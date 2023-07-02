@@ -18,14 +18,14 @@ Open source biodiversity database for the management of species at an individual
 
 - The backend uses the open source platform [Supabase](https://supabase.com/), the configuration of which can be found in the `supabase/` directory
 - You will need the Supabase CLI and an associated project, after which you can run the migrations to configure the database
-- To update TypeScript types, run the following command from the project directory: `supabase gen types typescript --project-id <PROJECT_ID> --schema public > src/types/supabase.ts`
+- To update TypeScript types, run the following command from the project directory: `supabase gen types typescript --project-id <PROJECT_ID> --schema public > types/supabase.ts`
 
 ## Contributing
 
 This is an alpha-stage project, but contributions are nonetheless welcome. Please ensure that your pull request meets the following guidelines:
 
 - Code style
-  - `prettier` is used to format TypeScript, e.g. `pnpm dlx prettier@latest --write src/`
+  - `prettier` is used to format TypeScript, e.g. `pnpm dlx prettier@latest --write app/`
   - `sqlfluff` is used to format SQL code e.g. `sqlfluff fix supabase/migrations/* --dialect postgres`
 
 ## Licence
