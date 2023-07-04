@@ -17,10 +17,11 @@ export default async function Header() {
         <Link className="navbar-brand" href="/">
           NatureNature
         </Link>
-        {user && (
-          <span className="navbar-text">Signed in as: {user.email}</span>
+        {user ? (
+          <span className="navbar-text">{user.email}</span>
+        ) : (
+          <span className="navbar-text">Not logged in</span>
         )}
-        {!user && <span className="navbar-text">Not signed in</span>}
       </div>
     </nav>
   );
