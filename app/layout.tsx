@@ -29,7 +29,7 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <Header session={session} />
-        {children}
+        <div className="container-fluid">{children}</div>
         <Footer session={session} />
       </body>
     </html>

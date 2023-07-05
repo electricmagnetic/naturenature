@@ -6,8 +6,13 @@ const AuthenticatedNav = ({ session }: { session: Session }) => {
     <>
       <ul className="navbar-nav ms-auto">
         <li className="nav-item">
+          <Link className="nav-link" href="/events">
+            Events
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link className="nav-link" href="/account">
-            {session.user.email}
+            Account
           </Link>
         </li>
       </ul>
@@ -25,7 +30,7 @@ export default async function Header({ session }: { session: Session | null }) {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary mb-3">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/">
           NatureNature
