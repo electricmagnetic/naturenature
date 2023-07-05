@@ -8,21 +8,23 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient<Database>({ req, res });
 
-  const { data, error } = await supabase.auth.getSession()
+  const { data, error } = await supabase.auth.getSession();
+  if (error) console.log(error);
+
   const user = data.session?.user;
 
-  if(error) console.log(error);
+  // Anonymous user redirect (except for login page itself)
+  if (!user && req.nextUrl.pathname !== "/account") {
+    const url = new URL("/account", req.url);
+    url.searchParams.append("next", req.nextUrl.pathname); // Store original URL as a search parameter called 'next'
 
-  // (1) Anonymous user redirect (doesn't apply to /account because of the matcher config)
-  if (!user) {
-    // TODO add code to remember original linnk
-    return NextResponse.redirect(new URL("account", req.url))
+    return NextResponse.redirect(url);
   }
 
   return res;
 }
 
-// Don't apply to these pages (including /account)
+// Don't apply to these pages
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|account).*)',],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
