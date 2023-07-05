@@ -1,7 +1,7 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import type { Database } from "@/types/supabase";
 
@@ -18,7 +18,7 @@ export default function Home() {
     };
 
     getData();
-  }, []);
+  }, [supabase]);
 
   return todos ? (
     <pre>{JSON.stringify(todos, null, 2)}</pre>
