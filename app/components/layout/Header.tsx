@@ -38,7 +38,7 @@ export default async function Header({ session }: { session: Session | null }) {
     <nav className="navbar navbar-expand-lg bg-body-tertiary mb-3">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/">
-          NatureNature
+          {process.env.NEXT_PUBLIC_DATABASE_NAME}
         </Link>
         {session?.user ? (
           <AuthenticatedNav session={session} />
