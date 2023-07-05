@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
+import Section from "@/app/components/layout/Section";
 import type { Database } from "@/types/supabase";
 
 type Event = Database["public"]["Tables"]["events"]["Row"];
@@ -34,19 +35,22 @@ export default function Event({ params: { id } }: { params: { id: string } }) {
       {event && (
         <main>
           <h1>Event: {id}</h1>
-          <dl>
-            <dt>Date/Time</dt>
-            <dd>{event.datetime}</dd>
-          </dl>
+          <Section isPrimary>
+            <dl className="row row-cols-4 g-2">
+              <div>
+                <dt>Email</dt>
+                <dd>{event.datetime}</dd>
+              </div>
+            </dl>
+          </Section>
           {event.records && (
-            <section>
-              <h2>Records</h2>
+            <Section title="Records">
               <ul>
                 {event.records.map((record) => (
                   <li key={record.id}>{record.protocol}</li>
                 ))}
               </ul>
-            </section>
+            </Section>
           )}
         </main>
       )}
