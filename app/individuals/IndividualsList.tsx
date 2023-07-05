@@ -4,32 +4,32 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import type { Database } from "@/types/supabase";
 
-export default async function EventsList() {
+export default async function Individuals() {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  const { data: events } = await supabase
-    .from("events")
+  const { data: individuals } = await supabase
+    .from("individuals")
     .select("*, records(count)");
 
-  if (!events) return <em>No events found</em>;
+  if (!individuals) return <em>No individuals found</em>;
 
   return (
     <table className="table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Date/Time</th>
-          <th>Comments</th>
+          <th>Name</th>
         </tr>
       </thead>
       <tbody>
-        {events.map((event) => (
-          <tr key={event.id}>
+        {individuals.map((individual) => (
+          <tr key={individual.id}>
             <td>
-              <Link href={`/events/${event.id}`}>{event.id}</Link>
+              <Link href={`/individuals/${individual.id}`}>
+                {individual.id}
+              </Link>
             </td>
-            <td>{event.datetime}</td>
-            <td>{event.comments}</td>
+            <td>{individual.name}</td>
           </tr>
         ))}
       </tbody>
