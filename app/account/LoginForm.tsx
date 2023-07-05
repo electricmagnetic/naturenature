@@ -4,7 +4,7 @@ import { useState, SyntheticEvent, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import { Loader } from "@/app/components/utilities";
+import Loading from "@/app/loading";
 import type { Database } from "@/types/supabase";
 
 export default function LoginForm() {
@@ -74,7 +74,7 @@ export default function LoginForm() {
           Sign in
         </button>
 
-        {isPending && <Loader />}
+        {isPending && <Loading />}
         {status && <span>{status}</span>}
       </form>
     </main>
