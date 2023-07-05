@@ -1,24 +1,16 @@
-import { cookies } from "next/headers";
 import Link from "next/link";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Session } from "@supabase/auth-helpers-nextjs";
 
-import type { Database } from "@/types/supabase";
 const { version } = require("@/package.json");
 
-export default async function Footer() {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+export default async function Footer({ session }: { session: Session | null }) {
   return (
     <footer>
       <div className="container-fluid">
         <p>NatureNature (v. {version})</p>
-        {user ? (
+        {session?.user ? (
           <p>
-            Logged in as <Link href="/account">{user.email}</Link>
+            Logged in as <Link href="/account">{session.user.email}</Link>
           </p>
         ) : (
           <p>Not logged in</p>

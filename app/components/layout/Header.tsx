@@ -1,15 +1,28 @@
-import { cookies } from "next/headers";
 import Link from "next/link";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Session } from "@supabase/auth-helpers-nextjs";
 
-import type { Database } from "@/types/supabase";
+const AuthenticatedNav = ({ session }: { session: Session }) => {
+  return (
+    <>
+      <ul className="navbar-nav ms-auto">
+        <li className="nav-item">
+          <Link className="nav-link" href="/account">
+            {session.user.email}
+          </Link>
+        </li>
+      </ul>
+    </>
+  );
+};
 
-export default async function Header() {
-  const supabase = createServerComponentClient<Database>({ cookies });
+const AnonymousNav = () => {
+  return <span className="navbar-text">Not logged in</span>;
+};
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+export default async function Header({ session }: { session: Session | null }) {
+  if (typeof window !== "undefined") {
+    require("bootstrap");
+  }
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -17,10 +30,10 @@ export default async function Header() {
         <Link className="navbar-brand" href="/">
           NatureNature
         </Link>
-        {user ? (
-          <span className="navbar-text">{user.email}</span>
+        {session?.user ? (
+          <AuthenticatedNav session={session} />
         ) : (
-          <span className="navbar-text">Not logged in</span>
+          <AnonymousNav />
         )}
       </div>
     </nav>
