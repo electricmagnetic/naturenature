@@ -6,25 +6,29 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Section from "@/app/components/layout/Section";
 import type { Database } from "@/types/supabase";
 
-type Event = Database["public"]["Tables"]["events"]["Row"];
+type Individual = Database["public"]["Tables"]["individuals"]["Row"];
 type Record = Database["public"]["Tables"]["records"]["Row"];
 
-export default function Event({ params: { id } }: { params: { id: string } }) {
-  const [event, setEvent] = useState<
-    (Event & { records: Record[] | null }) | null
+export default function Individual({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  const [individual, setIndividual] = useState<
+    (Individual & { records: Record[] | null }) | null
   >(null);
   const supabase = createClientComponentClient<Database>();
 
   useEffect(() => {
     const getData = async () => {
       const { data, error } = await supabase
-        .from("events")
+        .from("individuals")
         .select("*, records(*)")
         .eq("id", id)
         .limit(1)
         .single();
 
-      setEvent(data);
+      setIndividual(data);
     };
 
     getData();
@@ -32,21 +36,21 @@ export default function Event({ params: { id } }: { params: { id: string } }) {
 
   return (
     <>
-      {event && (
+      {individual && (
         <main>
-          <h1>Event: {id}</h1>
+          <h1>Individual: {id}</h1>
           <Section isPrimary>
             <dl className="row row-cols-4 g-2">
               <div>
-                <dt>Date/Time</dt>
-                <dd>{event.datetime}</dd>
+                <dt>Name</dt>
+                <dd>{individual.name}</dd>
               </div>
             </dl>
           </Section>
-          {event.records && (
+          {individual.records && (
             <Section title="Records">
               <ul>
-                {event.records.map((record) => (
+                {individual.records.map((record) => (
                   <li key={record.id}>{record.protocol}</li>
                 ))}
               </ul>

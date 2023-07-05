@@ -11,6 +11,11 @@ const AuthenticatedNav = ({ session }: { session: Session }) => {
           </Link>
         </li>
         <li className="nav-item">
+          <Link className="nav-link" href="/individuals">
+            Individuals
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link className="nav-link" href="/account">
             Account
           </Link>
