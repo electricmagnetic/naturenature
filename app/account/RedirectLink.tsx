@@ -1,19 +1,20 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+
+import Toolbar from "@/components/ui/Toolbar";
 
 /**
  * Client side function for showing an alert with links to home and the previous page visited before logging in
  */
-export default function RedirectButton() {
+export default function RedirectLink() {
   const searchParams = useSearchParams();
   const next = searchParams.get("next");
 
   if (!next || next === "/") return null;
   return (
-    <Link href={next} className="btn btn-sm btn-light me-2">
+    <Toolbar.Link href={next}>
       Return to {searchParams.get("next")}
-    </Link>
+    </Toolbar.Link>
   );
 }

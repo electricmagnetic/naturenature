@@ -1,10 +1,11 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import Table from "@/components/ui/Table";
 
 import type { Database } from "@/types/supabase";
 
-export default async function Individuals() {
+export default async function IndividualsList() {
   const supabase = createServerComponentClient<Database>({ cookies });
 
   const { data: individuals } = await supabase
@@ -14,25 +15,25 @@ export default async function Individuals() {
   if (!individuals) return <em>No individuals found</em>;
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody>
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Heading>ID</Table.Heading>
+          <Table.Heading>Name</Table.Heading>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
         {individuals.map((individual) => (
-          <tr key={individual.id}>
-            <td>
+          <Table.Row key={individual.id}>
+            <Table.Data>
               <Link href={`/individuals/${individual.id}`}>
                 {individual.id}
               </Link>
-            </td>
-            <td>{individual.name}</td>
-          </tr>
+            </Table.Data>
+            <Table.Data>{individual.name}</Table.Data>
+          </Table.Row>
         ))}
-      </tbody>
-    </table>
+      </Table.Body>
+    </Table>
   );
 }

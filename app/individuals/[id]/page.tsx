@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import Section from "@/app/components/layout/Section";
+import Section from "@/components/layout/Section";
 import type { Database } from "@/types/supabase";
 
 export default async function Individual({

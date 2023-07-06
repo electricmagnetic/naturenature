@@ -1,23 +1,18 @@
 import { User } from "@supabase/supabase-js";
 
-import Link from "next/link";
-
-import Section from "@/app/components/layout/Section";
-import RedirectButton from "./RedirectButton";
+import Toolbar from "@/components/ui/Toolbar";
+import Section from "@/components/layout/Section";
+import RedirectLink from "./RedirectLink";
 
 export default function AccountView({ user }: { user: User }) {
   return (
     <>
       <main>
         <h1>Account</h1>
-        <div className="card mb-3">
-          <div className="card-body">
-            <Link href="/" className="btn btn-sm btn-light me-2">
-              Home
-            </Link>
-            <RedirectButton />
-          </div>
-        </div>
+        <Toolbar>
+          <Toolbar.Link href="/">Home</Toolbar.Link>
+          <RedirectLink />
+        </Toolbar>
         <Section isPrimary>
           <dl className="row row-cols-4 g-2">
             <div>

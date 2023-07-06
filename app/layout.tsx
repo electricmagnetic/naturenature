@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import Header from "@/app/components/layout/Header";
-import Footer from "@/app/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import type { Database } from "@/types/supabase";
 
 import "./global.scss";

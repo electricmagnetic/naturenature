@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import type { Database } from "@/types/supabase";
+import Table from "@/components/ui/Table";
 
 export default async function EventsList() {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -14,25 +15,25 @@ export default async function EventsList() {
   if (!events) return <em>No events found</em>;
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date/Time</th>
-          <th>Comments</th>
-        </tr>
-      </thead>
-      <tbody>
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Heading>ID</Table.Heading>
+          <Table.Heading>Date/Time</Table.Heading>
+          <Table.Heading>Comments</Table.Heading>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
         {events.map((event) => (
-          <tr key={event.id}>
-            <td>
+          <Table.Row key={event.id}>
+            <Table.Data>
               <Link href={`/events/${event.id}`}>{event.id}</Link>
-            </td>
-            <td>{event.datetime}</td>
-            <td>{event.comments}</td>
-          </tr>
+            </Table.Data>
+            <Table.Data>{event.datetime}</Table.Data>
+            <Table.Data>{event.comments}</Table.Data>
+          </Table.Row>
         ))}
-      </tbody>
-    </table>
+      </Table.Body>
+    </Table>
   );
 }

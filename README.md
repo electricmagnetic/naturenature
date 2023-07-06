@@ -27,6 +27,9 @@ This is an alpha-stage project, but contributions are nonetheless welcome. Pleas
 - Code style
   - `prettier` is used to format TypeScript, e.g. `pnpm dlx prettier@latest --write app/`
   - `sqlfluff` is used to format SQL code e.g. `sqlfluff fix supabase/migrations/* --dialect postgres`
+- Conventions
+  - Module imports ordered from general to specialised: e.g. React -> Next.js -> Supabase -> custom general components -> custom specific components etc
+  - Files are named with capital letters if they export a single default component
 
 ## Licence
 
