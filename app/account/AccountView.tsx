@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { User } from "@supabase/supabase-js";
 
 import Section from "@/components/layout/Section";
@@ -28,11 +29,23 @@ export default function AccountView({ user }: { user: User }) {
           </div>
           <div>
             <dt>Created at</dt>
-            <dd>{user.created_at}</dd>
+            <dd>
+              {DateTime.fromISO(user.created_at).toLocaleString(
+                DateTime.DATETIME_MED,
+              )}
+            </dd>
           </div>
           <div>
             <dt>Last signed in</dt>
-            <dd>{user.last_sign_in_at}</dd>
+            <dd>
+              {user.last_sign_in_at ? (
+                DateTime.fromISO(user.last_sign_in_at).toLocaleString(
+                  DateTime.DATETIME_MED,
+                )
+              ) : (
+                <span>Never</span>
+              )}
+            </dd>
           </div>
         </dl>
       </Section>

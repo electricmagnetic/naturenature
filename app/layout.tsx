@@ -26,7 +26,7 @@ export default async function RootLayout({
   } = await supabase.auth.getSession();
 
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <body>
         <Navbar session={session} />
         <div className="container-fluid">{children}</div>

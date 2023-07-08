@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { DateTime } from "luxon";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import type { Database } from "@/types/supabase";
@@ -18,7 +19,6 @@ export default async function EventsList() {
     <Table>
       <Table.Head>
         <Table.Row>
-          <Table.Heading>ID</Table.Heading>
           <Table.Heading>Date/Time</Table.Heading>
           <Table.Heading>Comments</Table.Heading>
         </Table.Row>
@@ -27,9 +27,12 @@ export default async function EventsList() {
         {events.map((event) => (
           <Table.Row key={event.id}>
             <Table.Data>
-              <Link href={`/events/${event.id}`}>{event.id}</Link>
+              <Link href={`/events/${event.id}`}>
+                {DateTime.fromISO(event.datetime).toLocaleString(
+                  DateTime.DATETIME_MED,
+                )}
+              </Link>
             </Table.Data>
-            <Table.Data>{event.datetime}</Table.Data>
             <Table.Data>{event.comments}</Table.Data>
           </Table.Row>
         ))}
