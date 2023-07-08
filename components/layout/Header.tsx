@@ -6,18 +6,23 @@ const AuthenticatedNav = ({ session }: { session: Session }) => {
     <>
       <ul className="navbar-nav ms-auto">
         <li className="nav-item">
+          <Link className="nav-link" href="/">
+            <i className="bi-house me-2" style={{ width: '1em'}}></i>Home
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link className="nav-link" href="/events">
-            Events
+            <i className="bi-calendar-check me-2" style={{ width: '1em'}}></i>Events
           </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" href="/individuals">
-            Individuals
+            <i className="bi-star me-2" style={{ width: '1em'}}></i>Individuals
           </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" href="/account">
-            Account
+            <i className="bi-person-circle me-2" style={{ width: '1em'}}></i>Account
           </Link>
         </li>
       </ul>
