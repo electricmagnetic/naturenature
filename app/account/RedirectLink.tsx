@@ -13,7 +13,7 @@ export default function RedirectLink() {
 
   if (!next || next === "/") return null;
   return (
-    <Toolbar.Link href={next}>
+    <Toolbar.Link href={next} iconName="arrow-counterclockwise">
       Return to {searchParams.get("next")}
     </Toolbar.Link>
   );

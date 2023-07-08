@@ -10,7 +10,9 @@ export default function AccountView({ user }: { user: User }) {
       <main>
         <h1>Account</h1>
         <Toolbar>
-          <Toolbar.Link href="/">Home</Toolbar.Link>
+          <Toolbar.Link href="/" iconName="house">
+            Home
+          </Toolbar.Link>
           <RedirectLink />
         </Toolbar>
         <Section isPrimary>

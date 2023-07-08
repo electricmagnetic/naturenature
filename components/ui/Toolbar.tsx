@@ -2,11 +2,13 @@ import { PropsWithChildren } from "react";
 import Link from "next/link";
 
 const ToolbarLink = ({
-  children,
+  iconName,
   href,
+  children,
   ...others
-}: PropsWithChildren<{ href: string }>) => (
+}: PropsWithChildren<{ iconName: string; href: string }>) => (
   <Link className="btn btn-sm btn-light me-2" href={href} {...others}>
+    <i className={`bi bi-${iconName}`}></i>
     {children}
   </Link>
 );

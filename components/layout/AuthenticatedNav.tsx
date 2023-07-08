@@ -1,7 +1,20 @@
 "use client";
+import { PropsWithChildren } from "react";
 import Link from "next/link";
 
 import { Session } from "@supabase/auth-helpers-nextjs";
+
+const NavbarLink = ({
+  iconName,
+  href,
+  children,
+  ...others
+}: PropsWithChildren<{ iconName: string; href: string }>) => (
+  <Link className="nav-link" href={href} {...others}>
+    <i className={`bi bi-${iconName}`}></i>
+    {children}
+  </Link>
+);
 
 export default function AuthenticatedNav({ session }: { session: Session }) {
   if (typeof window !== "undefined") {
@@ -14,40 +27,34 @@ export default function AuthenticatedNav({ session }: { session: Session }) {
         className="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
+        data-bs-target="#navbar"
+        aria-controls="navbar"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <div className="collapse navbar-collapse" id="navbar">
         <ul className="navbar-nav ms-auto">
           <li className="nav-item">
-            <Link className="nav-link" href="/">
-              <i className="bi-house me-2" style={{ width: "1em" }}></i>Home
-            </Link>
+            <NavbarLink href="/" iconName="house">
+              Home
+            </NavbarLink>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="/events">
-              <i
-                className="bi-calendar-check me-2"
-                style={{ width: "1em" }}
-              ></i>
+            <NavbarLink href="/events" iconName="calendar-check">
               Events
-            </Link>
+            </NavbarLink>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="/individuals">
-              <i className="bi-star me-2" style={{ width: "1em" }}></i>
+            <NavbarLink href="/individuals" iconName="star">
               Individuals
-            </Link>
+            </NavbarLink>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="/account">
-              <i className="bi-person-circle me-2" style={{ width: "1em" }}></i>
+            <NavbarLink href="/account" iconName="person-circle">
               Account
-            </Link>
+            </NavbarLink>
           </li>
         </ul>
       </div>

@@ -9,3 +9,8 @@
 
 /* Custom SCSS */
 // ADD HERE
+
+.bi {
+  width: 1em;
+  @extend .me-2;
+}
