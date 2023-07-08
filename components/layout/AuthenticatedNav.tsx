@@ -1,8 +1,9 @@
 "use client";
 import { PropsWithChildren } from "react";
 import Link from "next/link";
-
 import { Session } from "@supabase/auth-helpers-nextjs";
+
+import Icon from "@/components/ui/Icon";
 
 const NavbarLink = ({
   iconName,
@@ -11,7 +12,7 @@ const NavbarLink = ({
   ...others
 }: PropsWithChildren<{ iconName: string; href: string }>) => (
   <Link className="nav-link" href={href} {...others}>
-    <i className={`bi bi-${iconName}`}></i>
+    <Icon iconName={iconName} />
     {children}
   </Link>
 );
