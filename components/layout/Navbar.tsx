@@ -4,7 +4,7 @@ import { Session } from "@supabase/auth-helpers-nextjs";
 import AuthenticatedNav from "./AuthenticatedNav";
 import AnonymousNav from "./AnonymousNav";
 
-export default function Header({ session }: { session: Session | null }) {
+export default function Navbar({ session }: { session: Session | null }) {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary mb-3">
       <div className="container-fluid">

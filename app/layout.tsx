@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import Header from "@/components/layout/Header";
+import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import type { Database } from "@/types/supabase";
 
@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header session={session} />
+        <Navbar session={session} />
         <div className="container-fluid">{children}</div>
         <Footer session={session} />
       </body>
