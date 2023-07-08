@@ -9,7 +9,7 @@ const ToolbarLink = ({
   children,
   ...others
 }: PropsWithChildren<{ iconName: string; href: string }>) => (
-  <Link className="btn btn-sm btn-light mb-2" href={href} {...others}>
+  <Link className="btn btn-sm btn-light" href={href} {...others}>
     <Icon iconName={iconName} />
     {children}
   </Link>
