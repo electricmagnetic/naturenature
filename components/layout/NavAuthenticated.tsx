@@ -1,4 +1,5 @@
 "use client";
+
 import { PropsWithChildren } from "react";
 import Link from "next/link";
 import { Session } from "@supabase/auth-helpers-nextjs";
@@ -17,7 +18,7 @@ const NavbarLink = ({
   </Link>
 );
 
-export default function AuthenticatedNav({ session }: { session: Session }) {
+export default function NavAuthenticated({ session }: { session: Session }) {
   if (typeof window !== "undefined") {
     require("bootstrap");
   }

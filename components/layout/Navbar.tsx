@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Session } from "@supabase/auth-helpers-nextjs";
 
-import AuthenticatedNav from "./AuthenticatedNav";
-import AnonymousNav from "./AnonymousNav";
+import NavAuthenticated from "./NavAuthenticated";
+import NavAnonymous from "./NavAnonymous";
 
 export default function Navbar({ session }: { session: Session | null }) {
   return (
@@ -12,9 +12,9 @@ export default function Navbar({ session }: { session: Session | null }) {
           {process.env.NEXT_PUBLIC_DATABASE_NAME}
         </Link>
         {session?.user ? (
-          <AuthenticatedNav session={session} />
+          <NavAuthenticated session={session} />
         ) : (
-          <AnonymousNav />
+          <NavAnonymous />
         )}
       </div>
     </nav>
