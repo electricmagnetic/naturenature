@@ -29,6 +29,12 @@ export default async function Individual({
       <Header title={`Individual: ${individual.id}`}>
         <Toolbar>
           <Toolbar.Link
+            href={`/individuals/${individual.id}/edit`}
+            iconName="pencil-square"
+          >
+            Edit
+          </Toolbar.Link>
+          <Toolbar.Link
             href={`/individuals/${individual.id}/delete`}
             iconName="trash"
           >
