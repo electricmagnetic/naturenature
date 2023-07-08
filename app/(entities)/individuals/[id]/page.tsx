@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Header from "@/components/layout/Header";
-import Section from "@/components/layout/Section";
+import Section from "@/components/layout/Section"
+import Toolbar from "@/components/ui/Toolbar";
 import type { Database } from "@/types/_supabase";
 
 export default async function Individual({
@@ -25,7 +26,16 @@ export default async function Individual({
 
   return (
     <main>
-      <Header title={`Individual: ${individual.id}`} />
+      <Header title={`Individual: ${individual.id}`}>
+        <Toolbar>
+          <Toolbar.Link
+            href={`/individuals/${individual.id}/delete`}
+            iconName="trash"
+          >
+            Delete
+          </Toolbar.Link>
+        </Toolbar>
+      </Header>
       <Section isPrimary>
         <dl className="row row-cols-4 g-2">
           <div>
