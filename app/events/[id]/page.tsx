@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
+import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import type { Database } from "@/types/supabase";
 
@@ -22,7 +23,7 @@ export default async function Event({
 
   return (
     <main>
-      <h1>Event: {id}</h1>
+      <Header title={`Event: ${event.id}`} />
       <Section isPrimary>
         <dl className="row row-cols-4 g-2">
           <div>

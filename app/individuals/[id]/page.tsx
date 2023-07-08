@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
+import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import type { Database } from "@/types/supabase";
 
@@ -23,7 +24,7 @@ export default async function Individual({
 
   return (
     <main>
-      <h1>Individual: {id}</h1>
+      <Header title={`Individual: ${individual.id}`} />
       <Section isPrimary>
         <dl className="row row-cols-4 g-2">
           <div>

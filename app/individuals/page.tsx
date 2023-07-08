@@ -1,9 +1,11 @@
+import Header from "@/components/layout/Header";
+
 import IndividualsList from "./IndividualsList";
 
 export default function Individuals() {
   return (
     <main>
-      <h1>Individuals</h1>
+      <Header title="Individuals" />
       <IndividualsList />
     </main>
   );
