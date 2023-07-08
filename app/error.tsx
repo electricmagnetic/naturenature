@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 
 export default function Error({
@@ -9,20 +8,24 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
+  if (typeof window !== "undefined") {
+    require("bootstrap");
+  }
+
   useEffect(() => {
     console.error(error);
   }, [error]);
 
   return (
-    <div>
-      <h2>Error</h2>
-      {error?.message && <p>{error.message}</p>}
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
+    <div className="alert alert-danger" role="alert">
+      <h2 className="alert-heading">Error</h2>
+      {error.message && (
+        <>
+          <p>The following error has occurred:</p>
+          <pre>{error.message}</pre>
+        </>
+      )}
+      <button className="btn btn-danger" onClick={() => reset()}>
         Try again
       </button>
     </div>
