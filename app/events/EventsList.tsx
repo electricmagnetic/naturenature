@@ -9,10 +9,12 @@ import Table from "@/components/ui/Table";
 export default async function EventsList() {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  const { data: events } = await supabase
+  const { data: events, error } = await supabase
     .from("events")
-    .select("*, records(count)");
+    .select("*, records(count)")
+    .order("datetime", { ascending: false });
 
+  if (error) throw Error(error.message);
   if (!events) return <em>No events found</em>;
 
   return (

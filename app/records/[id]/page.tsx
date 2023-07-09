@@ -4,6 +4,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
+import Protocol from "../protocols/Protocol";
 import type { Database } from "@/types/supabase";
 
 export default async function Record({
@@ -31,6 +32,9 @@ export default async function Record({
             <dd>{record.protocol}</dd>
           </div>
         </dl>
+      </Section>
+      <Section>
+        <Protocol record={record} />
       </Section>
     </main>
   );

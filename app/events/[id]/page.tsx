@@ -5,6 +5,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import type { Database } from "@/types/supabase";
+import Protocol from "@/app/records/protocols/Protocol";
 
 export default async function Event({
   params: { id },
@@ -12,13 +13,14 @@ export default async function Event({
   params: { id: string };
 }) {
   const supabase = createServerComponentClient<Database>({ cookies });
-  const { data: event } = await supabase
+  const { data: event, error } = await supabase
     .from("events")
     .select("*, records(*)")
     .eq("id", id)
     .limit(1)
     .single();
 
+  if (error) throw Error(error.message);
   if (!event) return notFound();
 
   return (
@@ -34,11 +36,11 @@ export default async function Event({
       </Section>
       {event.records && (
         <Section title="Records">
-          <ul>
+          <div className="row row-cols-3 g-3">
             {event.records.map((record) => (
-              <li key={record.id}>{record.protocol}</li>
+              <Protocol record={record} className="col" key={record.id} />
             ))}
-          </ul>
+          </div>
         </Section>
       )}
     </main>
