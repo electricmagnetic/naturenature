@@ -36,9 +36,9 @@ export default async function Event({
       </Section>
       {event.records && (
         <Section title="Records">
-          <div className="row row-cols-3 g-3">
+          <div className="row row-cols-md-3 g-3">
             {event.records.map((record) => (
-              <Protocol record={record} className="col" key={record.id} />
+              <Protocol record={record} className="col-md" key={record.id} />
             ))}
           </div>
         </Section>
