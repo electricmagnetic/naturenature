@@ -13,14 +13,22 @@ export default async function Event({
   params: { id: string };
 }) {
   const supabase = createServerComponentClient<Database>({ cookies });
-  const { data: event, error } = await supabase
+  const { data: event, error: eventError } = await supabase
     .from("events")
-    .select("*, records(*)")
+    .select("*")
     .eq("id", id)
     .limit(1)
     .single();
 
-  if (error) throw Error(error.message);
+  if (eventError) throw Error(eventError.message);
+
+  const { data: records, error: recordsError } = await supabase
+    .from("records")
+    .select("*, event") // TODO: individual(*), identifier(*), sample(*), person(*), place(*)
+    .eq("event", id);
+
+  if (recordsError) throw Error(recordsError.message);
+
   if (!event) return notFound();
 
   return (
@@ -34,10 +42,10 @@ export default async function Event({
           </div>
         </dl>
       </Section>
-      {event.records && (
+      {records && (
         <Section title="Records">
           <div className="row row-cols-md-3 g-3">
-            {event.records.map((record) => (
+            {records.map((record) => (
               <Protocol record={record} className="col-md" key={record.id} />
             ))}
           </div>
