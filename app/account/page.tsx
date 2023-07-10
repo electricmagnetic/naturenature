@@ -11,8 +11,10 @@ export default async function Account() {
 
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
 
+  //if (error) throw Error(error.message); // TODO check implications of Error catcher
   if (user) return <AccountView user={user} />;
   return <LoginForm />;
 }

@@ -4,8 +4,11 @@ import { useState, SyntheticEvent, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
+import Message from "@/components/ui/Message";
 import Loading from "@/app/loading";
 import type { Database } from "@/types/supabase";
+
+const DOMAINS = ["keadatabase.nz", "keaconservation.nz"];
 
 export default function LoginForm() {
   const router = useRouter();
@@ -22,6 +25,12 @@ export default function LoginForm() {
   const handleSignIn = async (e: SyntheticEvent) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      setStatus("Missing email or password");
+      return;
+    }
+
+    // Standard login
     setStatus("Logging in");
 
     const {
@@ -33,6 +42,8 @@ export default function LoginForm() {
     });
 
     if (error) setStatus(`${error.status}: ${error.message}`);
+    // TODO check implications of adding Error catcher
+
     if (user) {
       setStatus(`Login succeeded`);
       startTransition(() => router.refresh());
@@ -75,7 +86,7 @@ export default function LoginForm() {
         </button>
 
         {isPending && <Loading />}
-        {status && <span>{status}</span>}
+        {status && <Message>{status}</Message>}
       </form>
     </main>
   );
