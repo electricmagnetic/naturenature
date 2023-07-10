@@ -3,7 +3,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
-
 import type { Database } from "@/types/_supabase";
 
 export default async function PlacesList() {
