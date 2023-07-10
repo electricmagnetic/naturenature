@@ -1,5 +1,5 @@
 /* Variable overrides */
-// ADD HERE
+$card-border-radius: 0;
 
 /* Bootstrap */
 @import "bootstrap";
@@ -8,8 +8,8 @@
 @import "bootstrap-icons";
 
 /* Custom SCSS */
-// ADD HERE
 
+// Bootstrap Icons
 .bi {
   width: 1em;
   @extend .me-2;
