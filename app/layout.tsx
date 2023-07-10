@@ -3,7 +3,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/_supabase";
 
 import "./global.scss";
 

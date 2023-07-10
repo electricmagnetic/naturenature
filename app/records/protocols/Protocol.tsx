@@ -8,9 +8,9 @@ import ProtocolMeasurement from "./ProtocolMeasurement";
 import ProtocolObservation from "./ProtocolObservation";
 import ProtocolPerson from "./ProtocolPerson";
 import ProtocolSample from "./ProtocolSample";
-import type { Database } from "@/types/supabase";
+import type { Row } from "@/types/database";
 
-type Record = Database["public"]["Tables"]["records"]["Row"];
+type Record = Row<"records">;
 type ProtocolComponent = { [key: string]: FC<{ record: Record }> };
 
 const protocolComponents: ProtocolComponent = {

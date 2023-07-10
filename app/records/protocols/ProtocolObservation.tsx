@@ -1,7 +1,7 @@
 import Card from "@/components/ui/Card";
-import type { Database } from "@/types/supabase";
+import type { Row } from "@/types/database";
 
-type Record = Database["public"]["Tables"]["records"]["Row"];
+type Record = Row<"records">;
 
 export default function ProtocolObservation({ record }: { record: Record }) {
   return (

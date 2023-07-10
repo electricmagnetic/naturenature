@@ -5,7 +5,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import Protocol from "../protocols/Protocol";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/_supabase";
 
 export default async function Record({
   params: { id },

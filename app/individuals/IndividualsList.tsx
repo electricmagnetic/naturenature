@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Table from "@/components/ui/Table";
 
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/_supabase";
 
 export default async function IndividualsList() {
   const supabase = createServerComponentClient<Database>({ cookies });

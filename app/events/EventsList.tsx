@@ -3,7 +3,7 @@ import Link from "next/link";
 import { DateTime } from "luxon";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/_supabase";
 import Table from "@/components/ui/Table";
 
 export default async function EventsList() {

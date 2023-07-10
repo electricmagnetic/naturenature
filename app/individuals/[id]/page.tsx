@@ -4,7 +4,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/_supabase";
 
 export default async function Individual({
   params: { id },
@@ -13,13 +13,14 @@ export default async function Individual({
 }) {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  const { data: individual } = await supabase
+  const { data: individual, error } = await supabase
     .from("individuals")
     .select("*, records(*)")
     .eq("id", id)
     .limit(1)
     .single();
 
+  if (error) throw Error(error.message);
   if (!individual) return notFound();
 
   return (
