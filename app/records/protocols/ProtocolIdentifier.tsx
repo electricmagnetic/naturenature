@@ -6,7 +6,7 @@ type Record = Row<"records">;
 export default function ProtocolIdentifier({ record }: { record: Record }) {
   return (
     <Card title="Identifier">
-      {record.action} {record.identifier} to {record.individual}
+      {record.action} {record.object} to {record.individual}
     </Card>
   );
 }

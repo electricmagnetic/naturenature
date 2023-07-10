@@ -73,34 +73,6 @@ export interface Database {
           }
         ]
       }
-      identifiers: {
-        Row: {
-          created_at: string | null
-          id: string
-          name: string | null
-          type: string
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          name?: string | null
-          type: string
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          name?: string | null
-          type?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "identifiers_type_fkey"
-            columns: ["type"]
-            referencedRelation: "dictionary"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       individuals: {
         Row: {
           created_at: string | null
@@ -118,6 +90,46 @@ export interface Database {
           name?: string | null
         }
         Relationships: []
+      }
+      objects: {
+        Row: {
+          class: string
+          created_at: string | null
+          data: Json | null
+          id: string
+          name: string | null
+          type: string
+        }
+        Insert: {
+          class: string
+          created_at?: string | null
+          data?: Json | null
+          id?: string
+          name?: string | null
+          type: string
+        }
+        Update: {
+          class?: string
+          created_at?: string | null
+          data?: Json | null
+          id?: string
+          name?: string | null
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "objects_class_fkey"
+            columns: ["class"]
+            referencedRelation: "dictionary"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "objects_type_fkey"
+            columns: ["type"]
+            referencedRelation: "dictionary"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       people: {
         Row: {
@@ -185,11 +197,10 @@ export interface Database {
           data: Json | null
           event: string
           id: string
-          identifier: string | null
           individual: string | null
+          object: string | null
           person: string | null
           protocol: string
-          sample: string | null
           type: string | null
         }
         Insert: {
@@ -198,11 +209,10 @@ export interface Database {
           data?: Json | null
           event: string
           id?: string
-          identifier?: string | null
           individual?: string | null
+          object?: string | null
           person?: string | null
           protocol: string
-          sample?: string | null
           type?: string | null
         }
         Update: {
@@ -211,11 +221,10 @@ export interface Database {
           data?: Json | null
           event?: string
           id?: string
-          identifier?: string | null
           individual?: string | null
+          object?: string | null
           person?: string | null
           protocol?: string
-          sample?: string | null
           type?: string | null
         }
         Relationships: [
@@ -232,15 +241,15 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "records_identifier_fkey"
-            columns: ["identifier"]
-            referencedRelation: "identifiers"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "records_individual_fkey"
             columns: ["individual"]
             referencedRelation: "individuals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "records_object_fkey"
+            columns: ["object"]
+            referencedRelation: "objects"
             referencedColumns: ["id"]
           },
           {
@@ -256,41 +265,7 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "records_sample_fkey"
-            columns: ["sample"]
-            referencedRelation: "samples"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "records_type_fkey"
-            columns: ["type"]
-            referencedRelation: "dictionary"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      samples: {
-        Row: {
-          created_at: string | null
-          id: string
-          name: string | null
-          type: string
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          name?: string | null
-          type: string
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          name?: string | null
-          type?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "samples_type_fkey"
             columns: ["type"]
             referencedRelation: "dictionary"
             referencedColumns: ["id"]

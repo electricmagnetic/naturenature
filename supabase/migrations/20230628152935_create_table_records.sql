@@ -50,7 +50,7 @@ alter table "public"."records" validate constraint "records_type_fkey";
 
 create index idx_records_type on records (type);
 
--- identifier
+-- identifier (deprecated, replaced by object)
 
 alter table "public"."records" add column "identifier" uuid null;
 
@@ -61,7 +61,7 @@ alter table "public"."records" validate constraint "records_identifier_fkey";
 
 create index idx_records_identifier on records (identifier);
 
--- sample
+-- sample (deprecated, replaced by object)
 
 alter table "public"."records" add column "sample" uuid null;
 

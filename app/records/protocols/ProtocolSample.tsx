@@ -10,7 +10,7 @@ export default function ProtocolSample({ record }: { record: Record }) {
   return (
     <Card title="Sample">
       <div>
-        {record.action} ({record.sample}) for {record.individual}
+        {record.action} ({record.object}) for {record.individual}
       </div>
       {data && (
         <div>

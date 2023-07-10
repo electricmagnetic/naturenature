@@ -1,4 +1,4 @@
--- create table
+-- create table (deprecated, replaced by objects)
 
 create table "public"."identifiers" (
     "id" uuid not null default gen_random_uuid(),
