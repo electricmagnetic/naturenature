@@ -8,10 +8,11 @@ import type { Database } from "@/types/_supabase";
 export default async function IndividualsList() {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  const { data: individuals } = await supabase
+  const { data: individuals, error } = await supabase
     .from("individuals")
     .select("*, records(count)");
 
+  if (error) throw Error(error.message);
   if (!individuals) return <em>No individuals found</em>;
 
   return (
