@@ -9,6 +9,7 @@ export default async function EditIndividual({
   return (
     <main>
       <Header title={`Edit Individual: ${id}`} />
+      <span>TODO</span>
       {/*<IndividualForm id={id} />*/}
     </main>
   );

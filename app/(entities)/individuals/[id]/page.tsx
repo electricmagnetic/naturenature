@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Header from "@/components/layout/Header";
-import Section from "@/components/layout/Section"
+import Section from "@/components/layout/Section";
 import Toolbar from "@/components/ui/Toolbar";
 import type { Database } from "@/types/_supabase";
 

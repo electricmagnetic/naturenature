@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import { Database } from "@/types/supabase";
+import { Database } from "@/types/_supabase";
 
 /**
  * Delete an object with 'id' from the table 'from'. Require that the user clicks to confirm deletion.
