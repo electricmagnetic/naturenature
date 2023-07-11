@@ -7,6 +7,9 @@ Open source biodiversity database for the management of species at an individual
 - An open source project using open source tools
 - Minimising the amount of custom code necessary, relying on mature tools to handle authentication, APIs, object storage and data storage
 - An 'event-based' approach to the management of individuals, permitting their status to be known at any given point in time
+- Strong separation of 'transactional' and 'analytical' concerns
+  - Focus on transactional data (e.g. post field-trip data entry, data from sensors)
+  - Analytics to be handled elsewhere through simple integrations (e.g. via SQL, REST API etc)
 
 ## Getting started (front-end)
 
