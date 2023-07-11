@@ -9,9 +9,11 @@ export default function ProtocolSample({ record }: { record: CompleteRecord }) {
     <Card title="Sample">
       <div>
         {record.action} ({record.object?.type}) for{" "}
-        <Link href="/individuals/${record.individual.id}">
-          {record.individual?.name}
-        </Link>
+        {record.individual && (
+          <Link href={`/individuals/${record.individual.id}`}>
+            {record.individual?.name}
+          </Link>
+        )}
       </div>
       {data && (
         <div>
