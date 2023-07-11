@@ -69,6 +69,11 @@ export default function NavAuthenticated({ session }: { session: Session }) {
             </NavbarLink>
           </li>
           <li className="nav-item">
+            <NavbarLink href="/people" iconName="people">
+              People
+            </NavbarLink>
+          </li>
+          <li className="nav-item">
             <NavbarLink href="/account" iconName="person-circle">
               Account
             </NavbarLink>
