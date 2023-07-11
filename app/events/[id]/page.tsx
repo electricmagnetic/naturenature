@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import type { Database } from "@/types/_supabase";
 import Protocol from "@/app/records/protocols/Protocol";
+import { CompleteRecord } from "@/types/recordTypes";
 
 export default async function Event({
   params: { id },
@@ -25,7 +26,8 @@ export default async function Event({
   const { data: records, error: recordsError } = await supabase
     .from("records")
     .select("*, event(*), individual(*), object(*), person(*)")
-    .eq("event", id);
+    .eq("event", id)
+    .returns<CompleteRecord[]>();
 
   if (recordsError) throw Error(recordsError.message);
 

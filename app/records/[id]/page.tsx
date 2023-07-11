@@ -14,10 +14,11 @@ export default async function Record({
   params: { id: string };
 }) {
   const supabase = createServerComponentClient<Database>({ cookies });
-  const { data: record }: { data: CompleteRecord | null } = await supabase
+  const { data: record } = await supabase
     .from("records")
     .select("*, event(*), individual(*), object(*), person(*)")
     .eq("id", id)
+    .returns<CompleteRecord[]>()
     .limit(1)
     .single();
 
