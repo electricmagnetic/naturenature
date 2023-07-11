@@ -1,12 +1,21 @@
+import Link from "next/link";
+
 import Card from "@/components/ui/Card";
-import type { Row } from "@/types/database";
+import type { CompleteRecord } from "@/types/recordTypes";
 
-type Record = Row<"records">;
-
-export default function ProtocolObservation({ record }: { record: Record }) {
+export default function ProtocolObservation({
+  record,
+}: {
+  record: CompleteRecord;
+}) {
   return (
     <Card title="Observation">
-      {record.type} of {record.individual}
+      {record.type} of{" "}
+      {record.individual && (
+        <Link href={`/individuals/${record.individual.id}`}>
+          {record.individual?.name}
+        </Link>
+      )}
     </Card>
   );
 }

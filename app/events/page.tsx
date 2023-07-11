@@ -4,7 +4,7 @@ import EventsList from "./EventsList";
 export default function Events() {
   return (
     <main>
-      <Header title="Events" />
+      <Header title="Events" iconName="calendar" />
       <EventsList />
     </main>
   );

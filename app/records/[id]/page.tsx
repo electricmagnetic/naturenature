@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import Protocol from "../protocols/Protocol";
 import type { Database } from "@/types/_supabase";
+import type { CompleteRecord } from "@/types/recordTypes";
 
 export default async function Record({
   params: { id },
@@ -13,9 +14,9 @@ export default async function Record({
   params: { id: string };
 }) {
   const supabase = createServerComponentClient<Database>({ cookies });
-  const { data: record } = await supabase
+  const { data: record }: { data: CompleteRecord | null } = await supabase
     .from("records")
-    .select("*")
+    .select("*, event(*), individual(*), object(*), person(*)")
     .eq("id", id)
     .limit(1)
     .single();

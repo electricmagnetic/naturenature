@@ -4,7 +4,7 @@ import RecordsList from "./RecordsList";
 export default function Records() {
   return (
     <main>
-      <Header title="Records" />
+      <Header title="Records" iconName="database" />
       <RecordsList />
     </main>
   );

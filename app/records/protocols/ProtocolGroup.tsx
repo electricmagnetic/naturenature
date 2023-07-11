@@ -1,8 +1,6 @@
 import Card from "@/components/ui/Card";
-import type { Row } from "@/types/database";
+import type { CompleteRecord } from "@/types/recordTypes";
 
-type Record = Row<"records">;
-
-export default function ProtocolGroup({ record }: { record: Record }) {
+export default function ProtocolGroup({ record }: { record: CompleteRecord }) {
   return <Card title="Group">{record.type}</Card>;
 }

@@ -15,7 +15,9 @@ const TableRow = ({ children }: PropsWithChildren) => <tr>{children}</tr>;
 const TableData = ({ children }: PropsWithChildren) => <td>{children}</td>;
 
 const Table = ({ children }: PropsWithChildren) => (
-  <table className="table table-striped">{children}</table>
+  <div className="table-responsive">
+    <table className="table table-striped ">{children}</table>
+  </div>
 );
 
 Table.Head = TableHead;

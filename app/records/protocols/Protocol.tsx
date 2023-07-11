@@ -8,10 +8,9 @@ import ProtocolMeasurement from "./ProtocolMeasurement";
 import ProtocolObservation from "./ProtocolObservation";
 import ProtocolPerson from "./ProtocolPerson";
 import ProtocolSample from "./ProtocolSample";
-import type { Row } from "@/types/database";
+import type { CompleteRecord } from "@/types/recordTypes";
 
-type Record = Row<"records">;
-type ProtocolComponent = { [key: string]: FC<{ record: Record }> };
+type ProtocolComponent = { [key: string]: FC<{ record: CompleteRecord }> };
 
 const protocolComponents: ProtocolComponent = {
   GROUP: ProtocolGroup,
@@ -28,12 +27,10 @@ export default function Protocol({
   className,
   ...others
 }: {
-  record: Record;
+  record: CompleteRecord;
   className?: string;
 }) {
   const { protocol } = record;
-
-  if (!protocol) throw Error("Protocol missing from Record");
 
   const SpecificProtocol = protocolComponents[protocol];
   if (!SpecificProtocol) return <Message>Protocol parser not found</Message>;

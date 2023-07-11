@@ -5,7 +5,7 @@ import IndividualsList from "./IndividualsList";
 export default function Individuals() {
   return (
     <main>
-      <Header title="Individuals" />
+      <Header title="Individuals" iconName="bullseye" />
       <IndividualsList />
     </main>
   );

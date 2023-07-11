@@ -1,12 +1,21 @@
+import Link from "next/link";
+
 import Card from "@/components/ui/Card";
-import type { Row } from "@/types/database";
+import type { CompleteRecord } from "@/types/recordTypes";
 
-type Record = Row<"records">;
-
-export default function ProtocolIdentifier({ record }: { record: Record }) {
+export default function ProtocolIdentifier({
+  record,
+}: {
+  record: CompleteRecord;
+}) {
   return (
     <Card title="Identifier">
-      {record.action} {record.object} to {record.individual}
+      {record.action} {record.object?.name} to{" "}
+      {record.individual && (
+        <Link href={`/individuals/${record.individual.id}`}>
+          {record.individual?.name}
+        </Link>
+      )}
     </Card>
   );
 }

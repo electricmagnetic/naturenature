@@ -9,7 +9,7 @@ import RedirectLink from "./RedirectLink";
 export default function AccountView({ user }: { user: User }) {
   return (
     <main>
-      <Header title="Account">
+      <Header title="Account" iconName="person-circle">
         <Toolbar>
           <Toolbar.Link href="/" iconName="house">
             Home

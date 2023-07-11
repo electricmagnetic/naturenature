@@ -1,12 +1,12 @@
+import Link from "next/link";
 import Card from "@/components/ui/Card";
-import type { Row } from "@/types/database";
+import type { CompleteRecord } from "@/types/recordTypes";
 
-type Record = Row<"records">;
-
-export default function ProtocolPerson({ record }: { record: Record }) {
+export default function ProtocolPerson({ record }: { record: CompleteRecord }) {
   return (
     <Card title="Person">
-      {record.person} ({record.type})
+      <Link href={`/people/${record.person?.id}`}>{record.person?.name}</Link> (
+      {record.type})
     </Card>
   );
 }

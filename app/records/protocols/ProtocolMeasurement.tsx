@@ -1,16 +1,27 @@
+import Link from "next/link";
+
 import Card from "@/components/ui/Card";
-import type { ProtocolMeasurementData } from "@/types/recordData";
-import type { Row } from "@/types/database";
+import type {
+  CompleteRecord,
+  ProtocolMeasurementData,
+} from "@/types/recordTypes";
 
-type Record = Row<"records">;
-
-export default function ProtocolMeasurement({ record }: { record: Record }) {
+export default function ProtocolMeasurement({
+  record,
+}: {
+  record: CompleteRecord;
+}) {
   const data = record.data as ProtocolMeasurementData;
 
   return (
     <Card title="Measurement">
       <div>
-        {record.action} {record.type} of {record.individual}
+        {record.action} {record.type} of{" "}
+        {record.individual && (
+          <Link href={`/individuals/${record.individual.id}`}>
+            {record.individual?.name}
+          </Link>
+        )}
       </div>
       {data && (
         <div>

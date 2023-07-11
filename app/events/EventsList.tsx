@@ -3,8 +3,9 @@ import Link from "next/link";
 import { DateTime } from "luxon";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import type { Database } from "@/types/_supabase";
+import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
+import type { Database } from "@/types/_supabase";
 
 export default async function EventsList() {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -15,7 +16,7 @@ export default async function EventsList() {
     .order("datetime", { ascending: false });
 
   if (error) throw Error(error.message);
-  if (!events) return <em>No events found</em>;
+  if (!events) return <Message>No events found</Message>;
 
   return (
     <Table>

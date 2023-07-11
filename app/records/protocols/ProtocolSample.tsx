@@ -1,16 +1,17 @@
+import Link from "next/link";
 import Card from "@/components/ui/Card";
-import type { ProtocolSampleData } from "@/types/recordData";
-import type { Row } from "@/types/database";
+import type { CompleteRecord, ProtocolSampleData } from "@/types/recordTypes";
 
-type Record = Row<"records">;
-
-export default function ProtocolSample({ record }: { record: Record }) {
+export default function ProtocolSample({ record }: { record: CompleteRecord }) {
   const data = record.data as ProtocolSampleData;
 
   return (
     <Card title="Sample">
       <div>
-        {record.action} ({record.object}) for {record.individual}
+        {record.action} ({record.object?.type}) for{" "}
+        <Link href="/individuals/${record.individual.id}">
+          {record.individual?.name}
+        </Link>
       </div>
       {data && (
         <div>

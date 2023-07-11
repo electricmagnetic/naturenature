@@ -24,7 +24,7 @@ export default async function Event({
 
   const { data: records, error: recordsError } = await supabase
     .from("records")
-    .select("*, event") // TODO: individual(*), object(*), person(*), place(*)
+    .select("*, event(*), individual(*), object(*), person(*)")
     .eq("event", id);
 
   if (recordsError) throw Error(recordsError.message);

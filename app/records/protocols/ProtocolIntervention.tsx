@@ -1,12 +1,22 @@
+import Link from "next/link";
+
 import Card from "@/components/ui/Card";
-import type { Row } from "@/types/database";
+import type { CompleteRecord } from "@/types/recordTypes";
 
-type Record = Row<"records">;
-
-export default function ProtocolIntervention({ record }: { record: Record }) {
+export default function ProtocolIntervention({
+  record,
+}: {
+  record: CompleteRecord;
+}) {
   return (
     <Card title="Intervention">
-      {record.action} {record.individual} ({record.type})
+      {record.action}{" "}
+      {record.individual && (
+        <Link href={`/individuals/${record.individual.id}`}>
+          {record.individual?.name}
+        </Link>
+      )}{" "}
+      ({record.type})
     </Card>
   );
 }

@@ -44,7 +44,7 @@ export default function NavAuthenticated({ session }: { session: Session }) {
             </NavbarLink>
           </li>
           <li className="nav-item">
-            <NavbarLink href="/events" iconName="calendar-check">
+            <NavbarLink href="/events" iconName="calendar">
               Events
             </NavbarLink>
           </li>
@@ -54,8 +54,18 @@ export default function NavAuthenticated({ session }: { session: Session }) {
             </NavbarLink>
           </li>
           <li className="nav-item">
-            <NavbarLink href="/individuals" iconName="star">
+            <NavbarLink href="/individuals" iconName="bullseye">
               Individuals
+            </NavbarLink>
+          </li>
+          <li className="nav-item">
+            <NavbarLink href="/objects" iconName="box-seam">
+              Objects
+            </NavbarLink>
+          </li>
+          <li className="nav-item">
+            <NavbarLink href="/places" iconName="geo-alt">
+              Places
             </NavbarLink>
           </li>
           <li className="nav-item">
