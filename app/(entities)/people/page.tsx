@@ -12,7 +12,7 @@ export default function People() {
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
       >
-        <CreateActionButton href="/create/individual" />
+        <CreateActionButton href="/create/person" />
       </Header>
       <PeopleList />
     </main>

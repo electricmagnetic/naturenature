@@ -13,7 +13,7 @@ export default function Places() {
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
       >
-        <CreateActionButton href="/create/individual" />
+        <CreateActionButton href="/create/place" />
       </Header>
       <PlacesList />
     </main>

@@ -13,7 +13,7 @@ export default function Records() {
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
       >
-        <CreateActionButton href="/create/individual" />
+        <CreateActionButton href="/create/record" />
       </Header>
       <RecordsList />
     </main>
