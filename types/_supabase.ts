@@ -91,6 +91,30 @@ export interface Database {
         }
         Relationships: []
       }
+      media: {
+        Row: {
+          caption: string | null
+          created_at: string | null
+          id: string
+          metadata: Json | null
+          url: string | null
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          url?: string | null
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          url?: string | null
+        }
+        Relationships: []
+      }
       objects: {
         Row: {
           class: string
@@ -198,6 +222,7 @@ export interface Database {
           event: string
           id: string
           individual: string | null
+          media: string | null
           object: string | null
           person: string | null
           protocol: string
@@ -210,6 +235,7 @@ export interface Database {
           event: string
           id?: string
           individual?: string | null
+          media?: string | null
           object?: string | null
           person?: string | null
           protocol: string
@@ -222,6 +248,7 @@ export interface Database {
           event?: string
           id?: string
           individual?: string | null
+          media?: string | null
           object?: string | null
           person?: string | null
           protocol?: string
@@ -244,6 +271,12 @@ export interface Database {
             foreignKeyName: "records_individual_fkey"
             columns: ["individual"]
             referencedRelation: "individuals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "records_media_fkey"
+            columns: ["media"]
+            referencedRelation: "media"
             referencedColumns: ["id"]
           },
           {
