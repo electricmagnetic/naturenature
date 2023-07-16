@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useForm, FieldValues } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import type { FieldValues } from "react-hook-form";
 
+import Form from "@/components/forms/Form";
+import { InputField, Submit } from "@/components/forms/fields";
+import { FormStatus } from "@/components/forms/helpers";
 import { validateIndividual } from "./validations";
 import type { Database } from "@/types/_supabase";
 
@@ -25,22 +27,15 @@ export default async function IndividualForm({ id }: { id?: string }) {
     if (data) setStatus(`Created ${data[0].id}`);
   };
 
-  const { register, handleSubmit } = useForm({
-    resolver: yupResolver(validateIndividual),
-  });
-
   return (
-    <form onSubmit={handleSubmit(formSubmitted)}>
-      <label className="form-label" htmlFor="name">
-        Name
-      </label>
-      <input className="form-control" id="name" {...register("name")} />{" "}
-      {/*TODO turn this into a component*/}
-      {/*errors.name?.message && <p>{errors.name?.message}</p>*/}
-      <button className="btn btn-primary" type="submit">
-        Submit
-      </button>
-      {status}
-    </form>
+    <Form
+      defaultValues={{ name: "" }}
+      onSubmit={formSubmitted}
+      resolver={validateIndividual}
+    >
+      <InputField type="text" label="Name" name="name" />
+      <Submit>Submit</Submit>
+      {status && <FormStatus status={status} />}
+    </Form>
   );
 }
