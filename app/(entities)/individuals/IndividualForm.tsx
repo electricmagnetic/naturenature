@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import type { FieldValues } from "react-hook-form";
 
+import Loading from "@/app/loading";
 import Form from "@/components/forms/Form";
 import { InputField, Submit } from "@/components/forms/fields";
 import { FormStatus } from "@/components/forms/helpers";
@@ -16,21 +18,28 @@ export default async function IndividualForm({
 }: {
   individual?: Row<"individuals">;
 }) {
+  const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
   const [status, setStatus] = useState("");
-  if (individual) console.log("TODO EDIT MODE");
-  const defaultValues = initialValues; // TODO EDIT MODE
+  const [isPending, startTransition] = useTransition();
+
+  const defaultValues = individual ? individual : initialValues;
 
   const formSubmitted = async (values: FieldValues) => {
     setStatus("Submitting");
+
     const { status, data, error } = await supabase
       .from("individuals")
-      .insert(values)
-      .select();
+      .upsert(values)
+      .select()
+      .single();
+
     if (error) setStatus(`Error ${error.message}`);
-    if (status != 201) setStatus(`Not Created (${status})`);
-    if (data) setStatus(`Created ${data[0].id}`);
+    if (status == 201 && data) {
+      setStatus(`Created/Updated`);
+      startTransition(() => router.push(`/individuals/${data.id}`));
+    } else setStatus(`Status ${status}`);
   };
 
   return (
@@ -41,6 +50,7 @@ export default async function IndividualForm({
     >
       <InputField type="text" label="Name" name="name" />
       <Submit>Submit</Submit>
+      {isPending && <Loading />}
       {status && <FormStatus status={status} />}
     </Form>
   );
