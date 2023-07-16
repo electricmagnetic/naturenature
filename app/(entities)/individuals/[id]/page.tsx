@@ -1,6 +1,11 @@
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import Toolbar from "@/components/ui/Toolbar";
+import {
+  EditActionButton,
+  DeleteActionButton,
+} from "@/components/ui/ActionButton";
+
 import { getIndividual } from "../api";
 
 export default async function Individual({
@@ -14,18 +19,8 @@ export default async function Individual({
     <main>
       <Header title={`Individual: ${individual.id}`}>
         <Toolbar>
-          <Toolbar.Link
-            href={`/individuals/${individual.id}/edit`}
-            iconName="pencil-square"
-          >
-            Edit
-          </Toolbar.Link>
-          <Toolbar.Link
-            href={`/individuals/${individual.id}/delete`}
-            iconName="trash"
-          >
-            Delete
-          </Toolbar.Link>
+          <EditActionButton href={`/individuals/${individual.id}/edit`} />
+          <DeleteActionButton href={`/individuals/${individual.id}/delete`} />
         </Toolbar>
       </Header>
       <Section isPrimary>

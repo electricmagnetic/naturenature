@@ -4,6 +4,7 @@ import { User } from "@supabase/supabase-js";
 import Section from "@/components/layout/Section";
 import Header from "@/components/layout/Header";
 import Toolbar from "@/components/ui/Toolbar";
+import ActionButton from "@/components/ui/ActionButton";
 import RedirectLink from "./RedirectLink";
 
 export default function AccountView({ user }: { user: User }) {
@@ -11,9 +12,9 @@ export default function AccountView({ user }: { user: User }) {
     <main>
       <Header title="Account" iconName="person-circle">
         <Toolbar>
-          <Toolbar.Link href="/" iconName="house">
+          <ActionButton href="/" iconName="house">
             Home
-          </Toolbar.Link>
+          </ActionButton>
           <RedirectLink />
         </Toolbar>
       </Header>

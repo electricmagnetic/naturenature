@@ -1,5 +1,5 @@
 import Header from "@/components/layout/Header";
-import Toolbar from "@/components/ui/Toolbar";
+import { CreateActionButton } from "@/components/ui/ActionButton";
 
 import { getIndividuals } from "./api";
 
@@ -11,9 +11,7 @@ export default async function Individuals() {
   return (
     <main>
       <Header title="Individuals" iconName="bullseye">
-        <Toolbar.Link href="/individuals/create" iconName="plus-circle">
-          Create
-        </Toolbar.Link>
+        <CreateActionButton href="/individuals/create" />
       </Header>
       <IndividualsList individuals={individuals} />
     </main>

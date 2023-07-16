@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-import Toolbar from "@/components/ui/Toolbar"; // TODO, technically not being used as a toolbar here
+import {
+  ViewActionButton,
+  EditActionButton,
+  DeleteActionButton,
+} from "@/components/ui/ActionButton";
 import Table from "@/components/ui/Table";
 import type { Row } from "@/types/database";
 
@@ -26,24 +30,11 @@ export default async function IndividualsList({
               </Link>
             </Table.Data>
             <Table.Data>
-              <Toolbar.Link
-                href={`/individuals/${individual.id}`}
-                iconName="eye"
-              >
-                View
-              </Toolbar.Link>
-              <Toolbar.Link
-                href={`/individuals/${individual.id}/edit`}
-                iconName="pencil-square"
-              >
-                Edit
-              </Toolbar.Link>
-              <Toolbar.Link
+              <ViewActionButton href={`/individuals/${individual.id}`} />
+              <EditActionButton href={`/individuals/${individual.id}/edit`} />
+              <DeleteActionButton
                 href={`/individuals/${individual.id}/delete`}
-                iconName="trash"
-              >
-                Delete
-              </Toolbar.Link>
+              />
             </Table.Data>
           </Table.Row>
         ))}

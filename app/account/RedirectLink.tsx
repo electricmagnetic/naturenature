@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 
-import Toolbar from "@/components/ui/Toolbar";
+import ActionButton from "@/components/ui/ActionButton";
 
 /**
  * Client side function for showing an alert with links to home and the previous page visited before logging in
@@ -13,8 +13,8 @@ export default function RedirectLink() {
 
   if (!next || next === "/") return null;
   return (
-    <Toolbar.Link href={next} iconName="arrow-counterclockwise">
+    <ActionButton href={next} iconName="arrow-counterclockwise">
       Return to {searchParams.get("next")}
-    </Toolbar.Link>
+    </ActionButton>
   );
 }
