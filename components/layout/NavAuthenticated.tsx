@@ -4,6 +4,7 @@ import { PropsWithChildren } from "react";
 import Link from "next/link";
 import { Session } from "@supabase/auth-helpers-nextjs";
 
+import metadata from "@/app/(entities)/metadata";
 import Icon from "@/components/ui/Icon";
 
 const NavbarLink = ({
@@ -49,24 +50,15 @@ export default function NavAuthenticated({ session }: { session: Session }) {
       </button>
       <div className="collapse navbar-collapse" id="navbar">
         <ul className="navbar-nav me-auto">
-          <NavbarLink href="/events" iconName="calendar">
-            Events
-          </NavbarLink>
-          <NavbarLink href="/records" iconName="database">
-            Records
-          </NavbarLink>
-          <NavbarLink href="/individuals" iconName="bullseye">
-            Individuals
-          </NavbarLink>
-          <NavbarLink href="/objects" iconName="box-seam">
-            Objects
-          </NavbarLink>
-          <NavbarLink href="/places" iconName="geo-alt">
-            Places
-          </NavbarLink>
-          <NavbarLink href="/people" iconName="people">
-            People
-          </NavbarLink>
+          {Object.keys(metadata).map((entity) => (
+            <NavbarLink
+              key={entity}
+              href={metadata[entity].baseLink}
+              iconName={metadata[entity].iconName}
+            >
+              {metadata[entity].pluralName}
+            </NavbarLink>
+          ))}
         </ul>
         <ul className="navbar-nav ms-auto">
           <li className="nav-item dropdown">
@@ -81,31 +73,21 @@ export default function NavAuthenticated({ session }: { session: Session }) {
               Create
             </a>
             <ul className="dropdown-menu dropdown-menu-end">
-              {/*<NavbarLink isDropdownItem href="/create/event" iconName="calendar">
-                Event
-              </NavbarLink>
-              <NavbarLink isDropdownItem href="/create/record" iconName="database">
-                Record
-              </NavbarLink>
-              <NavbarLink isDropdownItem href="/create/individual" iconName="bullseye">
-                Individual
-              </NavbarLink>
-              <NavbarLink isDropdownItem href="/create/object" iconName="box-seam">
-                Object
-              </NavbarLink>
-              <NavbarLink isDropdownItem href="/create/place" iconName="geo-alt">
-                Place
-              </NavbarLink>
-              <NavbarLink isDropdownItem href="/create/person" iconName="people">
-                Person
-  </NavbarLink>*/}
+              {Object.keys(metadata).map((entity) => (
+                <NavbarLink
+                  key={entity}
+                  isDropdownItem
+                  href={`/create/${entity}`}
+                  iconName={metadata[entity].iconName}
+                >
+                  {metadata[entity].name}
+                </NavbarLink>
+              ))}
             </ul>
           </li>
-          <li className="nav-item">
-            <NavbarLink href="/account" iconName="person-circle">
-              Account
-            </NavbarLink>
-          </li>
+          <NavbarLink href="/account" iconName="person-circle">
+            Account
+          </NavbarLink>
         </ul>
       </div>
     </>

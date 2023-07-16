@@ -11,7 +11,7 @@ export default async function Individuals() {
   return (
     <main>
       <Header title="Individuals" iconName="bullseye">
-        <CreateActionButton href="/individuals/create" />
+        <CreateActionButton href="/create/individual" />
       </Header>
       <IndividualsList individuals={individuals} />
     </main>
