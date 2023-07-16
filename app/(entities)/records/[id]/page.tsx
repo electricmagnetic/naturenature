@@ -16,7 +16,7 @@ export default async function Record({
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data: record } = await supabase
     .from("records")
-    .select("*, event(*), individual(*), object(*), person(*)")
+    .select("*, event(*), individual(*), media(*), object(*), person(*)")
     .eq("id", id)
     .returns<CompleteRecord[]>()
     .limit(1)

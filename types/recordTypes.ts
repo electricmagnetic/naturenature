@@ -6,6 +6,7 @@ export type CompleteRecord = Row<"records"> & {
   person: Row<"people"> | null,
   individual: Row<"individuals"> | null,
   object: Row<"objects"> | null,
+  media: Row<"media"> | null,
 }
 
 // Types for JSON fields in Records

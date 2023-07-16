@@ -5,6 +5,7 @@ import ProtocolGroup from "./ProtocolGroup";
 import ProtocolIdentifier from "./ProtocolIdentifier";
 import ProtocolIntervention from "./ProtocolIntervention";
 import ProtocolMeasurement from "./ProtocolMeasurement";
+import ProtocolMedia from "./ProtocolMedia";
 import ProtocolObservation from "./ProtocolObservation";
 import ProtocolPerson from "./ProtocolPerson";
 import ProtocolSample from "./ProtocolSample";
@@ -17,6 +18,7 @@ const protocolComponents: ProtocolComponent = {
   IDENTIFIER: ProtocolIdentifier,
   INTERVENTION: ProtocolIntervention,
   MEASUREMENT: ProtocolMeasurement,
+  MEDIA: ProtocolMedia,
   OBSERVATION: ProtocolObservation,
   PERSON: ProtocolPerson,
   SAMPLE: ProtocolSample,

@@ -25,7 +25,7 @@ export default async function Event({
 
   const { data: records, error: recordsError } = await supabase
     .from("records")
-    .select("*, event(*), individual(*), object(*), person(*)")
+    .select("*, event(*), individual(*), media(*), object(*), person(*)")
     .eq("event", id)
     .returns<CompleteRecord[]>();
 

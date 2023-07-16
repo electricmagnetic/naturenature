@@ -14,6 +14,12 @@ const metadata: { [key: string]: EntityMetadatum } = {
     iconName: "bullseye",
     baseLink: "/individuals",
   },
+  media: {
+    name: "Media",
+    pluralName: "Media",
+    iconName: "images",
+    baseLink: "/media",
+  },
   object: {
     name: "Object",
     pluralName: "Objects",

@@ -2,20 +2,20 @@ import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
 import { CreateActionButton } from "@/components/ui/ActionButton";
 
-import ObjectsList from "./ObjectsList";
+import MediaList from "./MediaList";
 
-const entityMetadata = metadata.object;
+const entityMetadata = metadata.media;
 
-export default function Objects() {
+export default function Medias() {
   return (
     <main>
       <Header
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
       >
-        <CreateActionButton href="/create/object" />
+        <CreateActionButton href="/create/media" />
       </Header>
-      <ObjectsList />
+      <MediaList />
     </main>
   );
 }
