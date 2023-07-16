@@ -30,7 +30,7 @@ alter table "public"."objects" enable row level security;
 create policy "Authenticated users can select objects" on objects
 for select to authenticated using (true);
 
--- update events table to include link to object
+-- update records table to include link to object
 
 alter table "public"."records" add column "object" uuid;
 
