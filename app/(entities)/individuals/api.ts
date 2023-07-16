@@ -9,7 +9,7 @@ export const getIndividuals = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data: individuals, error } = await supabase
     .from("individuals")
-    .select("*, records(count)");
+    .select("*");
 
   if (error) throw Error(error.message);
   if (!individuals) return notFound();
