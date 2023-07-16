@@ -1,9 +1,13 @@
 import Header from "@/components/layout/Header";
 import Toolbar from "@/components/ui/Toolbar";
 
+import { getIndividuals } from "./api";
+
 import IndividualsList from "./IndividualsList";
 
-export default function Individuals() {
+export default async function Individuals() {
+  const individuals = await getIndividuals();
+
   return (
     <main>
       <Header title="Individuals" iconName="bullseye">
@@ -11,7 +15,7 @@ export default function Individuals() {
           Create
         </Toolbar.Link>
       </Header>
-      <IndividualsList />
+      <IndividualsList individuals={individuals} />
     </main>
   );
 }

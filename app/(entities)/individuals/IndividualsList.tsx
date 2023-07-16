@@ -1,22 +1,14 @@
-import { cookies } from "next/headers";
 import Link from "next/link";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Toolbar from "@/components/ui/Toolbar"; // TODO, technically not being used as a toolbar here
-import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
-import type { Database } from "@/types/_supabase";
+import type { Row } from "@/types/database";
 
-export default async function IndividualsList() {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const { data: individuals, error } = await supabase
-    .from("individuals")
-    .select("*, records(count)");
-
-  if (error) throw Error(error.message);
-  if (!individuals) return <Message>No individuals found</Message>;
-
+export default async function IndividualsList({
+  individuals,
+}: {
+  individuals: Row<"individuals">[];
+}) {
   return (
     <Table>
       <Table.Head>

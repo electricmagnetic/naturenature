@@ -1,28 +1,14 @@
-import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import Toolbar from "@/components/ui/Toolbar";
-import type { Database } from "@/types/_supabase";
+import { getIndividual } from "../api";
 
 export default async function Individual({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const { data: individual, error } = await supabase
-    .from("individuals")
-    .select("*, records(*)")
-    .eq("id", id)
-    .limit(1)
-    .single();
-
-  if (error) throw Error(error.message);
-  if (!individual) return notFound();
+  const individual = await getIndividual(id);
 
   return (
     <main>
@@ -50,15 +36,6 @@ export default async function Individual({
           </div>
         </dl>
       </Section>
-      {individual.records && (
-        <Section title="Records">
-          <ul>
-            {individual.records.map((record) => (
-              <li key={record.id}>{record.protocol}</li>
-            ))}
-          </ul>
-        </Section>
-      )}
     </main>
   );
 }

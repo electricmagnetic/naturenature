@@ -1,16 +1,18 @@
 import Header from "@/components/layout/Header";
-//import IndividualForm from "../../IndividualForm";
+import { getIndividual } from "../../api";
+import IndividualForm from "../../IndividualForm";
 
 export default async function EditIndividual({
   params: { id },
 }: {
   params: { id: string };
 }) {
+  const individual = await getIndividual(id);
+
   return (
     <main>
       <Header title={`Edit Individual: ${id}`} />
-      <span>TODO</span>
-      {/*<IndividualForm id={id} />*/}
+      <IndividualForm individual={individual} />
     </main>
   );
 }

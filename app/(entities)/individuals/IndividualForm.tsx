@@ -7,14 +7,20 @@ import type { FieldValues } from "react-hook-form";
 import Form from "@/components/forms/Form";
 import { InputField, Submit } from "@/components/forms/fields";
 import { FormStatus } from "@/components/forms/helpers";
-import { validateIndividual } from "./validations";
+import { validate, initialValues } from "./validations";
 import type { Database } from "@/types/_supabase";
+import type { Row } from "@/types/database";
 
-export default async function IndividualForm({ id }: { id?: string }) {
+export default async function IndividualForm({
+  individual,
+}: {
+  individual?: Row<"individuals">;
+}) {
   const supabase = createClientComponentClient<Database>();
 
   const [status, setStatus] = useState("");
-  if (id) console.log("EDIT MODE TODO");
+  if (individual) console.log("TODO EDIT MODE");
+  const defaultValues = initialValues; // TODO EDIT MODE
 
   const formSubmitted = async (values: FieldValues) => {
     setStatus("Submitting");
@@ -29,9 +35,9 @@ export default async function IndividualForm({ id }: { id?: string }) {
 
   return (
     <Form
-      defaultValues={{ name: "" }}
+      defaultValues={defaultValues}
       onSubmit={formSubmitted}
-      resolver={validateIndividual}
+      resolver={validate}
     >
       <InputField type="text" label="Name" name="name" />
       <Submit>Submit</Submit>
