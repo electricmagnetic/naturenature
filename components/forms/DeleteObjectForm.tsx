@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import { Database } from "@/types/_supabase";
+import Loading from "@/app/loading";
+import type { Database } from "@/types/_supabase";
 
 /**
  * Delete an object with 'id' from the table 'from'. Require that the user clicks to confirm deletion.
@@ -19,6 +20,8 @@ export default function DeleteObjectForm({
 
   const router = useRouter();
   const [error, setError] = useState<Error | undefined>();
+  const [isPending, startTransition] = useTransition();
+
   const [confirmDeletion, setConfirmDeletion] = useState(false);
   const [helperText, setHelperText] = useState(`Delete ${id} from ${from}?`);
   const [buttonClassName, setButtonClassName] = useState("btn-warning");
@@ -32,7 +35,7 @@ export default function DeleteObjectForm({
       const { error } = await supabase.from(from).delete().eq("id", id);
 
       if (error) setError(Error(error.message));
-      router.push(`/${from}`, { shallow: false });
+      startTransition(() => router.push(`/${from}`, { shallow: false }));
     }
   };
 
@@ -47,6 +50,7 @@ export default function DeleteObjectForm({
       <button className="btn btn-light" onClick={() => router.back()}>
         Cancel
       </button>
+      {isPending && <Loading />}
     </>
   );
 }
