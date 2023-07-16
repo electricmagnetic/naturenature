@@ -1,5 +1,6 @@
 import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
+import { CreateActionButton } from "@/components/ui/ActionButton";
 
 import RecordsList from "./RecordsList";
 
@@ -11,7 +12,9 @@ export default function Records() {
       <Header
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
-      />
+      >
+        <CreateActionButton href="/create/individual" />
+      </Header>
       <RecordsList />
     </main>
   );
