@@ -2,7 +2,7 @@
 
 create table "public"."dictionary" (
     "id" text not null,
-    "type" text not null,
+    "class" text not null,
     "name" text
 );
 

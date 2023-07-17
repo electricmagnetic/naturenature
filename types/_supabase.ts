@@ -11,19 +11,19 @@ export interface Database {
     Tables: {
       dictionary: {
         Row: {
+          class: string
           id: string
           name: string | null
-          type: string
         }
         Insert: {
+          class: string
           id: string
           name?: string | null
-          type: string
         }
         Update: {
+          class?: string
           id?: string
           name?: string | null
-          type?: string
         }
         Relationships: []
       }
@@ -144,12 +144,6 @@ export interface Database {
           {
             foreignKeyName: "objects_class_fkey"
             columns: ["class"]
-            referencedRelation: "dictionary"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "objects_type_fkey"
-            columns: ["type"]
             referencedRelation: "dictionary"
             referencedColumns: ["id"]
           }
