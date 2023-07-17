@@ -12,18 +12,24 @@ export interface Database {
       dictionary: {
         Row: {
           class: string
+          description: string | null
           id: string
           name: string | null
+          type: string | null
         }
         Insert: {
           class: string
+          description?: string | null
           id: string
           name?: string | null
+          type?: string | null
         }
         Update: {
           class?: string
+          description?: string | null
           id?: string
           name?: string | null
+          type?: string | null
         }
         Relationships: []
       }
