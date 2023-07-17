@@ -2,6 +2,8 @@
 
 import { PropsWithChildren } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 import { Session } from "@supabase/auth-helpers-nextjs";
 
 import metadata from "@/app/(entities)/metadata";
@@ -11,24 +13,35 @@ const NavbarLink = ({
   iconName,
   href,
   isDropdownItem = false,
+  exact = false,
   children,
   ...others
 }: PropsWithChildren<{
   iconName: string;
   href: string;
   isDropdownItem?: boolean;
-}>) => (
-  <li className={isDropdownItem ? "" : "nav-item"}>
-    <Link
-      className={isDropdownItem ? "dropdown-item" : "nav-link"}
-      href={href}
-      {...others}
-    >
-      <Icon iconName={iconName} />
-      {children}
-    </Link>
-  </li>
-);
+  exact?: boolean;
+}>) => {
+  const pathname = usePathname();
+  const isActive = exact ? !!(pathname === href) : !!pathname.startsWith(href);
+
+  return (
+    <li className={isDropdownItem ? "" : "nav-item"}>
+      <Link
+        className={clsx(
+          isDropdownItem ? "dropdown-item" : "nav-link",
+          isActive && "active",
+        )}
+        href={href}
+        aria-current={isActive && "page"}
+        {...others}
+      >
+        <Icon iconName={iconName} />
+        {children}
+      </Link>
+    </li>
+  );
+};
 
 export default function NavAuthenticated({ session }: { session: Session }) {
   if (typeof window !== "undefined") {
