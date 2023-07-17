@@ -5,9 +5,9 @@ import { useSearchParams } from "next/navigation";
 import ActionButton from "@/components/ui/ActionButton";
 
 /**
- * Client side function for showing an alert with links to home and the previous page visited before logging in
+ * Button (client side) for showing an alert with links to home and the previous page visited before logging in
  */
-export default function RedirectLink() {
+export default function RedirectLinkButton() {
   const searchParams = useSearchParams();
   const next = searchParams.get("next");
 

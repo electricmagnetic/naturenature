@@ -5,7 +5,9 @@ import Header from "@/components/layout/Header";
 import Toolbar from "@/components/ui/Toolbar";
 import DateTime from "@/components/ui/DateTime";
 import ActionButton from "@/components/ui/ActionButton";
-import RedirectLink from "./RedirectLink";
+
+import RedirectLinkButton from "./RedirectLinkButton";
+import ClearSessionStorageButton from "./ClearSessionStorageButton";
 
 export default function AccountView({ user }: { user: User }) {
   return (
@@ -15,7 +17,7 @@ export default function AccountView({ user }: { user: User }) {
           <ActionButton href="/" iconName="house">
             Home
           </ActionButton>
-          <RedirectLink />
+          <RedirectLinkButton />
         </Toolbar>
       </Header>
       <Section isPrimary>
@@ -46,11 +48,20 @@ export default function AccountView({ user }: { user: User }) {
           </div>
         </dl>
       </Section>
-      <form action="/auth/logout" method="post">
-        <button className="btn btn-primary" role="btn" type="submit">
-          Log out
-        </button>
-      </form>
+      <Section>
+        <div className="row row-cols-auto">
+          <div className="col">
+            <form action="/auth/logout" method="post">
+              <button className="btn btn-primary" role="btn" type="submit">
+                Log out
+              </button>
+            </form>
+          </div>
+          <div className="col">
+            <ClearSessionStorageButton />
+          </div>
+        </div>
+      </Section>
     </main>
   );
 }
