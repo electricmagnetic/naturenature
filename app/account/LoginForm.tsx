@@ -8,8 +8,6 @@ import Message from "@/components/ui/Message";
 import Loading from "@/app/loading";
 import type { Database } from "@/types/_supabase";
 
-const DOMAINS = ["keadatabase.nz", "keaconservation.nz"];
-
 export default function LoginForm() {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();

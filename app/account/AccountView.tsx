@@ -7,7 +7,7 @@ import DateTime from "@/components/ui/DateTime";
 import ActionButton from "@/components/ui/ActionButton";
 
 import RedirectLinkButton from "./RedirectLinkButton";
-import ClearSessionStorageButton from "./ClearSessionStorageButton";
+import ClearLocalStorageButton from "./ClearLocalStorageButton";
 
 export default function AccountView({ user }: { user: User }) {
   return (
@@ -58,7 +58,7 @@ export default function AccountView({ user }: { user: User }) {
             </form>
           </div>
           <div className="col">
-            <ClearSessionStorageButton />
+            <ClearLocalStorageButton />
           </div>
         </div>
       </Section>

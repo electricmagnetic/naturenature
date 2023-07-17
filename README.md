@@ -32,7 +32,7 @@ This is an alpha-stage project, but contributions are nonetheless welcome. Pleas
 - **Project layout**
   - `app` routes (and components specific to those routes), as well as styles and global components necessary for the app router of Next.js
     - `app/(entities)` folders (pages/components) relating to the different entities (tables), and a metadata file containing information on each entity
-    - `app/account` page/components relating to logging in (including redirecting to the link before login), as well as a simple button for clearing sessionStorage
+    - `app/account` page/components relating to logging in (including redirecting to the link before login), as well as a simple button for clearing localStorage
     - `app/auth` auth callback, plus a route for logging out
     - `app/create` a single page for creating different entities
   - `components` reusable components, not specific to any one route

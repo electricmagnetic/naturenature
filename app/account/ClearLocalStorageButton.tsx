@@ -3,13 +3,13 @@
 import type { SyntheticEvent } from "react";
 
 /**
- * Button (client side) for clearing session storage (forcing the front-end to redownload any stored data)
+ * Button (client side) for clearing local storage (forcing the front-end to redownload any stored data)
  */
-export default function ClearSessionStorageButton() {
+export default function ClearLocalStorageButton() {
   const handleOnClick = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    window.sessionStorage.clear();
+    window.localStorage.clear();
     alert("Storage cleared");
   };
 
