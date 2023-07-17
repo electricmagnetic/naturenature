@@ -8,10 +8,6 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  if (typeof window !== "undefined") {
-    require("bootstrap");
-  }
-
   useEffect(() => {
     console.error(error);
   }, [error]);
