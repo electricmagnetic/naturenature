@@ -1,10 +1,10 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
-import { DateTime } from "luxon";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
+import DateTime from "@/components/ui/DateTime";
 import type { Database } from "@/types/_supabase";
 
 export default async function EventsList() {
@@ -31,9 +31,7 @@ export default async function EventsList() {
           <Table.Row key={event.id}>
             <Table.Data>
               <Link href={`/events/${event.id}`}>
-                {DateTime.fromISO(event.datetime).toLocaleString(
-                  DateTime.DATETIME_MED,
-                )}
+                <DateTime datetime={event.datetime} />
               </Link>
             </Table.Data>
             <Table.Data>{event.comments}</Table.Data>

@@ -2,11 +2,12 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
-import type { Database } from "@/types/_supabase";
+import Header from "@/components/layout/Header";
+import DateTime from "@/components/ui/DateTime";
 import Protocol from "@/app/(entities)/records/protocols/Protocol";
-import { CompleteRecord } from "@/types/recordTypes";
+import type { Database } from "@/types/_supabase";
+import type { CompleteRecord } from "@/types/recordTypes";
 
 export default async function Event({
   params: { id },
@@ -40,7 +41,9 @@ export default async function Event({
         <dl className="row row-cols-4 g-2">
           <div>
             <dt>Date/Time</dt>
-            <dd>{event.datetime}</dd>
+            <dd>
+              <DateTime datetime={event.datetime} />
+            </dd>
           </div>
         </dl>
       </Section>
