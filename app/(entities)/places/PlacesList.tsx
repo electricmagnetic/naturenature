@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
+import Lookup from "@/components/dictionary/Lookup";
 import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
 import type { Database } from "@/types/_supabase";
@@ -26,7 +27,9 @@ export default async function PlacesList() {
         {places.map((place) => (
           <Table.Row key={place.id}>
             <Table.Data>{place.id}</Table.Data>
-            <Table.Data>{place.type}</Table.Data>
+            <Table.Data>
+              <Lookup>{place.type}</Lookup>
+            </Table.Data>
             <Table.Data>{place.name}</Table.Data>
           </Table.Row>
         ))}

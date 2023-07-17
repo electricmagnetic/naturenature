@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 
 import Card from "@/components/ui/Card";
+import Lookup from "@/components/dictionary/Lookup";
 import type {
   CompleteRecord,
   ProtocolMeasurementData,
@@ -16,7 +19,8 @@ export default function ProtocolMeasurement({
   return (
     <Card title="Measurement">
       <div>
-        {record.action} {record.type} of{" "}
+        <Lookup formatted>{record.action}</Lookup>{" "}
+        <Lookup>{record.type}</Lookup> of{" "}
         {record.individual && (
           <Link href={`/individuals/${record.individual.id}`}>
             {record.individual?.name}

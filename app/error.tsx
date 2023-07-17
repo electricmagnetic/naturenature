@@ -22,7 +22,7 @@ export default function Error({
       {error.message && (
         <>
           <p>The following error has occurred:</p>
-          <pre>{error.message}</pre>
+          <p className="font-monospace">{error.message}</p>
         </>
       )}
       <button className="btn btn-danger" onClick={() => reset()}>

@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
+import Lookup from "@/components/dictionary/Lookup";
 import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
 import type { Database } from "@/types/_supabase";
@@ -27,8 +28,12 @@ export default async function ObjectsList() {
         {objects.map((object) => (
           <Table.Row key={object.id}>
             <Table.Data>{object.id}</Table.Data>
-            <Table.Data>{object.class}</Table.Data>
-            <Table.Data>{object.type}</Table.Data>
+            <Table.Data>
+              <Lookup>{object.class}</Lookup>
+            </Table.Data>
+            <Table.Data>
+              <Lookup>{object.type}</Lookup>
+            </Table.Data>
             <Table.Data>{object.name}</Table.Data>
           </Table.Row>
         ))}
