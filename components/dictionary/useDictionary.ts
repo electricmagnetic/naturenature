@@ -1,55 +1,59 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { notFound } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import useSWR, { Fetcher } from "swr";
 
 import type { Row } from "@/types/database";
-import type { Database } from "@/types/_supabase";
 
-const STORED_DICTIONARY_KEY = "dictionary";
 type Dictionary = Row<"dictionary">[] | null;
+
+// Key for use in localStorage
+const DICTIONARY_KEY = "dictionary";
+
+// Necessary for accessing Supabase REST API manually
+const DICTIONARY_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/dictionary?select=*`;
+const HEADERS = new Headers({
+  apikey: `${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+  authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+});
+
+// localStorage helpers
+const retrieveDictionary = async (): Promise<Dictionary> => {
+  const data = window.localStorage.getItem(DICTIONARY_KEY);
+  return data ? JSON.parse(data) : null;
+};
+
+const storeDictionary = (data: Dictionary) =>
+  window.localStorage.setItem(DICTIONARY_KEY, JSON.stringify(data));
+
+// SWR function to get dictionary from localStorage (if exists), otherwise fetch and store in localStorage
+const fetcher: Fetcher<Dictionary> = async (url: string) => {
+  const storedDictionary = await retrieveDictionary();
+  if (storedDictionary) return storedDictionary;
+
+  const result = await fetch(url, { headers: HEADERS });
+  const data = await result.json();
+
+  if (!result.ok) {
+    // Catch 40x errors
+    throw Error(`Error fetching dictionary (${data.message})`);
+  }
+
+  storeDictionary(data);
+  return data;
+};
 
 /**
  * Provides a dictionary of terms (from the 'dictionary' table) used in dropdowns.
  * NB: By design, this data is assumed to be non-sensitive, and not subject to authentication.
  */
 export default function useDictionary() {
-  const [dictionary, setDictionary] = useState<Dictionary>(null);
+  const { data: dictionary, error } = useSWR<Dictionary, Error>(
+    DICTIONARY_URL,
+    fetcher,
+  );
 
-  // Get dictionary from localStorage (if exists) otherwise return null
-  const retrieveDictionary = (): Dictionary => {
-    const data = window.localStorage.getItem(STORED_DICTIONARY_KEY);
-    return data ? JSON.parse(data) : null;
-  };
-
-  // Store dictionary in localStorage
-  const storeDictionary = (data: Dictionary) =>
-    window.localStorage.setItem(STORED_DICTIONARY_KEY, JSON.stringify(data));
-
-  // Fetch dictionary from API and update 'dictionary' (state)
-  const fetchDictionary = async () => {
-    const supabase = createClientComponentClient<Database>();
-    const { data, error } = await supabase.from("dictionary").select("*");
-
-    if (error) throw Error(error.message);
-    if (!data) return notFound();
-
-    setDictionary(data);
-  };
-
-  // Saves 'dictionary' (state)
-  useEffect(() => {
-    if (dictionary) storeDictionary(dictionary);
-  }, [dictionary]);
-
-  // Retrieve dictionary from storage (if exists), otherwise fetch it
-  useEffect(() => {
-    const storedDictionary = retrieveDictionary();
-
-    if (!storedDictionary) fetchDictionary();
-    else setDictionary(storedDictionary);
-  }, [setDictionary]);
+  if (error) throw Error(error.message);
+  if (!dictionary) return null;
 
   return dictionary;
 }
