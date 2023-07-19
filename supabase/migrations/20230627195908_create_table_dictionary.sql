@@ -3,7 +3,9 @@
 create table "public"."dictionary" (
     "id" text not null,
     "class" text not null,
-    "name" text
+    "type" text,
+    "name" text,
+    "description" text
 );
 
 

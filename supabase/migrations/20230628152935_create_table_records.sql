@@ -50,28 +50,6 @@ alter table "public"."records" validate constraint "records_type_fkey";
 
 create index idx_records_type on records (type);
 
--- identifier (deprecated, replaced by object)
-
-alter table "public"."records" add column "identifier" uuid null;
-
-alter table "public"."records" add constraint "records_identifier_fkey" foreign key (
-    identifier
-) references identifiers (id) on delete restrict not valid;
-alter table "public"."records" validate constraint "records_identifier_fkey";
-
-create index idx_records_identifier on records (identifier);
-
--- sample (deprecated, replaced by object)
-
-alter table "public"."records" add column "sample" uuid null;
-
-alter table "public"."records" add constraint "records_sample_fkey" foreign key (
-    sample
-) references samples (id) on delete restrict not valid;
-alter table "public"."records" validate constraint "records_sample_fkey";
-
-create index idx_records_sample on records (sample);
-
 -- person
 
 alter table "public"."records" add column "person" uuid null;
