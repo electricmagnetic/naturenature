@@ -72,6 +72,12 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "events_place_fkey"
+            columns: ["place"]
+            referencedRelation: "places_with_geojson"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "events_source_fkey"
             columns: ["source"]
             referencedRelation: "dictionary"
@@ -194,6 +200,7 @@ export interface Database {
           created_at: string | null
           geography: unknown
           id: string
+          metadata: Json | null
           name: string
           type: string
         }
@@ -201,6 +208,7 @@ export interface Database {
           created_at?: string | null
           geography: unknown
           id?: string
+          metadata?: Json | null
           name: string
           type: string
         }
@@ -208,6 +216,7 @@ export interface Database {
           created_at?: string | null
           geography?: unknown
           id?: string
+          metadata?: Json | null
           name?: string
           type?: string
         }
@@ -378,6 +387,40 @@ export interface Database {
           type?: string | null
         }
         Relationships: []
+      }
+      places_with_geojson: {
+        Row: {
+          created_at: string | null
+          geojson: Json | null
+          id: string | null
+          metadata: Json | null
+          name: string | null
+          type: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          geojson?: never
+          id?: string | null
+          metadata?: Json | null
+          name?: string | null
+          type?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          geojson?: never
+          id?: string | null
+          metadata?: Json | null
+          name?: string | null
+          type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "places_type_fkey"
+            columns: ["type"]
+            referencedRelation: "dictionary"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Functions: {
