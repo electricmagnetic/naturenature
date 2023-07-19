@@ -152,6 +152,12 @@ export interface Database {
             columns: ["class"]
             referencedRelation: "dictionary"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "objects_type_fkey"
+            columns: ["type"]
+            referencedRelation: "dictionary"
+            referencedColumns: ["id"]
           }
         ]
       }
