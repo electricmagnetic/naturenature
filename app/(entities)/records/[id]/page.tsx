@@ -4,6 +4,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
+import Properties from "@/components/ui/Properties";
 import Protocol from "../protocols/Protocol";
 import type { Database } from "@/types/_supabase";
 import type { CompleteRecord } from "@/types/recordTypes";
@@ -28,12 +29,9 @@ export default async function Record({
     <main>
       <Header title={`Record: ${record.id}`} />
       <Section isPrimary>
-        <dl className="row row-cols-4 g-2">
-          <div>
-            <dt>Protocol</dt>
-            <dd>{record.protocol}</dd>
-          </div>
-        </dl>
+        <Properties>
+          <Properties.Item name="Protocol">{record.protocol}</Properties.Item>
+        </Properties>
       </Section>
       <Section>
         <Protocol record={record} />

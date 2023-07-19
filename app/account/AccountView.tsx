@@ -2,6 +2,7 @@ import { User } from "@supabase/supabase-js";
 
 import Section from "@/components/layout/Section";
 import Header from "@/components/layout/Header";
+import Properties from "@/components/ui/Properties";
 import Toolbar from "@/components/ui/Toolbar";
 import DateTime from "@/components/ui/DateTime";
 import ActionButton from "@/components/ui/ActionButton";
@@ -21,32 +22,20 @@ export default function AccountView({ user }: { user: User }) {
         </Toolbar>
       </Header>
       <Section isPrimary>
-        <dl className="row row-cols-4 g-2">
-          <div>
-            <dt>Email</dt>
-            <dd>{user.email}</dd>
-          </div>
-          <div>
-            <dt>Role</dt>
-            <dd>{user.role}</dd>
-          </div>
-          <div>
-            <dt>Created at</dt>
-            <dd>
-              <DateTime datetime={user.created_at} />
-            </dd>
-          </div>
-          <div>
-            <dt>Last signed in</dt>
-            <dd>
-              {user.last_sign_in_at ? (
-                <DateTime datetime={user.last_sign_in_at} />
-              ) : (
-                <span>Never</span>
-              )}
-            </dd>
-          </div>
-        </dl>
+        <Properties>
+          <Properties.Item name="Email">{user.email}</Properties.Item>
+          <Properties.Item name="Role">{user.role}</Properties.Item>
+          <Properties.Item name="Created at">
+            <DateTime datetime={user.created_at} />
+          </Properties.Item>
+          <Properties.Item name="Last signed in">
+            {user.last_sign_in_at ? (
+              <DateTime datetime={user.last_sign_in_at} />
+            ) : (
+              <span>Never</span>
+            )}
+          </Properties.Item>
+        </Properties>
       </Section>
       <Section>
         <div className="row row-cols-auto">

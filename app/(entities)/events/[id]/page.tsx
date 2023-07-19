@@ -5,6 +5,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Section from "@/components/layout/Section";
 import Header from "@/components/layout/Header";
 import DateTime from "@/components/ui/DateTime";
+import Properties from "@/components/ui/Properties";
 import Protocol from "@/app/(entities)/records/protocols/Protocol";
 import type { Database } from "@/types/_supabase";
 import type { CompleteRecord } from "@/types/recordTypes";
@@ -38,14 +39,11 @@ export default async function Event({
     <main>
       <Header title={`Event: ${event.id}`} />
       <Section isPrimary>
-        <dl className="row row-cols-4 g-2">
-          <div>
-            <dt>Date/Time</dt>
-            <dd>
-              <DateTime datetime={event.datetime} />
-            </dd>
-          </div>
-        </dl>
+        <Properties>
+          <Properties.Item name="Date/Time">
+            <DateTime datetime={event.datetime} />
+          </Properties.Item>
+        </Properties>
       </Section>
       {records && (
         <Section title="Records">
