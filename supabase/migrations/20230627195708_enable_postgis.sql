@@ -1,1 +1,1 @@
-CREATE EXTENSION IF NOT EXISTS "postgis" WITH SCHEMA "public";
+create extension postgis with schema extensions;
