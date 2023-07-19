@@ -2,11 +2,14 @@ import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
 import { CreateActionButton } from "@/components/ui/ActionButton";
 
+import { getPlaces } from "./api";
 import PlacesList from "./PlacesList";
 
 const entityMetadata = metadata.place;
 
-export default function Places() {
+export default async function Places() {
+  const places = await getPlaces();
+
   return (
     <main>
       <Header
@@ -15,7 +18,7 @@ export default function Places() {
       >
         <CreateActionButton href="/create/place" />
       </Header>
-      <PlacesList />
+      <PlacesList places={places} />
     </main>
   );
 }

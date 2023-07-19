@@ -1,36 +1,31 @@
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import Link from "next/link";
 
 import Lookup from "@/components/dictionary/Lookup";
-import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
-import type { Database } from "@/types/_supabase";
+import type { ViewRow } from "@/types/database";
 
-export default async function PlacesList() {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const { data: places, error } = await supabase.from("places").select("*");
-
-  if (error) throw Error(error.message);
-  if (!places) return <Message>No places found</Message>;
-
+export default async function PlacesList({
+  places,
+}: {
+  places: ViewRow<"places_with_geojson">[];
+}) {
   return (
     <Table>
       <Table.Head>
         <Table.Row>
-          <Table.Heading>ID</Table.Heading>
-          <Table.Heading>Type</Table.Heading>
           <Table.Heading>Name</Table.Heading>
+          <Table.Heading>Type</Table.Heading>
         </Table.Row>
       </Table.Head>
       <Table.Body>
         {places.map((place) => (
           <Table.Row key={place.id}>
-            <Table.Data>{place.id}</Table.Data>
+            <Table.Data>
+              <Link href={`/places/${place.id}`}>{place.name}</Link>
+            </Table.Data>
             <Table.Data>
               <Lookup>{place.type}</Lookup>
             </Table.Data>
-            <Table.Data>{place.name}</Table.Data>
           </Table.Row>
         ))}
       </Table.Body>
