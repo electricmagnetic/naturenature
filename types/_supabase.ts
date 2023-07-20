@@ -35,31 +35,34 @@ export interface Database {
       }
       events: {
         Row: {
-          attached_place_geography: unknown | null
-          attached_place_metadata: Json | null
           comments: string | null
           created_at: string | null
           datetime: string
+          event_place_as_geojson: Json | null
+          event_place_geography: unknown | null
+          event_place_metadata: Json | null
           id: string
           place: string | null
           source: string | null
         }
         Insert: {
-          attached_place_geography?: unknown | null
-          attached_place_metadata?: Json | null
           comments?: string | null
           created_at?: string | null
           datetime: string
+          event_place_as_geojson?: Json | null
+          event_place_geography?: unknown | null
+          event_place_metadata?: Json | null
           id?: string
           place?: string | null
           source?: string | null
         }
         Update: {
-          attached_place_geography?: unknown | null
-          attached_place_metadata?: Json | null
           comments?: string | null
           created_at?: string | null
           datetime?: string
+          event_place_as_geojson?: Json | null
+          event_place_geography?: unknown | null
+          event_place_metadata?: Json | null
           id?: string
           place?: string | null
           source?: string | null
@@ -197,6 +200,7 @@ export interface Database {
       }
       places: {
         Row: {
+          as_geojson: Json | null
           created_at: string | null
           geography: unknown
           id: string
@@ -205,6 +209,7 @@ export interface Database {
           type: string
         }
         Insert: {
+          as_geojson?: Json | null
           created_at?: string | null
           geography: unknown
           id?: string
@@ -213,6 +218,7 @@ export interface Database {
           type: string
         }
         Update: {
+          as_geojson?: Json | null
           created_at?: string | null
           geography?: unknown
           id?: string
