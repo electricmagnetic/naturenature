@@ -32,7 +32,7 @@ export default async function Place({
       </Section>
       <Section title="Map">
         <Map style={{ height: 640 }}>
-          <GeoJSON data={place.geojson} />
+          <GeoJSON data={place.as_geojson} />
         </Map>
       </Section>
     </main>

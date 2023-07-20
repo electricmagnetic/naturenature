@@ -8,7 +8,7 @@ import type { Database } from "@/types/_supabase";
 export const getPlaces = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data: places, error } = await supabase
-    .from("places_with_geojson")
+    .from("places")
     .select("*");
 
   if (error) throw Error(error.message);
@@ -21,7 +21,7 @@ export const getPlace = async (id: string) => {
   const supabase = createServerComponentClient<Database>({ cookies });
 
   const { data: place, error } = await supabase
-    .from("places_with_geojson")
+    .from("places")
     .select("*")
     .eq("id", id)
     .limit(1)
