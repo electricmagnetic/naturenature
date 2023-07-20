@@ -1,39 +1,26 @@
-import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import dynamic from "next/dynamic";
 
-import Section from "@/components/layout/Section";
+import GeoJSON from "@/components/geospatial/GeoJSON";
 import Header from "@/components/layout/Header";
-import DateTime from "@/components/ui/DateTime";
+import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
+import DateTime from "@/components/ui/DateTime";
 import Protocol from "@/app/(entities)/records/protocols/Protocol";
-import type { Database } from "@/types/_supabase";
-import type { CompleteRecord } from "@/types/recordTypes";
+
+import { getRecordsByEvent } from "@/app/(entities)/records/api";
+import { getEvent } from "../api";
+
+const Map = dynamic(() => import("@/components/geospatial/Map"), {
+  ssr: false,
+});
 
 export default async function Event({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const supabase = createServerComponentClient<Database>({ cookies });
-  const { data: event, error: eventError } = await supabase
-    .from("events")
-    .select("*")
-    .eq("id", id)
-    .limit(1)
-    .single();
-
-  if (eventError) throw Error(eventError.message);
-
-  const { data: records, error: recordsError } = await supabase
-    .from("records")
-    .select("*, event(*), individual(*), media(*), object(*), person(*)")
-    .eq("event", id)
-    .returns<CompleteRecord[]>();
-
-  if (recordsError) throw Error(recordsError.message);
-
-  if (!event) return notFound();
+  const event = await getEvent(id);
+  const records = await getRecordsByEvent(id);
 
   return (
     <main>
@@ -52,6 +39,20 @@ export default async function Event({
               <Protocol record={record} className="col-md" key={record.id} />
             ))}
           </div>
+        </Section>
+      )}
+      {event.place && (
+        <Section title="Map (place)">
+          <Map scrollWheelZoom={false}>
+            <GeoJSON data={event.place.as_geojson} />
+          </Map>
+        </Section>
+      )}
+      {event.event_place_as_geojson && (
+        <Section title="Map (event place)">
+          <Map scrollWheelZoom={false}>
+            <GeoJSON data={event.event_place_as_geojson} />
+          </Map>
         </Section>
       )}
     </main>

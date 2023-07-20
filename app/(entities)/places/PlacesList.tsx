@@ -2,12 +2,12 @@ import Link from "next/link";
 
 import Lookup from "@/components/dictionary/Lookup";
 import Table from "@/components/ui/Table";
-import type { ViewRow } from "@/types/database";
+import type { TableRow } from "@/types/database";
 
 export default async function PlacesList({
   places,
 }: {
-  places: ViewRow<"places_with_geojson">[];
+  places: TableRow<"places">[];
 }) {
   return (
     <Table>

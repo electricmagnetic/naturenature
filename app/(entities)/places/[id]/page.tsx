@@ -31,7 +31,7 @@ export default async function Place({
         </Properties>
       </Section>
       <Section title="Map">
-        <Map style={{ height: 640 }}>
+        <Map>
           <GeoJSON data={place.as_geojson} />
         </Map>
       </Section>

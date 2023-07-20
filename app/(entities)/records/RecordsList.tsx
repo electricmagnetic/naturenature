@@ -1,22 +1,14 @@
-import { cookies } from "next/headers";
 import Link from "next/link";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Lookup from "@/components/dictionary/Lookup";
-import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
-import type { Database } from "@/types/_supabase";
+import type { TableRow } from "@/types/database";
 
-export default async function RecordsList() {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const { data: records, error } = await supabase
-    .from("records")
-    .select("*, event");
-
-  if (error) throw Error(error.message);
-  if (!records) return <Message>No records found</Message>;
-
+export default async function RecordsList({
+  records,
+}: {
+  records: TableRow<"records">[];
+}) {
   return (
     <Table>
       <Table.Head>

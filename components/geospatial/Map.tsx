@@ -29,7 +29,13 @@ const Map = ({ children, ...props }: PropsWithChildren<MapContainerProps>) => {
     throw Error("Missing map environment variables");
 
   return (
-    <MapContainer center={center} zoom={zoom} maxZoom={maxZoom} {...props}>
+    <MapContainer
+      className="map"
+      center={center}
+      zoom={zoom}
+      maxZoom={maxZoom}
+      {...props}
+    >
       <TileLayer
         url={`${process.env.NEXT_PUBLIC_MAP_TILELAYER_URL}`}
         attribution={`${process.env.NEXT_PUBLIC_MAP_TILELAYER_ATTRIBUTION}`}
