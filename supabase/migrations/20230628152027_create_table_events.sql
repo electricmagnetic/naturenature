@@ -4,8 +4,8 @@ create table "public"."events" (
     "id" uuid not null default gen_random_uuid(),
     "created_at" timestamp with time zone default now(),
     "datetime" timestamp with time zone not null,
-    "location_metadata" jsonb null,
-    "geography" geography null,
+    "attached_place_metadata" jsonb null,
+    "attached_place_geography" geography null,
     "place" uuid null,
     "comments" text null
 );

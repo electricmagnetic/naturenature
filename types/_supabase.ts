@@ -35,32 +35,32 @@ export interface Database {
       }
       events: {
         Row: {
+          attached_place_geography: unknown | null
+          attached_place_metadata: Json | null
           comments: string | null
           created_at: string | null
           datetime: string
-          geography: unknown | null
           id: string
-          location_metadata: Json | null
           place: string | null
           source: string | null
         }
         Insert: {
+          attached_place_geography?: unknown | null
+          attached_place_metadata?: Json | null
           comments?: string | null
           created_at?: string | null
           datetime: string
-          geography?: unknown | null
           id?: string
-          location_metadata?: Json | null
           place?: string | null
           source?: string | null
         }
         Update: {
+          attached_place_geography?: unknown | null
+          attached_place_metadata?: Json | null
           comments?: string | null
           created_at?: string | null
           datetime?: string
-          geography?: unknown | null
           id?: string
-          location_metadata?: Json | null
           place?: string | null
           source?: string | null
         }
