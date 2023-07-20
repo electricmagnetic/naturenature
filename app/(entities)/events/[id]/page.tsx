@@ -30,6 +30,9 @@ export default async function Event({
           <Properties.Item name="Date/Time">
             <DateTime datetime={event.datetime} />
           </Properties.Item>
+          <Properties.Item name="Comments">
+            {event.comments}
+          </Properties.Item>
         </Properties>
       </Section>
       {records && (

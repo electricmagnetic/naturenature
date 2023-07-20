@@ -11,7 +11,7 @@ const PropertiesItem = ({
 );
 
 const Properties = ({ children }: PropsWithChildren) => (
-  <dl className="row row-cols-4 g-2 mb-0">{children}</dl>
+  <dl className="row row-cols-auto g-3 mb-0">{children}</dl>
 );
 
 Properties.Item = PropertiesItem;
