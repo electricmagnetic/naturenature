@@ -4,7 +4,7 @@ import { latLng, latLngBounds, LatLngBoundsExpression } from "leaflet";
 import { useMap } from "react-leaflet";
 import { BBox } from "@turf/turf";
 
-const BOUNDS_PADDING = 1;
+const BOUNDS_PADDING = 0.5;
 
 /**
  * Basic conversion of coordinates from a string (e.g. from an environment variable) to a Leaflet latLng
