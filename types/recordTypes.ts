@@ -1,12 +1,12 @@
-import type { Row } from "./database";
+import type { TableRow } from "./database";
 
 // Expanded definitions (when using related lookups)
-export type CompleteRecord = Row<"records"> & {
-  event: Row<"events">,
-  person: Row<"people"> | null,
-  individual: Row<"individuals"> | null,
-  object: Row<"objects"> | null,
-  media: Row<"media"> | null,
+export type CompleteRecord = TableRow<"records"> & {
+  event: TableRow<"events">,
+  person: TableRow<"people"> | null,
+  individual: TableRow<"individuals"> | null,
+  object: TableRow<"objects"> | null,
+  media: TableRow<"media"> | null,
 }
 
 // Types for JSON fields in Records

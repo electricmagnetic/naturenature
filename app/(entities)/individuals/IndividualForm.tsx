@@ -11,12 +11,12 @@ import { InputField, Submit } from "@/components/forms/fields";
 import { FormStatus } from "@/components/forms/helpers";
 import { validate, initialValues } from "./validations";
 import type { Database } from "@/types/_supabase";
-import type { Row } from "@/types/database";
+import type { TableRow } from "@/types/database";
 
 export default async function IndividualForm({
   individual,
 }: {
-  individual?: Row<"individuals">;
+  individual?: TableRow<"individuals">;
 }) {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();

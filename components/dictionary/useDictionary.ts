@@ -2,9 +2,9 @@
 
 import useSWR, { Fetcher } from "swr";
 
-import type { Row } from "@/types/database";
+import type { TableRow } from "@/types/database";
 
-type Dictionary = Row<"dictionary">[] | null;
+type Dictionary = TableRow<"dictionary">[] | null;
 
 // Key for use in localStorage
 const DICTIONARY_KEY = "dictionary";

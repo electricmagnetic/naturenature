@@ -6,12 +6,12 @@ import {
   DeleteActionButton,
 } from "@/components/ui/ActionButton";
 import Table from "@/components/ui/Table";
-import type { Row } from "@/types/database";
+import type { TableRow } from "@/types/database";
 
 export default async function IndividualsList({
   individuals,
 }: {
-  individuals: Row<"individuals">[];
+  individuals: TableRow<"individuals">[];
 }) {
   return (
     <Table>
