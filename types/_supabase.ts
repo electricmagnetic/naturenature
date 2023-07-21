@@ -38,34 +38,43 @@ export interface Database {
           comments: string | null
           created_at: string | null
           datetime: string
+          event_person: Json | null
           event_place_as_geojson: Json | null
           event_place_geography: unknown | null
           event_place_metadata: Json | null
           id: string
+          is_public: boolean
           place: string | null
           source: string | null
+          status: string | null
         }
         Insert: {
           comments?: string | null
           created_at?: string | null
           datetime: string
+          event_person?: Json | null
           event_place_as_geojson?: Json | null
           event_place_geography?: unknown | null
           event_place_metadata?: Json | null
           id?: string
+          is_public?: boolean
           place?: string | null
           source?: string | null
+          status?: string | null
         }
         Update: {
           comments?: string | null
           created_at?: string | null
           datetime?: string
+          event_person?: Json | null
           event_place_as_geojson?: Json | null
           event_place_geography?: unknown | null
           event_place_metadata?: Json | null
           id?: string
+          is_public?: boolean
           place?: string | null
           source?: string | null
+          status?: string | null
         }
         Relationships: [
           {
@@ -75,14 +84,14 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "events_place_fkey"
-            columns: ["place"]
-            referencedRelation: "places_with_geojson"
+            foreignKeyName: "events_source_fkey"
+            columns: ["source"]
+            referencedRelation: "dictionary"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "events_source_fkey"
-            columns: ["source"]
+            foreignKeyName: "events_status_fkey"
+            columns: ["status"]
             referencedRelation: "dictionary"
             referencedColumns: ["id"]
           }
@@ -328,40 +337,7 @@ export interface Database {
       }
     }
     Views: {
-      places_with_geojson: {
-        Row: {
-          created_at: string | null
-          geojson: Json | null
-          id: string | null
-          metadata: Json | null
-          name: string | null
-          type: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          geojson?: never
-          id?: string | null
-          metadata?: Json | null
-          name?: string | null
-          type?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          geojson?: never
-          id?: string | null
-          metadata?: Json | null
-          name?: string | null
-          type?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "places_type_fkey"
-            columns: ["type"]
-            referencedRelation: "dictionary"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
+      [_ in never]: never
     }
     Functions: {
       [_ in never]: never

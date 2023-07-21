@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import Message from "@/components/ui/Message";
+import ProtocolCitizen from "./ProtocolCitizen";
 import ProtocolGroup from "./ProtocolGroup";
 import ProtocolIdentifier from "./ProtocolIdentifier";
 import ProtocolIntervention from "./ProtocolIntervention";
@@ -9,11 +10,11 @@ import ProtocolMedia from "./ProtocolMedia";
 import ProtocolObservation from "./ProtocolObservation";
 import ProtocolPerson from "./ProtocolPerson";
 import ProtocolSample from "./ProtocolSample";
-import type { CompleteRecord } from "@/types/recordTypes";
 
-type ProtocolComponent = { [key: string]: FC<{ record: CompleteRecord }> };
+import type { CompleteRecord, ProtocolComponent } from "@/types/recordTypes";
 
 const protocolComponents: ProtocolComponent = {
+  CITIZEN: ProtocolCitizen,
   GROUP: ProtocolGroup,
   IDENTIFIER: ProtocolIdentifier,
   INTERVENTION: ProtocolIntervention,

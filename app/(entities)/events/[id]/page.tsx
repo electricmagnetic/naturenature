@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 
+import Lookup from "@/components/dictionary/Lookup";
 import GeoJSON from "@/components/geospatial/GeoJSON";
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
@@ -30,8 +31,20 @@ export default async function Event({
           <Properties.Item name="Date/Time">
             <DateTime datetime={event.datetime} />
           </Properties.Item>
-          <Properties.Item name="Comments">
-            {event.comments}
+          <Properties.Item name="Source">
+            {event.source ? (
+              <Lookup>{event.source}</Lookup>
+            ) : (
+              <em>Unspecified</em>
+            )}
+          </Properties.Item>
+          <Properties.Item name="Comments">{event.comments}</Properties.Item>
+          <Properties.Item name="Visibility">
+            {event.is_public ? (
+              <span className="badge text-bg-warning">Public</span>
+            ) : (
+              <span className="badge text-bg-dark">Private</span>
+            )}
           </Properties.Item>
         </Properties>
       </Section>
