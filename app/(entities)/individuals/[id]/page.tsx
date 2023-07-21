@@ -2,10 +2,7 @@ import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
 import Toolbar from "@/components/ui/Toolbar";
-import {
-  EditActionButton,
-  DeleteActionButton,
-} from "@/components/ui/ActionButton";
+import ActionButton from "@/components/ui/ActionButton";
 
 import { getIndividual } from "../api";
 
@@ -20,8 +17,8 @@ export default async function Individual({
     <main>
       <Header title={`Individual: ${individual.id}`}>
         <Toolbar>
-          <EditActionButton href={`/individuals/${individual.id}/edit`} />
-          <DeleteActionButton href={`/individuals/${individual.id}/delete`} />
+          <ActionButton.Edit entity="individual" id={individual.id} />
+          <ActionButton.Delete entity="individual" id={individual.id} />
         </Toolbar>
       </Header>
       <Section isPrimary>

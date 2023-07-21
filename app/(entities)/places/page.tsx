@@ -1,6 +1,6 @@
 import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
-import { CreateActionButton } from "@/components/ui/ActionButton";
+import ActionButton from "@/components/ui/ActionButton";
 
 import { getPlaces } from "./api";
 import PlacesList from "./PlacesList";
@@ -16,7 +16,7 @@ export default async function Places() {
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
       >
-        <CreateActionButton href="/create/place" />
+        <ActionButton.Create entity="place" />
       </Header>
       <PlacesList places={places} />
     </main>

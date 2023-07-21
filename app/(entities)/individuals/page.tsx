@@ -1,6 +1,6 @@
 import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
-import { CreateActionButton } from "@/components/ui/ActionButton";
+import ActionButton from "@/components/ui/ActionButton";
 
 import { getIndividuals } from "./api";
 import IndividualsList from "./IndividualsList";
@@ -16,7 +16,7 @@ export default async function Individuals() {
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
       >
-        <CreateActionButton href="/create/individual" />
+        <ActionButton.Create entity="individual" />
       </Header>
       <IndividualsList individuals={individuals} />
     </main>

@@ -1,10 +1,6 @@
 import Link from "next/link";
 
-import {
-  ViewActionButton,
-  EditActionButton,
-  DeleteActionButton,
-} from "@/components/ui/ActionButton";
+import ActionButton from "@/components/ui/ActionButton";
 import Table from "@/components/ui/Table";
 import type { TableRow } from "@/types/database";
 
@@ -30,11 +26,9 @@ export default async function IndividualsList({
               </Link>
             </Table.Data>
             <Table.Data>
-              <ViewActionButton href={`/individuals/${individual.id}`} />
-              <EditActionButton href={`/individuals/${individual.id}/edit`} />
-              <DeleteActionButton
-                href={`/individuals/${individual.id}/delete`}
-              />
+              <ActionButton.View entity="individual" id={individual.id} />
+              <ActionButton.Edit entity="individual" id={individual.id} />
+              <ActionButton.Delete entity="individual" id={individual.id} />
             </Table.Data>
           </Table.Row>
         ))}

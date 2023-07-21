@@ -1,42 +1,69 @@
 import { PropsWithChildren } from "react";
 import Link from "next/link";
 
+import metadata from "@/app/(entities)/metadata";
 import Icon from "./Icon";
 
-export default function ActionButton({
+const ActionButton = ({
   iconName,
   href,
   children,
   ...others
-}: PropsWithChildren<{ iconName: string; href: string }>) {
+}: PropsWithChildren<{ iconName: string; href: string }>) => {
   return (
     <Link className="btn btn-sm btn-light" href={href} {...others}>
       <Icon iconName={iconName} />
       {children}
     </Link>
   );
-}
+};
 
-export const CreateActionButton = ({ href, ...others }: { href: string }) => (
-  <ActionButton href={href} {...others} iconName="plus-circle">
+type ActionButtonBaseProps = { entity: string; id: string };
+type ActionButtonCreateProps = Omit<ActionButtonBaseProps, "id">;
+
+const ActionButtonCreate = ({ entity, ...others }: ActionButtonCreateProps) => (
+  <ActionButton href={`/create/${entity}`} {...others} iconName="plus-circle">
     Create
   </ActionButton>
 );
 
-export const ViewActionButton = ({ href, ...others }: { href: string }) => (
-  <ActionButton href={href} {...others} iconName="eye">
+const ActionButtonView = ({ entity, id, ...others }: ActionButtonBaseProps) => (
+  <ActionButton
+    href={`${metadata[entity].baseLink}/${id}`}
+    {...others}
+    iconName="eye"
+  >
     View
   </ActionButton>
 );
 
-export const EditActionButton = ({ href, ...others }: { href: string }) => (
-  <ActionButton href={href} {...others} iconName="pencil-square">
+const ActionButtonEdit = ({ entity, id, ...others }: ActionButtonBaseProps) => (
+  <ActionButton
+    href={`${metadata[entity].baseLink}/${id}/edit`}
+    {...others}
+    iconName="pencil-square"
+  >
     Edit
   </ActionButton>
 );
 
-export const DeleteActionButton = ({ href, ...others }: { href: string }) => (
-  <ActionButton href={href} {...others} iconName="trash">
+const ActionButtonDelete = ({
+  entity,
+  id,
+  ...others
+}: ActionButtonBaseProps) => (
+  <ActionButton
+    href={`${metadata[entity].baseLink}/${id}/delete`}
+    {...others}
+    iconName="trash"
+  >
     Delete
   </ActionButton>
 );
+
+ActionButton.Create = ActionButtonCreate;
+ActionButton.View = ActionButtonView;
+ActionButton.Edit = ActionButtonEdit;
+ActionButton.Delete = ActionButtonDelete;
+
+export default ActionButton;

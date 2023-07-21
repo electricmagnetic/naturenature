@@ -1,6 +1,6 @@
 import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
-import { CreateActionButton } from "@/components/ui/ActionButton";
+import ActionButton from "@/components/ui/ActionButton";
 
 import MediaList from "./MediaList";
 
@@ -13,7 +13,7 @@ export default function Medias() {
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
       >
-        <CreateActionButton href="/create/media" />
+        <ActionButton.Create entity="media" />
       </Header>
       <MediaList />
     </main>

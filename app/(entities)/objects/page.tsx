@@ -1,6 +1,6 @@
 import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
-import { CreateActionButton } from "@/components/ui/ActionButton";
+import ActionButton from "@/components/ui/ActionButton";
 
 import ObjectsList from "./ObjectsList";
 
@@ -13,7 +13,7 @@ export default function Objects() {
         title={entityMetadata.pluralName}
         iconName={entityMetadata.iconName}
       >
-        <CreateActionButton href="/create/object" />
+        <ActionButton.Create entity="object" />
       </Header>
       <ObjectsList />
     </main>
