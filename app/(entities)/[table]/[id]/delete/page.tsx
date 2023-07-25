@@ -4,6 +4,9 @@ import Header from "@/components/layout/Header";
 import metadata from "@/app/(entities)/metadata";
 import DeleteObjectForm from "@/components/forms/DeleteObjectForm";
 
+/**
+ * Generic delete view, handles a delete for any table/ID combo
+ */
 export default function Delete({
   params: { table, id },
 }: {
