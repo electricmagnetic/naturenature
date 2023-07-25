@@ -1,5 +1,4 @@
 import Header from "@/components/layout/Header";
-import ActionButton from "@/components/ui/ActionButton";
 
 import { getObjects } from "./api";
 import ObjectsList from "./ObjectsList";
@@ -9,9 +8,7 @@ export default async function Objects() {
 
   return (
     <main>
-      <Header.Entity entity="object">
-        <ActionButton.Create entity="object" />
-      </Header.Entity>
+      <Header.Entity entity="object" actionButtons={[Header.Action.Create]} />
       <ObjectsList objects={objects} />
     </main>
   );

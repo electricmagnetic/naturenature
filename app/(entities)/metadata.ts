@@ -1,4 +1,9 @@
-import type EntityMetadatum from "@/types/EntityMetadata";
+type EntityMetadatum = {
+  table: string;
+  name: string;
+  pluralName: string;
+  iconName: string;
+};
 
 // A register of the different types of entities, to ensure standardisation across the app
 const metadata: { [key: string]: EntityMetadatum } = {

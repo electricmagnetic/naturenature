@@ -1,5 +1,4 @@
 import Header from "@/components/layout/Header";
-import ActionButton from "@/components/ui/ActionButton";
 
 import { getEvents } from "./api";
 import EventsList from "./EventsList";
@@ -9,9 +8,7 @@ export default async function Events() {
 
   return (
     <main>
-      <Header.Entity entity="event">
-        <ActionButton.Create entity="event" />
-      </Header.Entity>
+      <Header.Entity entity="event" actionButtons={[Header.Action.Create]} />
       <EventsList events={events} />
     </main>
   );

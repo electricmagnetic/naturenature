@@ -1,5 +1,4 @@
 import Header from "@/components/layout/Header";
-import ActionButton from "@/components/ui/ActionButton";
 
 import { getPlaces } from "./api";
 import PlacesList from "./PlacesList";
@@ -9,9 +8,7 @@ export default async function Places() {
 
   return (
     <main>
-      <Header.Entity entity="place">
-        <ActionButton.Create entity="place" />
-      </Header.Entity>
+      <Header.Entity entity="place" actionButtons={[Header.Action.Create]} />
       <PlacesList places={places} />
     </main>
   );

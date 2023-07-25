@@ -1,5 +1,4 @@
 import Header from "@/components/layout/Header";
-import ActionButton from "@/components/ui/ActionButton";
 
 import { getMedia } from "./api";
 import MediaList from "./MediaList";
@@ -9,9 +8,7 @@ export default async function Media() {
 
   return (
     <main>
-      <Header.Entity entity="media">
-        <ActionButton.Create entity="media" />
-      </Header.Entity>
+      <Header.Entity entity="media" actionButtons={[Header.Action.Create]} />
       <MediaList media={media} />
     </main>
   );

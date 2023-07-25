@@ -1,5 +1,4 @@
 import Header from "@/components/layout/Header";
-import ActionButton from "@/components/ui/ActionButton";
 
 import { getRecords } from "./api";
 import RecordsList from "./RecordsList";
@@ -9,9 +8,7 @@ export default async function Records() {
 
   return (
     <main>
-      <Header.Entity entity="record">
-        <ActionButton.Create entity="record" />
-      </Header.Entity>
+      <Header.Entity entity="record" actionButtons={[Header.Action.Create]} />
       <RecordsList records={records} />
     </main>
   );

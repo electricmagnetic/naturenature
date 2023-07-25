@@ -1,23 +1,62 @@
 import { PropsWithChildren } from "react";
 
 import metadata from "@/app/(entities)/metadata";
+import ActionButton from "@/components/ui/ActionButton";
 import Icon from "@/components/ui/Icon";
+import Toolbar from "@/components/ui/Toolbar";
+
+export enum Action {
+  Create = "Create",
+  View = "View",
+  Edit = "Edit",
+  Delete = "Delete",
+}
 
 /**
  * Header specifically for entities (automatically figures out title and icon from metadata)
  */
 const HeaderEntity = ({
   entity,
+  id,
+  action,
+  actionButtons,
   children,
-}: PropsWithChildren<{ entity: string }>) => {
+}: PropsWithChildren<{
+  entity: string;
+  id?: string;
+  action?: Action;
+  actionButtons?: Action[];
+}>) => {
   const entityMetadata = metadata[entity];
   if (!entityMetadata) throw Error("Entity metadata not found");
 
   return (
     <Header
-      title={entityMetadata.pluralName}
+      title={`${action ? `${Action[action]} ` : ""}${
+        id ? entityMetadata.name : entityMetadata.pluralName
+      }`}
       iconName={entityMetadata.iconName}
     >
+      {actionButtons && (
+        <Toolbar>
+          {actionButtons.includes(Action.Create) && (
+            <ActionButton.Create entity={entity} />
+          )}
+          {id && (
+            <>
+              {actionButtons.includes(Action.View) && (
+                <ActionButton.View entity={entity} id={id} />
+              )}
+              {actionButtons.includes(Action.Edit) && (
+                <ActionButton.Edit entity={entity} id={id} />
+              )}
+              {actionButtons.includes(Action.Delete) && (
+                <ActionButton.Delete entity={entity} id={id} />
+              )}
+            </>
+          )}
+        </Toolbar>
+      )}
       {children}
     </Header>
   );
@@ -47,5 +86,6 @@ const Header = ({
 };
 
 Header.Entity = HeaderEntity;
+Header.Action = Action;
 
 export default Header;

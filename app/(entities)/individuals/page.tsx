@@ -1,5 +1,4 @@
 import Header from "@/components/layout/Header";
-import ActionButton from "@/components/ui/ActionButton";
 
 import { getIndividuals } from "./api";
 import IndividualsList from "./IndividualsList";
@@ -9,9 +8,10 @@ export default async function Individuals() {
 
   return (
     <main>
-      <Header.Entity entity="individual">
-        <ActionButton.Create entity="individual" />
-      </Header.Entity>
+      <Header.Entity
+        entity="individual"
+        actionButtons={[Header.Action.Create]}
+      />
       <IndividualsList individuals={individuals} />
     </main>
   );

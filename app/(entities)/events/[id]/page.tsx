@@ -1,13 +1,8 @@
-import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
-import Toolbar from "@/components/ui/Toolbar";
-import ActionButton from "@/components/ui/ActionButton";
 
 import { getRecordsByEvent } from "@/app/(entities)/records/api";
 import { getEvent } from "../api";
 import EventDetail from "../EventDetail";
-
-const entityMetadata = metadata.event;
 
 export default async function Event({
   params: { id },
@@ -19,15 +14,12 @@ export default async function Event({
 
   return (
     <main>
-      <Header
-        title={`${entityMetadata.name}: ${event.id}`}
-        iconName={entityMetadata.iconName}
-      >
-        <Toolbar>
-          {/*<ActionButton.Edit entity="event" id={event.id} />*/}
-          <ActionButton.Delete entity="event" id={event.id} />
-        </Toolbar>
-      </Header>
+      <Header.Entity
+        entity="event"
+        action={Header.Action.View}
+        id={id}
+        actionButtons={[Header.Action.Delete]}
+      />
       <EventDetail event={event} records={records} />
     </main>
   );
