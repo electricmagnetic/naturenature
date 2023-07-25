@@ -38,7 +38,6 @@ export interface Database {
           comments: string | null
           created_at: string | null
           datetime: string
-          event_person: Json | null
           event_place_as_geojson: Json | null
           event_place_geography: unknown | null
           event_place_metadata: Json | null
@@ -52,7 +51,6 @@ export interface Database {
           comments?: string | null
           created_at?: string | null
           datetime: string
-          event_person?: Json | null
           event_place_as_geojson?: Json | null
           event_place_geography?: unknown | null
           event_place_metadata?: Json | null
@@ -66,7 +64,6 @@ export interface Database {
           comments?: string | null
           created_at?: string | null
           datetime?: string
-          event_person?: Json | null
           event_place_as_geojson?: Json | null
           event_place_geography?: unknown | null
           event_place_metadata?: Json | null

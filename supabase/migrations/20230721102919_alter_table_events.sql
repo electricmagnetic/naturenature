@@ -1,6 +1,5 @@
 -- add columns necessary for citizen science contributions
 
-alter table "public"."events" add column "event_person" jsonb;
 alter table "public"."events" add column "is_public" boolean not null default false;
 alter table "public"."events" add column "status" text;
 
