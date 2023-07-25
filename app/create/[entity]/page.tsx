@@ -2,9 +2,9 @@ import { notFound } from "next/navigation";
 
 import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
+import Message from "@/components/ui/Message";
 
 import IndividualForm from "@/app/(entities)/individuals/IndividualForm";
-import Message from "@/components/ui/Message";
 
 const EntityForm = ({ entity }: { entity: string }) => {
   switch (entity) {

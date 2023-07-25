@@ -10,10 +10,10 @@ import type { Database } from "@/types/_supabase";
  * Delete an object with 'id' from the table 'from'. Require that the user clicks to confirm deletion.
  */
 export default function DeleteObjectForm({
-  from,
+  table,
   id,
 }: {
-  from: string;
+  table: string;
   id: string;
 }) {
   const supabase = createClientComponentClient<Database>();
@@ -23,7 +23,7 @@ export default function DeleteObjectForm({
   const [isPending, startTransition] = useTransition();
 
   const [confirmDeletion, setConfirmDeletion] = useState(false);
-  const [helperText, setHelperText] = useState(`Delete ${id} from ${from}?`);
+  const [helperText, setHelperText] = useState(`Delete ${id} from ${table}?`);
   const [buttonClassName, setButtonClassName] = useState("btn-warning");
 
   const handleDelete = async () => {
@@ -32,10 +32,10 @@ export default function DeleteObjectForm({
       setButtonClassName("btn-danger");
       setConfirmDeletion(true);
     } else {
-      const { error } = await supabase.from(from).delete().eq("id", id);
+      const { error } = await supabase.from(table).delete().eq("id", id);
 
       if (error) setError(Error(error.message));
-      startTransition(() => router.push(`/${from}`, { shallow: false }));
+      startTransition(() => router.push(`/${table}`, { shallow: false }));
     }
   };
 

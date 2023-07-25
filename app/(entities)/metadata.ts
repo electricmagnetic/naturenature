@@ -3,46 +3,46 @@ import type EntityMetadatum from "@/types/EntityMetadata";
 // A register of the different types of entities, to ensure standardisation across the app
 const metadata: { [key: string]: EntityMetadatum } = {
   event: {
+    table: "events",
     name: "Event",
     pluralName: "Events",
     iconName: "calendar",
-    baseLink: "/events",
   },
   individual: {
+    table: "individuals",
     name: "Individual",
     pluralName: "Individuals",
     iconName: "bullseye",
-    baseLink: "/individuals",
   },
   media: {
+    table: "media",
     name: "Media",
     pluralName: "Media",
     iconName: "images",
-    baseLink: "/media",
   },
   object: {
+    table: "objects",
     name: "Object",
     pluralName: "Objects",
     iconName: "box-seam",
-    baseLink: "/objects",
   },
   person: {
+    table: "people",
     name: "Person",
     pluralName: "People",
     iconName: "people",
-    baseLink: "/people",
   },
   place: {
+    table: "places",
     name: "Place",
     pluralName: "Places",
     iconName: "geo-alt",
-    baseLink: "/places",
   },
   record: {
+    table: "records",
     name: "Record",
     pluralName: "Records",
     iconName: "database",
-    baseLink: "/records",
   },
 };
 

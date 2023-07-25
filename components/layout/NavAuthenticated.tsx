@@ -66,7 +66,7 @@ export default function NavAuthenticated({ session }: { session: Session }) {
           {Object.keys(metadata).map((entity) => (
             <NavbarLink
               key={entity}
-              href={metadata[entity].baseLink}
+              href={`/${metadata[entity].table}`}
               iconName={metadata[entity].iconName}
             >
               {metadata[entity].pluralName}
