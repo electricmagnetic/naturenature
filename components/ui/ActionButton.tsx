@@ -18,24 +18,47 @@ const ActionButton = ({
   );
 };
 
-type ActionButtonCreateProps = { entity: string };
-type ActionButtonBaseProps = { table: string; id: string };
+type ActionButtonTable = { entity?: never; table: string };
+type ActionButtonEntity = { entity: string; table?: never };
 
-const ActionButtonCreate = ({ entity, ...others }: ActionButtonCreateProps) => (
-  <ActionButton href={`/create/${entity}`} {...others} iconName="plus-circle">
+type ActionButton = ActionButtonTable | ActionButtonEntity;
+type ActionButtonWithId = { id: string };
+
+const getTable = (entity: string) => metadata[entity].table;
+
+const ActionButtonCreate = ({ entity, table, ...others }: ActionButton) => (
+  <ActionButton
+    href={`/create/${entity ? getTable(entity) : table}`}
+    {...others}
+    iconName="plus-circle"
+  >
     Create
   </ActionButton>
 );
 
-const ActionButtonView = ({ table, id, ...others }: ActionButtonBaseProps) => (
-  <ActionButton href={`/${table}/${id}`} {...others} iconName="eye">
+const ActionButtonView = ({
+  entity,
+  table,
+  id,
+  ...others
+}: ActionButton & ActionButtonWithId) => (
+  <ActionButton
+    href={`/${entity ? getTable(entity) : table}/${id}`}
+    {...others}
+    iconName="eye"
+  >
     View
   </ActionButton>
 );
 
-const ActionButtonEdit = ({ table, id, ...others }: ActionButtonBaseProps) => (
+const ActionButtonEdit = ({
+  entity,
+  table,
+  id,
+  ...others
+}: ActionButton & ActionButtonWithId) => (
   <ActionButton
-    href={`/${table}/${id}/edit`}
+    href={`/${entity ? getTable(entity) : table}/${id}/edit`}
     {...others}
     iconName="pencil-square"
   >
@@ -44,11 +67,16 @@ const ActionButtonEdit = ({ table, id, ...others }: ActionButtonBaseProps) => (
 );
 
 const ActionButtonDelete = ({
+  entity,
   table,
   id,
   ...others
-}: ActionButtonBaseProps) => (
-  <ActionButton href={`/${table}/${id}/delete`} {...others} iconName="trash">
+}: ActionButton & ActionButtonWithId) => (
+  <ActionButton
+    href={`/${entity ? getTable(entity) : table}/${id}/delete`}
+    {...others}
+    iconName="trash"
+  >
     Delete
   </ActionButton>
 );

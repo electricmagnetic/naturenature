@@ -26,9 +26,9 @@ export default async function IndividualsList({
               </Link>
             </Table.Data>
             <Table.Data>
-              <ActionButton.View table="individuals" id={individual.id} />
-              <ActionButton.Edit table="individuals" id={individual.id} />
-              <ActionButton.Delete table="individuals" id={individual.id} />
+              <ActionButton.View entity="individual" id={individual.id} />
+              <ActionButton.Edit entity="individual" id={individual.id} />
+              <ActionButton.Delete entity="individual" id={individual.id} />
             </Table.Data>
           </Table.Row>
         ))}

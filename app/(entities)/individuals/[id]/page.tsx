@@ -22,8 +22,8 @@ export default async function Individual({
         iconName={entityMetadata.iconName}
       >
         <Toolbar>
-          <ActionButton.Edit table="individuals" id={individual.id} />
-          <ActionButton.Delete table="individuals" id={individual.id} />
+          <ActionButton.Edit entity="individual" id={individual.id} />
+          <ActionButton.Delete entity="individual" id={individual.id} />
         </Toolbar>
       </Header>
       <IndividualDetail individual={individual} />

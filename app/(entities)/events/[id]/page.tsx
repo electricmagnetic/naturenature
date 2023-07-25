@@ -24,8 +24,8 @@ export default async function Event({
         iconName={entityMetadata.iconName}
       >
         <Toolbar>
-          {/*<ActionButton.Edit table="events" id={event.id} />*/}
-          <ActionButton.Delete table="events" id={event.id} />
+          {/*<ActionButton.Edit entity="event" id={event.id} />*/}
+          <ActionButton.Delete entity="event" id={event.id} />
         </Toolbar>
       </Header>
       <EventDetail event={event} records={records} />
