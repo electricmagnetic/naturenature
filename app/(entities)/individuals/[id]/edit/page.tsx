@@ -1,6 +1,9 @@
+import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
 import { getIndividual } from "../../api";
 import IndividualForm from "../../IndividualForm";
+
+const entityMetadata = metadata.individual;
 
 export default async function EditIndividual({
   params: { id },
@@ -11,7 +14,10 @@ export default async function EditIndividual({
 
   return (
     <main>
-      <Header title={`Edit Individual: ${id}`} />
+      <Header
+        title={`Edit ${entityMetadata.name}: ${individual.id}`}
+        iconName={entityMetadata.iconName}
+      />
       <IndividualForm individual={individual} />
     </main>
   );

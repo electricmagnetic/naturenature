@@ -2,11 +2,14 @@ import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
 import ActionButton from "@/components/ui/ActionButton";
 
+import { getEvents } from "./api";
 import EventsList from "./EventsList";
 
 const entityMetadata = metadata.event;
 
-export default function Events() {
+export default async function Events() {
+  const events = await getEvents();
+
   return (
     <main>
       <Header
@@ -15,7 +18,7 @@ export default function Events() {
       >
         <ActionButton.Create entity="event" />
       </Header>
-      <EventsList />
+      <EventsList events={events} />
     </main>
   );
 }

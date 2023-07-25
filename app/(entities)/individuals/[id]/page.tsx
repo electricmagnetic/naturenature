@@ -1,10 +1,12 @@
+import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
-import Section from "@/components/layout/Section";
-import Properties from "@/components/ui/Properties";
 import Toolbar from "@/components/ui/Toolbar";
 import ActionButton from "@/components/ui/ActionButton";
 
 import { getIndividual } from "../api";
+import IndividualDetail from "../IndividualDetail";
+
+const entityMetadata = metadata.individual;
 
 export default async function Individual({
   params: { id },
@@ -15,17 +17,16 @@ export default async function Individual({
 
   return (
     <main>
-      <Header title={`Individual: ${individual.id}`}>
+      <Header
+        title={`${entityMetadata.name}: ${individual.id}`}
+        iconName={entityMetadata.iconName}
+      >
         <Toolbar>
-          <ActionButton.Edit entity="individual" id={individual.id} />
-          <ActionButton.Delete entity="individual" id={individual.id} />
+          <ActionButton.Edit table="individuals" id={individual.id} />
+          <ActionButton.Delete table="individuals" id={individual.id} />
         </Toolbar>
       </Header>
-      <Section isPrimary>
-        <Properties>
-          <Properties.Item name="Name">{individual.name}</Properties.Item>
-        </Properties>
-      </Section>
+      <IndividualDetail individual={individual} />
     </main>
   );
 }
