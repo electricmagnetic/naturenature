@@ -1,19 +1,12 @@
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-
 import Lookup from "@/components/dictionary/Lookup";
-import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
-import type { Database } from "@/types/_supabase";
+import type { TableRow } from "@/types/database";
 
-export default async function ObjectsList() {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const { data: objects, error } = await supabase.from("objects").select("*");
-
-  if (error) throw Error(error.message);
-  if (!objects) return <Message>No objects found</Message>;
-
+export default async function ObjectsList({
+  objects,
+}: {
+  objects: TableRow<"objects">[];
+}) {
   return (
     <Table>
       <Table.Head>

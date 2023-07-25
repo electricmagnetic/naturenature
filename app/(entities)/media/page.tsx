@@ -2,11 +2,14 @@ import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
 import ActionButton from "@/components/ui/ActionButton";
 
+import { getMedia } from "./api";
 import MediaList from "./MediaList";
 
 const entityMetadata = metadata.media;
 
-export default function Medias() {
+export default async function Medias() {
+  const media = await getMedia();
+
   return (
     <main>
       <Header
@@ -15,7 +18,7 @@ export default function Medias() {
       >
         <ActionButton.Create entity="media" />
       </Header>
-      <MediaList />
+      <MediaList media={media} />
     </main>
   );
 }

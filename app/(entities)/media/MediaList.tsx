@@ -1,18 +1,11 @@
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-
-import Message from "@/components/ui/Message";
 import Table from "@/components/ui/Table";
-import type { Database } from "@/types/_supabase";
+import type { TableRow } from "@/types/database";
 
-export default async function MediasList() {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const { data: media, error } = await supabase.from("media").select("*");
-
-  if (error) throw Error(error.message);
-  if (!media) return <Message>No media found</Message>;
-
+export default async function MediaList({
+  media,
+}: {
+  media: TableRow<"media">[];
+}) {
   return (
     <Table>
       <Table.Head>

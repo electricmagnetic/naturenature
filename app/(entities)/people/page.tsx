@@ -1,11 +1,15 @@
 import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
 import ActionButton from "@/components/ui/ActionButton";
+
+import { getPeople } from "./api";
 import PeopleList from "./PeopleList";
 
 const entityMetadata = metadata.person;
 
-export default function People() {
+export default async function People() {
+  const people = await getPeople();
+
   return (
     <main>
       <Header
@@ -14,7 +18,7 @@ export default function People() {
       >
         <ActionButton.Create entity="person" />
       </Header>
-      <PeopleList />
+      <PeopleList people={people} />
     </main>
   );
 }

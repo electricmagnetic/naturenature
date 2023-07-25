@@ -2,11 +2,14 @@ import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
 import ActionButton from "@/components/ui/ActionButton";
 
+import { getObjects } from "./api";
 import ObjectsList from "./ObjectsList";
 
 const entityMetadata = metadata.object;
 
-export default function Objects() {
+export default async function Objects() {
+  const objects = await getObjects();
+
   return (
     <main>
       <Header
@@ -15,7 +18,7 @@ export default function Objects() {
       >
         <ActionButton.Create entity="object" />
       </Header>
-      <ObjectsList />
+      <ObjectsList objects={objects} />
     </main>
   );
 }
