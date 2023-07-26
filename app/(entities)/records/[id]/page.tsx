@@ -1,9 +1,7 @@
 import Header from "@/components/layout/Header";
-import Section from "@/components/layout/Section";
-import Properties from "@/components/ui/Properties";
-import Protocol from "../protocols/Protocol";
 
 import { getRecord } from "../api";
+import RecordDetail from "../RecordDetail";
 
 export default async function Record({
   params: { id },
@@ -14,15 +12,13 @@ export default async function Record({
 
   return (
     <main>
-      <Header title={`Record: ${record.id}`} />
-      <Section isPrimary>
-        <Properties>
-          <Properties.Item name="Protocol">{record.protocol}</Properties.Item>
-        </Properties>
-      </Section>
-      <Section>
-        <Protocol record={record} />
-      </Section>
+      <Header.Entity
+        entity="record"
+        action={Header.Action.View}
+        id={id}
+        actionButtons={[Header.Action.Delete]}
+      />
+      <RecordDetail record={record} />
     </main>
   );
 }

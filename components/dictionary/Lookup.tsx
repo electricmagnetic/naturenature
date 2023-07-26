@@ -24,7 +24,7 @@ export default function Lookup({
     return (
       <span
         className={clsx(
-          term.class === "protocol" && "text-uppercase",
+          term.class === "protocol" && "fw-semibold",
           term.class === "action" && "fw-bold",
         )}
       >
