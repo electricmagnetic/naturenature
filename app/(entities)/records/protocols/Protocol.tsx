@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 import Message from "@/components/ui/Message";
 import ProtocolCitizen from "./ProtocolCitizen";
 import ProtocolGroup from "./ProtocolGroup";
@@ -11,7 +9,7 @@ import ProtocolObservation from "./ProtocolObservation";
 import ProtocolPerson from "./ProtocolPerson";
 import ProtocolSample from "./ProtocolSample";
 
-import type { CompleteRecord, ProtocolComponent } from "@/types/recordTypes";
+import type { CompleteRecord, ProtocolComponent } from "../types";
 
 const protocolComponents: ProtocolComponent = {
   CITIZEN: ProtocolCitizen,

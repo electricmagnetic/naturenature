@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
-import type { CompleteRecord, ProtocolSampleData } from "@/types/recordTypes";
+import type { CompleteRecord, ProtocolSampleData } from "../types";
 
 export default function ProtocolSample({ record }: { record: CompleteRecord }) {
   const data = record.data as ProtocolSampleData;

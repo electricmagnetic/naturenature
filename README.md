@@ -45,10 +45,9 @@ This is an alpha-stage project, but contributions are nonetheless welcome. Pleas
     - `components/ui` static components (server/client friendly) to standardise UI elements
   - `public` static assets
   - `supabase` migrations and configuration necessary for the Supabase backend
-  - `types` project-wide TypeScript types
+  - `types` global TypeScript types
     - `types/_supabase.ts` Automatically generated, _should not be edited manually_
     - `types/database.ts` Helpful extension to automatically generated types (e.g. DTOs)
-    - `types/{record/event}Types.ts` Types that include related objects and/or json field definitions
 - **Code style**
   - `prettier` to format TypeScript, e.g. `pnpm dlx prettier@latest --write app/`
   - `sqlfluff` to format SQL code e.g. `sqlfluff fix supabase/migrations/* --dialect postgres`

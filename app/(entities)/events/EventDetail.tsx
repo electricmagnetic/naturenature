@@ -7,8 +7,8 @@ import Properties from "@/components/ui/Properties";
 import DateTime from "@/components/ui/DateTime";
 import Protocol from "@/app/(entities)/records/protocols/Protocol";
 
-import type { CompleteEvent } from "@/types/eventTypes";
-import type { CompleteRecord } from "@/types/recordTypes";
+import type { CompleteRecord } from "@/app/(entities)/records/types";
+import type { CompleteEvent } from "./types";
 
 const Map = dynamic(() => import("@/components/geospatial/Map"), {
   ssr: false,

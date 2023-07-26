@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import type { Database } from "@/types/_supabase";
-import type { CompleteRecord } from "@/types/recordTypes";
+import type { CompleteRecord } from "./types";
 
 export const getRecords = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });
