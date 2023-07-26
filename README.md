@@ -27,8 +27,10 @@ Open source biodiversity database for the management of species at an individual
 
 This is an alpha-stage project, but contributions are nonetheless welcome. Please ensure that your pull request meets the following guidelines:
 
+- **Documentation**
+  - [GitHub Wiki](https://github.com/electricmagnetic/naturenature/wiki)
 - **Issue tracking**
-  - [GitHub Projects](https://github.com/electricmagnetic/naturenature/projects?query=is%3Aopen)
+  - [GitHub Projects](https://github.com/electricmagnetic/naturenature/projects)
 - **Project layout**
   - `app` routes (and components specific to those routes), as well as styles and global components necessary for the app router of Next.js
     - `app/(entities)` folders (pages/components) relating to the different entities (tables), and a metadata file containing information on each entity
