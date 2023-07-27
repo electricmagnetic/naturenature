@@ -1,9 +1,14 @@
+import clsx from "clsx";
+
 export default function Icon({
   iconName,
   className,
+  ...others
 }: {
   iconName: string;
   className?: string;
 }) {
-  return <i className={`bi bi-${iconName} ${className}`}></i>;
+  return (
+    <i className={clsx(`bi`, `bi-${iconName}`, className)} {...others}></i>
+  );
 }
