@@ -10,7 +10,11 @@ export async function middleware(req: NextRequest) {
   const { data } = await supabase.auth.getSession();
 
   // Anonymous user redirect (except for login page itself)
-  if (!data.session?.user && req.nextUrl.pathname !== "/account") {
+  if (
+    !data.session?.user &&
+    req.nextUrl.pathname !== "/account" &&
+    req.nextUrl.pathname !== "/auth/callback"
+  ) {
     const url = new URL("/account", req.url);
     url.searchParams.append("next", req.nextUrl.pathname); // Store original URL as a search parameter called 'next'
 
@@ -22,5 +26,5 @@ export async function middleware(req: NextRequest) {
 
 // Don't apply to these pages
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|auth).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

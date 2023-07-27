@@ -6,10 +6,12 @@ import type { NextRequest } from "next/server";
 import type { Database } from "@/types/_supabase";
 
 export async function GET(request: NextRequest) {
+  console.log("running callback");
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
 
   if (code) {
+    console.log("running code exchange");
     const supabase = createRouteHandlerClient<Database>({ cookies });
     await supabase.auth.exchangeCodeForSession(code);
   }

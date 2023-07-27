@@ -10,6 +10,7 @@ import type { Database } from "@/types/_supabase";
 
 enum LoginType {
   EMAIL,
+  SSO,
 }
 
 export default function LoginForm() {
@@ -53,9 +54,27 @@ export default function LoginForm() {
     e.preventDefault();
 
     // Reset on resubmission
-    startTransition(() => {
+    startTransition(async () => {
       setStatus("");
       setIsError(false);
+
+      if (loginType === LoginType.SSO) {
+        if (!process.env.NEXT_PUBLIC_SSO_PROVIDER_ID)
+          throw Error("SSO provider not configured");
+
+        const { data, error } = await supabase.auth.signInWithSSO({
+          providerId: process.env.NEXT_PUBLIC_SSO_PROVIDER_ID,
+          options: {
+            redirectTo: "http://localhost:3000",
+          },
+        });
+
+        if (data?.url) {
+          window.location.href = data.url; // Redirect to signin
+        }
+
+        if (error) throw Error(error.message);
+      }
 
       if (loginType === LoginType.EMAIL) {
         if (!email || !password) {
@@ -119,6 +138,20 @@ export default function LoginForm() {
                   </button>
                 </div>
               </form>
+              {process.env.NEXT_PUBLIC_SSO_PROVIDER_ID && (
+                <>
+                  <div className="border p-2 mt-3">
+                    <div className="d-grid">
+                      <button
+                        className="btn btn-secondary"
+                        onClick={handleLogin(LoginType.SSO)}
+                      >
+                        SSO Login
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
