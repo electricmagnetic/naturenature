@@ -35,7 +35,7 @@ export default function DeleteObjectForm({
       const { error } = await supabase.from(table).delete().eq("id", id);
 
       if (error) setError(Error(error.message));
-      startTransition(() => router.push(`/${table}`, { shallow: false }));
+      startTransition(() => router.push(`/${table}`));
     }
   };
 

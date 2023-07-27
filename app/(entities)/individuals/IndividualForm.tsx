@@ -13,7 +13,7 @@ import { validate, initialValues } from "./validations";
 import type { Database } from "@/types/_supabase";
 import type { TableRow } from "@/types/database";
 
-export default async function IndividualForm({
+export default function IndividualForm({
   individual,
 }: {
   individual?: TableRow<"individuals">;
