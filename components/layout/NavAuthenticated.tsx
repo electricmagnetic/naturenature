@@ -1,47 +1,8 @@
-"use client";
-
-import { PropsWithChildren } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import { Session } from "@supabase/auth-helpers-nextjs";
+import type { Session } from "@supabase/auth-helpers-nextjs";
 
 import metadata from "@/app/(entities)/metadata";
 import Icon from "@/components/ui/Icon";
-
-const NavbarLink = ({
-  iconName,
-  href,
-  isDropdownItem = false,
-  exact = false,
-  children,
-  ...others
-}: PropsWithChildren<{
-  iconName: string;
-  href: string;
-  isDropdownItem?: boolean;
-  exact?: boolean;
-}>) => {
-  const pathname = usePathname();
-  const isActive = exact ? !!(pathname === href) : !!pathname.startsWith(href);
-
-  return (
-    <li className={isDropdownItem ? "" : "nav-item"}>
-      <Link
-        className={clsx(
-          isDropdownItem ? "dropdown-item" : "nav-link",
-          isActive && "active",
-        )}
-        href={href}
-        aria-current={isActive && "page"}
-        {...others}
-      >
-        <Icon iconName={iconName} />
-        {children}
-      </Link>
-    </li>
-  );
-};
+import NavLink from "./NavLink";
 
 export default function NavAuthenticated({ session }: { session: Session }) {
   if (typeof window !== "undefined") {
@@ -64,13 +25,13 @@ export default function NavAuthenticated({ session }: { session: Session }) {
       <div className="collapse navbar-collapse" id="navbar">
         <ul className="navbar-nav me-auto">
           {Object.keys(metadata).map((entity) => (
-            <NavbarLink
+            <NavLink
               key={entity}
               href={`/${metadata[entity].table}`}
               iconName={metadata[entity].iconName}
             >
               {metadata[entity].pluralName}
-            </NavbarLink>
+            </NavLink>
           ))}
         </ul>
         <ul className="navbar-nav ms-auto">
@@ -87,20 +48,20 @@ export default function NavAuthenticated({ session }: { session: Session }) {
             </a>
             <ul className="dropdown-menu dropdown-menu-end">
               {Object.keys(metadata).map((entity) => (
-                <NavbarLink
+                <NavLink
                   key={entity}
                   isDropdownItem
                   href={`/create/${entity}`}
                   iconName={metadata[entity].iconName}
                 >
                   {metadata[entity].name}
-                </NavbarLink>
+                </NavLink>
               ))}
             </ul>
           </li>
-          <NavbarLink href="/account" iconName="person-circle">
+          <NavLink href="/account" iconName="person-circle">
             Account
-          </NavbarLink>
+          </NavLink>
         </ul>
       </div>
     </>

@@ -1,3 +1,13 @@
+import NavLink from "./NavLink";
+
 export default function NavAnonymous() {
-  return <span className="navbar-text">Not logged in</span>;
+  return (
+    <>
+      <ul className="navbar-nav ms-auto">
+        <NavLink href="/account" iconName="person-circle">
+          Login
+        </NavLink>
+      </ul>
+    </>
+  );
 }
