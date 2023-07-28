@@ -1,16 +1,14 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import type { FieldValues } from "react-hook-form";
 
-import Loading from "@/app/loading";
 import Form from "@/components/forms/Form";
 import { InputField, Submit } from "@/components/forms/fields";
 import { FormStatus } from "@/components/forms/helpers";
+import { upsertIndividual } from "./api/mutations";
 import { validate, initialValues } from "./validations";
-import type { Database } from "@/types/_supabase";
 import type { TableRow } from "@/types/database";
 
 export default function IndividualForm({
@@ -19,28 +17,30 @@ export default function IndividualForm({
   individual?: TableRow<"individuals">;
 }) {
   const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
 
   const [status, setStatus] = useState("");
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
 
   const defaultValues = individual ? individual : initialValues;
 
-  const formSubmitted = async (values: FieldValues) => {
-    setStatus("Submitting");
+  const formSubmitted = useCallback(
+    async (values: FieldValues) => {
+      setIsLoading(true);
 
-    const { status, data, error } = await supabase
-      .from("individuals")
-      .upsert(values)
-      .select()
-      .single();
+      const { status, data, error } = await upsertIndividual(values);
 
-    if (error) setStatus(`Error ${error.message}`);
-    if (status == 201 && data) {
-      setStatus(`Created/Updated`);
-      startTransition(() => router.push(`/individuals/${data.id}`));
-    } else setStatus(`Status ${status}`);
-  };
+      if (error) {
+        setStatus(`Error ${error.message}`);
+      }
+      if (status == 201 && data) {
+        router.refresh();
+        return router.back();
+      } else setStatus(`Status ${status}`);
+
+      setIsLoading(false);
+    },
+    [setStatus, setIsLoading, router],
+  );
 
   return (
     <Form
@@ -49,8 +49,7 @@ export default function IndividualForm({
       resolver={validate}
     >
       <InputField type="text" label="Name" name="name" />
-      <Submit>Submit</Submit>
-      {isPending && <Loading />}
+      <Submit isLoading={isLoading}>Submit</Submit>
       {status && <FormStatus status={status} />}
     </Form>
   );

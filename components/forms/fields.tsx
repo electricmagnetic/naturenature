@@ -1,6 +1,8 @@
 import { PropsWithChildren } from "react";
 import { UseFormRegister } from "react-hook-form";
 
+import Loader from "@/components/ui/Loader";
+
 export const FieldWrapper = ({ children }: PropsWithChildren) => (
   <>{children}</>
 );
@@ -37,8 +39,11 @@ export const InputField = ({
   );
 };
 
-export const Submit = ({ children }: PropsWithChildren) => (
-  <button type="submit" className="btn btn-primary">
-    {children}
+export const Submit = ({
+  isLoading,
+  children,
+}: PropsWithChildren<{ isLoading?: boolean }>) => (
+  <button type="submit" className="btn btn-primary" disabled={isLoading}>
+    {isLoading ? <Loader isButton /> : children}
   </button>
 );
