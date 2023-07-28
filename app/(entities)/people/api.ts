@@ -1,12 +1,9 @@
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-
-import type { Database } from "@/types/_supabase";
+import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 
 export const getPeople = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
   const { data: people, error } = await supabase.from("people").select("*");
 
   if (error) throw Error(error.message);
@@ -16,7 +13,7 @@ export const getPeople = async () => {
 };
 
 export const getPerson = async (id: string) => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
 
   const { data: person, error } = await supabase
     .from("people")

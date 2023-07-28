@@ -1,13 +1,11 @@
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 
-import type { Database } from "@/types/_supabase";
 import type { CompleteRecord } from "./types";
 
 export const getRecords = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
   const { data: records, error } = await supabase.from("records").select("*");
 
   if (error) throw Error(error.message);
@@ -17,7 +15,7 @@ export const getRecords = async () => {
 };
 
 export const getRecord = async (id: string) => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
 
   const { data: record, error } = await supabase
     .from("records")
@@ -34,7 +32,7 @@ export const getRecord = async (id: string) => {
 };
 
 export const getRecordsByEvent = async (id: string) => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
 
   const { data: record, error } = await supabase
     .from("records")

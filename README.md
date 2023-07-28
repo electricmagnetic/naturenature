@@ -41,6 +41,7 @@ This is an alpha-stage project, but contributions are nonetheless welcome. Pleas
     - `components/dictionary` components/functions for interacting with the dictionary, a special table used across the database to map IDs to names
     - `components/forms` components/functions relating to forms and fields
     - `components/geospatial` components/functions for Leaflet-based maps
+    - `components/helpers` functions for managing server-side fetching and cache revalidation
     - `components/layout` interactive components relating to page layout (header, footer, navbar etc)
     - `components/ui` static components (server/client friendly) to standardise UI elements
   - `public` static assets

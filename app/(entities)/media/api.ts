@@ -1,12 +1,9 @@
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-
-import type { Database } from "@/types/_supabase";
+import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 
 export const getMedia = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
   const { data: media, error } = await supabase.from("media").select("*");
 
   if (error) throw Error(error.message);
@@ -16,7 +13,7 @@ export const getMedia = async () => {
 };
 
 export const getMediaItem = async (id: string) => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
 
   const { data: mediaItem, error } = await supabase
     .from("media")
