@@ -9,6 +9,7 @@ import ActionButton from "@/components/ui/ActionButton";
 
 import RedirectLinkButton from "./RedirectLinkButton";
 import ClearLocalStorageButton from "./ClearLocalStorageButton";
+import RevalidateCacheButton from "./RevalidateCacheButton";
 
 export default function AccountView({ user }: { user: User }) {
   return (
@@ -48,6 +49,9 @@ export default function AccountView({ user }: { user: User }) {
           </div>
           <div className="col">
             <ClearLocalStorageButton />
+          </div>
+          <div className="col">
+            <RevalidateCacheButton />
           </div>
         </div>
       </Section>
