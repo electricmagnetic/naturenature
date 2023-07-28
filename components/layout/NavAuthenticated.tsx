@@ -1,3 +1,5 @@
+"use client";
+
 import type { Session } from "@supabase/auth-helpers-nextjs";
 
 import metadata from "@/app/(entities)/metadata";

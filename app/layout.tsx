@@ -1,7 +1,23 @@
+import { Inter, Archivo } from "next/font/google";
+
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+// Fonts
+const archivo = Archivo({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-archivo",
+});
+
+const inter = Inter({
+  subsets: ["latin", "latin-ext"], // To permit macron use
+  display: "swap",
+  variable: "--font-inter",
+});
+
+// Global stylesheet
 import "./global.scss";
 
 export const metadata = {
@@ -21,7 +37,10 @@ export default async function RootLayout({
   } = await supabase.auth.getSession();
 
   return (
-    <html lang="en-GB">
+    <html
+      lang={process.env.NEXT_PUBLIC_LOCALE}
+      className={`${archivo.variable} ${inter.variable}`}
+    >
       <body>
         <Navbar session={session} />
         <div className="container-fluid">{children}</div>

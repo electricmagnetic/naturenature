@@ -5,7 +5,7 @@ type EntityMetadatum = {
   iconName: string;
 };
 
-// A register of the different types of entities, to ensure standardisation across the app
+// A register of the different types of entities, to ensure standardisation across the app. Ordering is reflected in the interface.
 const metadata: { [key: string]: EntityMetadatum } = {
   event: {
     table: "events",
@@ -13,17 +13,17 @@ const metadata: { [key: string]: EntityMetadatum } = {
     pluralName: "Events",
     iconName: "calendar",
   },
+  record: {
+    table: "records",
+    name: "Record",
+    pluralName: "Records",
+    iconName: "database",
+  },
   individual: {
     table: "individuals",
     name: "Individual",
     pluralName: "Individuals",
     iconName: "bullseye",
-  },
-  media: {
-    table: "media",
-    name: "Media",
-    pluralName: "Media",
-    iconName: "images",
   },
   object: {
     table: "objects",
@@ -31,23 +31,23 @@ const metadata: { [key: string]: EntityMetadatum } = {
     pluralName: "Objects",
     iconName: "box-seam",
   },
-  person: {
-    table: "people",
-    name: "Person",
-    pluralName: "People",
-    iconName: "people",
-  },
   place: {
     table: "places",
     name: "Place",
     pluralName: "Places",
     iconName: "geo-alt",
   },
-  record: {
-    table: "records",
-    name: "Record",
-    pluralName: "Records",
-    iconName: "database",
+  media: {
+    table: "media",
+    name: "Media",
+    pluralName: "Media",
+    iconName: "images",
+  },
+  person: {
+    table: "people",
+    name: "Person",
+    pluralName: "People",
+    iconName: "people",
   },
 };
 

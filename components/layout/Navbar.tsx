@@ -6,7 +6,10 @@ import NavAnonymous from "./NavAnonymous";
 
 export default function Navbar({ session }: { session: Session | null }) {
   return (
-    <nav className="navbar navbar-expand-lg bg-dark mb-3" data-bs-theme="dark">
+    <nav
+      className="navbar navbar-expand-lg bg-secondary mb-3"
+      data-bs-theme="dark"
+    >
       <div className="container-fluid">
         <Link className="navbar-brand" href="/">
           {process.env.NEXT_PUBLIC_DATABASE_NAME}

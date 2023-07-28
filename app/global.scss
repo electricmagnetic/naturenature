@@ -1,6 +1,48 @@
+/* Custom colours */
+$white: #ffffff;
+$nature-orange: #ea5200;
+$nature-orange-dark: #cc4b05;
+
+$nature-green: #314023;
+
+$brown-light: hsl(42, 37%, 80%);
+$brown-lighter: #f7f4ee;
+
 /* Variable overrides */
+
+// Colours
+$body-color: #212529;
+
+$primary: $nature-orange-dark;
+$secondary: $nature-green;
+$light: $brown-lighter;
+$light-bg-subtle: mix($light, $white);
+
+$border-color: $brown-light;
+$table-striped-bg: $brown-lighter;
+$dropdown-bg: $secondary;
+
+// Fonts
+$font-family-base:
+  var(--font-inter),
+  system-ui,
+  -apple-system,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  "Noto Sans",
+  "Liberation Sans",
+  Arial,
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji";
+$headings-font-family: var(--font-archivo), $font-family-base;
+$headings-font-weight: 600;
+
+// Other
 $card-border-radius: 0;
-$primary: #cc4b05;
 
 /* Bootstrap */
 @import "bootstrap";
@@ -9,6 +51,11 @@ $primary: #cc4b05;
 @import "bootstrap-icons";
 
 /* Custom SCSS */
+
+// Navbar
+.navbar-brand {
+  font-family: $headings-font-family;
+}
 
 // Bootstrap Icons
 .bi {
