@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import type { Database } from "@/types/_supabase";
@@ -9,7 +8,8 @@ export const getIndividuals = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data: individuals, error } = await supabase
     .from("individuals")
-    .select("*");
+    .select("*")
+    .order("name");
 
   if (error) throw Error(error.message);
   if (!individuals) return notFound();
