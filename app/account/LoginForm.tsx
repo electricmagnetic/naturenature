@@ -25,40 +25,45 @@ export default function LoginForm() {
   const [isError, setIsError] = useState(false);
   const [isPending, startTransition] = useTransition();
 
+  const doLoginEmail = async () => {
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    startTransition(() => {
+      if (error) {
+        setIsError(true);
+        setStatus(`${error.status}: ${error.message}`);
+      }
+      // TODO check implications of adding Error catcher (using 'throw')
+
+      if (user) {
+        setIsError(false);
+        setStatus(`Login succeeded. Redirecting…`);
+        router.refresh();
+      }
+    });
+  };
+
   const handleLogin = (loginType: LoginType) => (e: SyntheticEvent) => {
     e.preventDefault();
 
     // Reset on resubmission
-    setStatus("");
-    setIsError(false);
+    startTransition(() => {
+      setStatus("");
+      setIsError(false);
 
-    startTransition(async () => {
       if (loginType === LoginType.EMAIL) {
         if (!email || !password) {
           setIsError(true);
           setStatus("Missing email or password");
           return;
         }
-
-        const {
-          data: { user },
-          error,
-        } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-        if (error) {
-          setIsError(true);
-          setStatus(`${error.status}: ${error.message}`);
-        }
-        // TODO check implications of adding Error catcher (using 'throw')
-
-        if (user) {
-          setIsError(false);
-          setStatus(`Login succeeded. Redirecting…`);
-          router.refresh();
-        }
+        doLoginEmail();
       }
     });
   };
