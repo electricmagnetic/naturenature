@@ -334,7 +334,13 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      names: {
+        Row: {
+          id: string | null
+          name: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
