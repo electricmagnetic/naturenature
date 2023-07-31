@@ -1,9 +1,9 @@
 "use client";
 
 import { PropsWithChildren } from "react";
+import clsx from "clsx";
 
 import useDictionary from "./useDictionary";
-import clsx from "clsx";
 
 /**
  * Looks up a given ID in the dictionary and returns its name as a string (by default), or a formatted span (option).

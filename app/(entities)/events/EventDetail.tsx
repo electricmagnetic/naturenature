@@ -4,6 +4,7 @@ import Lookup from "@/components/dictionary/Lookup";
 import GeoJSON from "@/components/geospatial/GeoJSON";
 import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
+import PublicPrivate from "@/components/ui/PublicPrivate";
 import DateTime from "@/components/ui/DateTime";
 import Protocol from "@/app/(entities)/records/protocols/Protocol";
 
@@ -29,19 +30,11 @@ export default async function EventDetail({
             <DateTime datetime={event.datetime} />
           </Properties.Item>
           <Properties.Item name="Source">
-            {event.source ? (
-              <Lookup>{event.source}</Lookup>
-            ) : (
-              <em>Unspecified</em>
-            )}
+            <Lookup>{event.source}</Lookup>
           </Properties.Item>
           <Properties.Item name="Comments">{event.comments}</Properties.Item>
           <Properties.Item name="Visibility">
-            {event.is_public ? (
-              <span className="badge text-bg-warning">Public</span>
-            ) : (
-              <span className="badge text-bg-dark">Private</span>
-            )}
+            <PublicPrivate>{event.is_public}</PublicPrivate>
           </Properties.Item>
         </Properties>
       </Section>
