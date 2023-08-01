@@ -19,15 +19,15 @@ const Wrapper = ({
   error,
   children,
 }: PropsWithChildren<FieldProperties>) => (
-  <>
+  <div className="mb-3 form-floating">
+    {children}
     <label className="form-label" htmlFor={name}>
       {label}
     </label>
-    {children}
     {error && (
       <div className="invalid-feedback">{error.message?.toString()}</div>
     )}
-  </>
+  </div>
 );
 
 export const FieldSelect = ({
@@ -35,6 +35,7 @@ export const FieldSelect = ({
   dictionaryType,
   name,
   label,
+  ...others
 }: FieldProperties & {
   dictionaryClass: string;
   dictionaryType?: string;
@@ -66,8 +67,9 @@ export const FieldSelect = ({
       <select
         className={clsx("form-select", invalid && "is-invalid")}
         {...field}
+        {...others}
       >
-        <option value="" selected></option>
+        <option value=""></option>
         {options &&
           options.map((option) => (
             <option key={option.id} value={option.id}>
@@ -96,6 +98,7 @@ const Field = ({
     <Wrapper name={name} label={label} error={error}>
       <input
         className={clsx("form-control", invalid && "is-invalid")}
+        placeholder={label}
         id={name}
         {...field}
         {...others}

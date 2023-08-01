@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 
 export const getIndividuals = async () => {
