@@ -1,16 +1,19 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { useFormContext } from "react-hook-form";
+import { FieldError, useController, useFormContext } from "react-hook-form";
+import clsx from "clsx";
 
 type FieldProperties = {
   name: string;
   label: string;
+  error?: FieldError;
 };
 
 const Wrapper = ({
   name,
   label,
+  error,
   children,
 }: PropsWithChildren<FieldProperties>) => (
   <>
@@ -18,12 +21,12 @@ const Wrapper = ({
       {label}
     </label>
     {children}
+    {error && (
+      <div className="invalid-feedback">{error.message?.toString()}</div>
+    )}
   </>
 );
 
-/* TODO
-- error handling: errors.name?.message && <p>{errors.name?.message}</p>
-*/
 const Field = ({
   type = "text",
   name,
@@ -34,17 +37,22 @@ const Field = ({
 }) => {
   const { register } = useFormContext();
 
+  const {
+    field,
+    fieldState: { invalid, error },
+  } = useController({ name });
+
   return (
-    register && (
-      <Wrapper name={name} label={label}>
-        <input
-          className="form-control"
-          id={name}
-          {...register(name)}
-          {...others}
-        />
-      </Wrapper>
-    )
+    <Wrapper name={name} label={label} error={error}>
+      <input
+        className={clsx("form-control", invalid && "is-invalid")}
+        id={name}
+        {...register(name)}
+        {...field}
+        {...others}
+      />
+    </Wrapper>
+    //)
   );
 };
 
