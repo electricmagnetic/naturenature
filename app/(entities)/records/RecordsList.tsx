@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import ActionButton from "@/components/ui/ActionButton";
 import Lookup from "@/components/dictionary/Lookup";
 import Table from "@/components/ui/Table";
 import type { TableRow } from "@/types/database";
@@ -17,6 +18,8 @@ export default async function RecordsList({
           <Table.Heading>Protocol</Table.Heading>
           <Table.Heading>Type</Table.Heading>
           <Table.Heading>Event</Table.Heading>
+          <Table.Heading>Individual</Table.Heading>
+          <Table.Heading>Actions</Table.Heading>
         </Table.Row>
       </Table.Head>
       <Table.Body>
@@ -35,6 +38,16 @@ export default async function RecordsList({
               <Link href={`/events/${record.event}`}>
                 Event: {record.event}
               </Link>
+            </Table.Data>
+            <Table.Data>
+              {record.individual && (
+                <Link href={`/individuals/${record.individual}`}>
+                  Individual: {record.individual}
+                </Link>
+              )}
+            </Table.Data>
+            <Table.Data>
+              <ActionButton.View entity="record" id={record.id} />
             </Table.Data>
           </Table.Row>
         ))}

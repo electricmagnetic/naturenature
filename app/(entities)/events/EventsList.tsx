@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import ActionButton from "@/components/ui/ActionButton";
 import Table from "@/components/ui/Table";
 import DateTime from "@/components/ui/DateTime";
 import Lookup from "@/components/dictionary/Lookup";
@@ -20,6 +21,7 @@ export default async function EventsList({
             <Table.Heading>Comments</Table.Heading>
             <Table.Heading>Source</Table.Heading>
             <Table.Heading>Visibility</Table.Heading>
+            <Table.Heading>Actions</Table.Heading>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -36,6 +38,9 @@ export default async function EventsList({
               </Table.Data>
               <Table.Data>
                 <PublicPrivate>{event.is_public}</PublicPrivate>
+              </Table.Data>
+              <Table.Data>
+                <ActionButton.View entity="event" id={event.id} />
               </Table.Data>
             </Table.Row>
           ))}

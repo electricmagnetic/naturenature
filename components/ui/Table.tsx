@@ -16,7 +16,9 @@ const TableData = ({ children }: PropsWithChildren) => <td>{children}</td>;
 
 const Table = ({ children }: PropsWithChildren) => (
   <div className="table-responsive">
-    <table className="table table-striped ">{children}</table>
+    <table className="table table-sm table-striped align-middle">
+      {children}
+    </table>
   </div>
 );
 
