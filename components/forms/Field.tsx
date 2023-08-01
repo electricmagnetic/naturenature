@@ -1,8 +1,11 @@
 "use client";
 
-import { PropsWithChildren } from "react";
-import { FieldError, useController, useFormContext } from "react-hook-form";
+import { PropsWithChildren, useEffect, useState } from "react";
+import { FieldError, useController } from "react-hook-form";
 import clsx from "clsx";
+
+import useDictionary from "@/components/dictionary/useDictionary";
+import type { TableRow } from "@/types/database";
 
 type FieldProperties = {
   name: string;
@@ -27,6 +30,55 @@ const Wrapper = ({
   </>
 );
 
+export const FieldSelect = ({
+  dictionaryClass,
+  dictionaryType,
+  name,
+  label,
+}: FieldProperties & {
+  dictionaryClass: string;
+  dictionaryType?: string;
+}) => {
+  const {
+    field,
+    fieldState: { invalid, error },
+  } = useController({ name });
+
+  const dictionary = useDictionary();
+  const [options, setOptions] = useState<TableRow<"dictionary">[]>();
+
+  useEffect(() => {
+    if (dictionary) {
+      const dictionaryByClass = dictionary.filter(
+        (term) => term.class === dictionaryClass,
+      );
+
+      const dictionaryByTypeAndClass =
+        dictionaryType &&
+        dictionaryByClass.filter((term) => term.type === dictionaryType);
+
+      setOptions(dictionaryByTypeAndClass || dictionaryByClass);
+    }
+  }, [dictionary, setOptions]);
+
+  return (
+    <Wrapper name={name} label={label} error={error}>
+      <select
+        className={clsx("form-select", invalid && "is-invalid")}
+        {...field}
+      >
+        <option value="" selected></option>
+        {options &&
+          options.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.name}
+            </option>
+          ))}
+      </select>
+    </Wrapper>
+  );
+};
+
 const Field = ({
   type = "text",
   name,
@@ -35,8 +87,6 @@ const Field = ({
 }: FieldProperties & {
   type: string;
 }) => {
-  const { register } = useFormContext();
-
   const {
     field,
     fieldState: { invalid, error },
@@ -47,13 +97,13 @@ const Field = ({
       <input
         className={clsx("form-control", invalid && "is-invalid")}
         id={name}
-        {...register(name)}
         {...field}
         {...others}
       />
     </Wrapper>
-    //)
   );
 };
+
+Field.Select = FieldSelect;
 
 export default Field;
