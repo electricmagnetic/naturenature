@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import type { FieldValues } from "react-hook-form";
 
 import Form from "@/components/forms/Form";
-import { InputField, Submit } from "@/components/forms/fields";
-import { FormStatus } from "@/components/forms/helpers";
+import Field from "@/components/forms/Field";
+import Submit from "@/components/forms/Submit";
 import { upsertIndividual } from "./api/mutations";
 import { validate, initialValues } from "./validations";
 import type { TableRow } from "@/types/database";
@@ -34,7 +34,7 @@ export default function IndividualForm({
       }
       if (status == 201 && data) {
         router.refresh();
-        return router.back();
+        return router.push(`/individuals/${data.id}`);
       } else setStatus(`Status ${status}`);
 
       setIsLoading(false);
@@ -48,9 +48,15 @@ export default function IndividualForm({
       onSubmit={formSubmitted}
       resolver={validate}
     >
-      <InputField type="text" label="Name" name="name" />
-      <Submit isLoading={isLoading}>Submit</Submit>
-      {status && <FormStatus status={status} />}
+      <Form.Fieldset title="Basic details">
+        <Field type="text" label="Name" name="name" />
+      </Form.Fieldset>
+
+      <Form.Footer>
+        <Submit isLoading={isLoading}>Submit</Submit>
+      </Form.Footer>
+
+      {status && <Form.Message message={status} />}
     </Form>
   );
 }
