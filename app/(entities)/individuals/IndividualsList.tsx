@@ -22,7 +22,7 @@ export default async function IndividualsList({
           <Table.Row key={individual.id}>
             <Table.Data>
               <Link href={`/individuals/${individual.id}`}>
-                {individual.name || individual.id}
+                {individual.name || <em>Unnamed</em>}
               </Link>
             </Table.Data>
             <Table.Data>
