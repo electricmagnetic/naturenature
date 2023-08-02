@@ -15,6 +15,7 @@ export default function IndividualForm({
   individual?: TableRow<"individuals">;
 }) {
   const methods = useForm<any>({
+    // TODO any
     defaultValues: individual ? individual : initialValues,
     resolver: yupResolver(validate),
   });
