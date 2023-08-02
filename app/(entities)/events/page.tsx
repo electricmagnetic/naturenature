@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getEvents } from "./api";
+import { getEvents } from "./api/queries";
 import EventsList from "./EventsList";
 
 export default async function Events() {

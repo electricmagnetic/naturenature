@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 
-import type { CompleteEvent } from "./types";
+import type { CompleteEvent } from "../types";
 
 export const getEvents = async () => {
   const supabase = createServerSupabaseClient();
