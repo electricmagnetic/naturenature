@@ -48,6 +48,7 @@ export const FieldSelect = ({
   const dictionary = useDictionary();
   const [options, setOptions] = useState<TableRow<"dictionary">[]>();
 
+  // Get options from dictionary
   useEffect(() => {
     if (dictionary) {
       const dictionaryByClass = dictionary.filter(
@@ -60,7 +61,11 @@ export const FieldSelect = ({
 
       setOptions(dictionaryByTypeAndClass || dictionaryByClass);
     }
-  }, [dictionary, setOptions]);
+  }, [dictionary, dictionaryType, dictionaryClass, setOptions]);
+
+  // Field should be disabled if a dictionaryType is expected but not provided (i.e. an empty string)
+  // Note that this is different to a select field without a dictionarType (i.e. undefined)
+  const disabled = !!(!dictionaryType && dictionaryType !== undefined);
 
   return (
     <Wrapper name={name} label={label} error={error}>
@@ -68,6 +73,7 @@ export const FieldSelect = ({
         className={clsx("form-select", invalid && "is-invalid")}
         {...field}
         {...others}
+        disabled={disabled}
       >
         <option value=""></option>
         {options &&

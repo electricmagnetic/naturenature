@@ -1,5 +1,8 @@
 "use client";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import Form from "@/components/forms/Form";
 import Field from "@/components/forms/Field";
 import { upsertIndividual } from "./api/mutations";
@@ -11,15 +14,13 @@ export default function IndividualForm({
 }: {
   individual?: TableRow<"individuals">;
 }) {
-  const defaultValues = individual ? individual : initialValues;
+  const methods = useForm<any>({
+    defaultValues: individual ? individual : initialValues,
+    resolver: yupResolver(validate),
+  });
 
   return (
-    <Form
-      defaultValues={defaultValues}
-      resolver={validate}
-      table="individuals"
-      mutation={upsertIndividual}
-    >
+    <Form table="individuals" mutation={upsertIndividual} methods={methods}>
       <Form.Fieldset title="Basic details">
         <Field type="text" label="Name" name="name" />
       </Form.Fieldset>

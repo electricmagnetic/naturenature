@@ -1,13 +1,13 @@
+"use client";
+
 import { PropsWithChildren, useCallback, useState } from "react";
-import { FieldValues, FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { FieldValues, FormProvider, UseFormReturn } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import type { ObjectSchema } from "yup";
 import type { PostgrestError } from "@supabase/supabase-js";
 
 import Message from "@/components/ui/Message";
 import Submit from "@/components/forms/Submit";
-import type { InsertDto, TableRow, UpdateDto } from "@/types/database";
+import type { TableRow } from "@/types/database";
 
 const FormMessage = ({
   message,
@@ -32,18 +32,14 @@ const FormFooter = ({ children }: PropsWithChildren) => (
 );
 
 const Form = ({
-  defaultValues,
-  resolver,
+  methods,
   table,
   mutation,
   children,
 }: PropsWithChildren<{
-  defaultValues: InsertDto<any> | UpdateDto<any>;
-  resolver: ObjectSchema<any>;
+  methods: UseFormReturn<any>; // TODO any
   table: string;
-  mutation: (
-    values: FieldValues,
-  ) => Promise<{
+  mutation: (values: FieldValues) => Promise<{
     status: number;
     data: TableRow<any>;
     error: PostgrestError | null;
@@ -53,11 +49,6 @@ const Form = ({
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-
-  const methods = useForm({
-    defaultValues,
-    resolver: yupResolver(resolver),
-  });
 
   const formSubmitted = useCallback(
     async (values: FieldValues) => {
