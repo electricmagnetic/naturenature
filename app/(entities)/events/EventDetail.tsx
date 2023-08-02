@@ -50,14 +50,14 @@ export default async function EventDetail({
       {event.place && (
         <Section title="Map (place)">
           <Map scrollWheelZoom={false}>
-            <GeoJSON data={event.place.as_geojson} />
+            <GeoJSON data={event.place.geojson} />
           </Map>
         </Section>
       )}
-      {event.event_place_as_geojson && (
+      {event.event_place_geojson && (
         <Section title="Map (event place)">
           <Map scrollWheelZoom={false}>
-            <GeoJSON data={event.event_place_as_geojson} />
+            <GeoJSON data={event.event_place_geojson} />
           </Map>
         </Section>
       )}

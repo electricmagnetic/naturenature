@@ -27,7 +27,7 @@ export default async function PlaceDetail({
       </Section>
       <Section title="Map">
         <Map>
-          <GeoJSON data={place.as_geojson} />
+          <GeoJSON data={place.geojson} />
         </Map>
       </Section>
     </>
