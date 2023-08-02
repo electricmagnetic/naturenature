@@ -12,8 +12,13 @@ export default function ProtocolSample({ record }: { record: CompleteRecord }) {
   return (
     <Card title="Sample">
       <div>
-        <Lookup formatted>{record.action}</Lookup> (
-        <Lookup>{record.object?.type}</Lookup>) for{" "}
+        <Lookup formatted>{record.action}</Lookup>{" "}
+        {record.object && (
+          <Link href={`/objects/${record.object.id}`}>
+            <Lookup>{record.object.type}</Lookup>
+          </Link>
+        )}{" "}
+        from{" "}
         {record.individual && (
           <Link href={`/individuals/${record.individual.id}`}>
             {record.individual?.name}

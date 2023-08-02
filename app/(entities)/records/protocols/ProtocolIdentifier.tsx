@@ -13,10 +13,16 @@ export default function ProtocolIdentifier({
 }) {
   return (
     <Card title="Identifier">
-      <Lookup formatted>{record.action}</Lookup> {record.object?.name} to{" "}
+      <Lookup formatted>{record.action}</Lookup>{" "}
+      {record.object && (
+        <Link href={`/objects/${record.object.id}`}>
+          <Lookup>{record.object.type}</Lookup>: {record.object.name}
+        </Link>
+      )}{" "}
+      to{" "}
       {record.individual && (
         <Link href={`/individuals/${record.individual.id}`}>
-          {record.individual?.name}
+          {record.individual.name}
         </Link>
       )}
     </Card>
