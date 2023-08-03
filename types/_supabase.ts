@@ -38,8 +38,7 @@ export interface Database {
           comments: string | null
           created_at: string | null
           datetime: string
-          event_place_as_geometry: unknown | null
-          event_place_geojson: Json | null
+          event_place_geometry: unknown | null
           event_place_metadata: Json | null
           id: string
           is_public: boolean
@@ -51,8 +50,7 @@ export interface Database {
           comments?: string | null
           created_at?: string | null
           datetime: string
-          event_place_as_geometry?: unknown | null
-          event_place_geojson?: Json | null
+          event_place_geometry?: unknown | null
           event_place_metadata?: Json | null
           id?: string
           is_public?: boolean
@@ -64,8 +62,7 @@ export interface Database {
           comments?: string | null
           created_at?: string | null
           datetime?: string
-          event_place_as_geometry?: unknown | null
-          event_place_geojson?: Json | null
+          event_place_geometry?: unknown | null
           event_place_metadata?: Json | null
           id?: string
           is_public?: boolean
@@ -206,27 +203,24 @@ export interface Database {
       }
       places: {
         Row: {
-          as_geometry: unknown | null
           created_at: string | null
-          geojson: Json
+          geometry: unknown
           id: string
           metadata: Json | null
           name: string
           type: string
         }
         Insert: {
-          as_geometry?: unknown | null
           created_at?: string | null
-          geojson: Json
+          geometry: unknown
           id?: string
           metadata?: Json | null
           name: string
           type: string
         }
         Update: {
-          as_geometry?: unknown | null
           created_at?: string | null
-          geojson?: Json
+          geometry?: unknown
           id?: string
           metadata?: Json | null
           name?: string

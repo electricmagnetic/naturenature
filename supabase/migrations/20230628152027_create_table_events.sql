@@ -5,7 +5,7 @@ create table "public"."events" (
     "created_at" timestamp with time zone default now(),
     "datetime" timestamp with time zone not null,
     "event_place_metadata" jsonb null,
-    "event_place_geojson" jsonb null,
+    "event_place_geometry" geometry null,
     "place" uuid null,
     "comments" text null
 );
@@ -24,11 +24,7 @@ create index idx_events_place on events (place);
 
 -- geospatial
 
-alter table "public"."events" add column "event_place_as_geometry" geometry generated always as (
-    (st_geomfromgeojson(event_place_geojson))::geometry
-) stored;
-
-create index idx_events_event_place_as_geometry on public.events using gist (event_place_as_geometry);
+create index idx_events_event_place_geometry on public.events using gist (event_place_geometry);
 
 -- security
 

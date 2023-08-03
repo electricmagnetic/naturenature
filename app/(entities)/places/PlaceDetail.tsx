@@ -4,6 +4,7 @@ import Lookup from "@/components/dictionary/Lookup";
 import GeoJSON from "@/components/geospatial/GeoJSON";
 import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
+import type { Json } from "@/types/_supabase";
 import type { TableRow } from "@/types/database";
 
 const Map = dynamic(() => import("@/components/geospatial/Map"), {
@@ -27,7 +28,7 @@ export default async function PlaceDetail({
       </Section>
       <Section title="Map">
         <Map>
-          <GeoJSON data={place.geojson} />
+          <GeoJSON data={place.geometry as Json} />
         </Map>
       </Section>
     </>

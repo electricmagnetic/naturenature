@@ -8,6 +8,7 @@ import PublicPrivate from "@/components/ui/PublicPrivate";
 import DateTime from "@/components/ui/DateTime";
 import Protocol from "@/app/(entities)/records/protocols/Protocol";
 
+import type { Json } from "@/types/_supabase";
 import type { CompleteRecord } from "@/app/(entities)/records/types";
 import type { CompleteEvent } from "./types";
 
@@ -50,14 +51,14 @@ export default async function EventDetail({
       {event.place && (
         <Section title="Map (place)">
           <Map scrollWheelZoom={false}>
-            <GeoJSON data={event.place.geojson} />
+            <GeoJSON data={event.place.geometry as Json} />
           </Map>
         </Section>
       )}
-      {event.event_place_geojson && (
+      {event.event_place_geometry && (
         <Section title="Map (event place)">
           <Map scrollWheelZoom={false}>
-            <GeoJSON data={event.event_place_geojson} />
+            <GeoJSON data={event.event_place_geometry as Json} />
           </Map>
         </Section>
       )}

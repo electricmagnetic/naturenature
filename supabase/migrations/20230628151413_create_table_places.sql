@@ -6,7 +6,7 @@ create table "public"."places" (
     "type" text not null,
     "name" text not null,
     "metadata" jsonb null,
-    "geojson" jsonb not null
+    "geometry" geometry not null
 );
 
 
@@ -22,11 +22,7 @@ alter table "public"."places" validate constraint "places_type_fkey";
 
 -- geospatial
 
-alter table "public"."places" add column "as_geometry" geometry generated always as (
-    (st_geomfromgeojson(geojson))::geometry
-) stored;
-
-create index idx_places_as_geometry on public.places using gist (as_geometry);
+create index idx_places_geometry on public.places using gist (geometry);
 
 -- security
 
