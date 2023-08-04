@@ -18,7 +18,7 @@ export default async function Event({
         entity="event"
         action={Header.Action.View}
         id={id}
-        actionButtons={[Header.Action.Delete]}
+        actionButtons={[Header.Action.Edit, Header.Action.Delete]}
       />
       <EventDetail event={event} records={records} />
     </main>

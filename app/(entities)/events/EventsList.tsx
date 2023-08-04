@@ -42,6 +42,8 @@ export default function EventsList({
               </Table.Data>
               <Table.Data>
                 <ActionButton.View entity="event" id={event.id} />
+                <ActionButton.Edit entity="event" id={event.id} />
+                <ActionButton.Delete entity="event" id={event.id} />
               </Table.Data>
             </Table.Row>
           ))}
