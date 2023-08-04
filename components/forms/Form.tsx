@@ -1,13 +1,19 @@
 "use client";
 
 import { PropsWithChildren, useCallback, useState } from "react";
-import { FieldValues, FormProvider, UseFormReturn } from "react-hook-form";
+import {
+  DefaultValues,
+  FieldValues,
+  FormProvider,
+  useForm,
+} from "react-hook-form";
+import { ObjectSchema } from "yup";
 import { useRouter } from "next/navigation";
 import type { PostgrestError } from "@supabase/supabase-js";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import Message from "@/components/ui/Message";
 import Submit from "@/components/forms/Submit";
-import type { TableRow } from "@/types/database";
 
 const FormMessage = ({
   message,
@@ -31,32 +37,65 @@ const FormFooter = ({ children }: PropsWithChildren) => (
   <div className="d-flex my-3">{children}</div>
 );
 
-const Form = ({
-  methods,
-  table,
-  mutation,
-  children,
-}: PropsWithChildren<{
-  methods: UseFormReturn<any>; // TODO any
+/**
+ * - table: the Supabase table (for redirection on success)
+ * - formToDatabase: function for transforming validated form data to a database object
+ * - databaseToForm: function for transforming database objects into form initial values
+ * - mutation: function for upserting the data
+ * - render: JSX function for rendering the form
+ * - initialValues: initial values for the form
+ * - validator: Yup object schema for form validation
+ * - entity: if provided, the Form will use this for the default values (instead of initialValues)
+ */
+type FormProps<FormValues, Entity> = {
   table: string;
-  mutation: (values: FieldValues) => Promise<{
+  formToDatabase: (values: FormValues) => Entity;
+  databaseToForm: (values: Entity) => FormValues;
+  mutation: (entity: Entity) => Promise<{
     status: number;
-    data: TableRow<any>;
+    data: Entity | null;
     error: PostgrestError | null;
   }>;
-}>) => {
+  render: () => JSX.Element;
+  validator: ObjectSchema<any>;
+  initialValues: FormValues;
+  entity?: Entity;
+};
+
+function Form<FormValues extends FieldValues, Entity extends { id: string }>({
+  // TODO tidy "extends" section
+  table,
+  formToDatabase,
+  databaseToForm,
+  mutation,
+  render: FormContent,
+  initialValues,
+  validator,
+  entity,
+}: FormProps<FormValues, Entity>) {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
+  const defaultValues: DefaultValues<any> = entity // TODO any
+    ? databaseToForm(entity)
+    : initialValues;
+
+  const methods = useForm<FormValues>({
+    defaultValues: defaultValues,
+    resolver: yupResolver(validator),
+  });
+
   const formSubmitted = useCallback(
-    async (values: FieldValues) => {
+    async (values: FormValues) => {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const { status, data, error } = await mutation(values);
+      const entity = formToDatabase(values);
+      const { status, data, error } = await mutation(entity);
 
       if (!error && data && status == 201) {
         router.refresh();
@@ -73,13 +112,21 @@ const Form = ({
 
       setIsLoading(false);
     },
-    [setIsLoading, setIsError, setMessage, router],
+    [
+      setIsLoading,
+      setIsError,
+      setMessage,
+      router,
+      formToDatabase,
+      mutation,
+      table,
+    ],
   );
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(formSubmitted)}>
-        {children}
+        <FormContent />
         <Form.Footer>
           <Submit isLoading={isLoading}>Submit</Submit>
         </Form.Footer>
@@ -87,7 +134,7 @@ const Form = ({
       </form>
     </FormProvider>
   );
-};
+}
 
 Form.Fieldset = FormFieldset;
 Form.Message = FormMessage;

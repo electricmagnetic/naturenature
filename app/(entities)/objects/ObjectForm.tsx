@@ -1,25 +1,21 @@
 "use client";
 
-import { useForm, useWatch } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useFormContext } from "react-hook-form";
 
 import Form from "@/components/forms/Form";
 import Field from "@/components/forms/Field";
 import { upsertObject } from "./api/mutations";
-import { validate, initialValues } from "./validations";
+import {
+  validate,
+  initialValues,
+  formToDatabase,
+  databaseToForm,
+} from "./validations";
 import type { TableRow } from "@/types/database";
 import { useEffect } from "react";
 
-export default function ObjectForm({
-  object,
-}: {
-  object?: TableRow<"objects">;
-}) {
-  const methods = useForm<any>({
-    // TODO any
-    defaultValues: object ? object : initialValues,
-    resolver: yupResolver(validate),
-  });
+const ObjectFormContent = () => {
+  const methods = useFormContext();
 
   // Conditional field based on 'class' selection
   const { watch, setValue } = methods;
@@ -27,10 +23,10 @@ export default function ObjectForm({
 
   useEffect(() => {
     if (!objectClass) setValue("type", "");
-  }, [objectClass]);
+  }, [objectClass, setValue]);
 
   return (
-    <Form table="objects" mutation={upsertObject} methods={methods}>
+    <>
       <Form.Fieldset title="Object class/type">
         <div className="row">
           <div className="col-sm-6">
@@ -54,6 +50,25 @@ export default function ObjectForm({
       <Form.Fieldset title="Basic details">
         <Field type="text" label="Name" name="name" />
       </Form.Fieldset>
-    </Form>
+    </>
+  );
+};
+
+export default function ObjectForm({
+  object,
+}: {
+  object?: TableRow<"objects">;
+}) {
+  return (
+    <Form
+      table="objects"
+      formToDatabase={formToDatabase}
+      databaseToForm={databaseToForm}
+      mutation={upsertObject}
+      render={ObjectFormContent}
+      entity={object}
+      initialValues={initialValues}
+      validator={validate}
+    />
   );
 }
