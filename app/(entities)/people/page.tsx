@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getPeople } from "./api";
+import { getPeople } from "./api/queries";
 import PeopleList from "./PeopleList";
 
 export default async function People() {
