@@ -52,4 +52,5 @@ INSERT INTO public."dictionary" (id, "class", "name", "type", description) VALUE
 ('CHELATION', 'type', 'Chelation', 'INTERVENTION', 'An individual undergoes chelation therapy'),
 ('DEPARTURE', 'type', 'Departure', 'INTERVENTION', 'An individual departs somewhere'),
 ('BILL_LENGTH', 'type', 'Bill Length', 'MEASUREMENT', 'Measurement of bill length'),
-('VET', 'type', 'Vet', 'PERSON', 'Person providing care to an individual');
+('VET', 'type', 'Vet', 'PERSON', 'Person providing care to an individual'),
+('AUTOMATED', 'source', 'Automated', NULL, 'Data obtained through an automated device');
