@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { PropsWithChildren, useCallback, useEffect, useMemo } from "react";
 import {
   DefaultValues,
   FieldValues,
@@ -81,15 +75,13 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
 }: FormProps<FormValues, Entity>) {
   const router = useRouter();
 
-  const [message, setMessage] = useState("");
-  const [isError, setIsError] = useState(false);
-
   const methods = useForm<FormValues>({
     defaultValues: useMemo(() => {
       const defaultValues = entity ? databaseToForm(entity) : initialValues;
       return defaultValues as DefaultValues<any>; // TODO any
     }, [entity, initialValues]),
     resolver: yupResolver(validator),
+    criteriaMode: "all",
   });
 
   const {
@@ -101,6 +93,7 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
       isSubmitted,
       isValidating,
     },
+    setError,
   } = methods;
 
   // Publish validation errors to the console
@@ -110,9 +103,6 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
 
   const formSubmitted = useCallback(
     async (values: FormValues) => {
-      setIsError(false);
-      setMessage("");
-
       const entity = formToDatabase(values);
       const { status, data, error } = await mutation(entity);
 
@@ -122,14 +112,15 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
       }
 
       if (error) {
-        setIsError(true);
-        setMessage(error.message);
+        setError("root.submissionError", {
+          type: `${status}`,
+          message: `${error.message} (${error.code})`,
+        });
       } else {
-        setIsError(false);
-        setMessage(`Status ${status}`);
+        console.info(status);
       }
     },
-    [setIsError, setMessage, router, formToDatabase, mutation, table],
+    [router, formToDatabase, mutation, table, setError],
   );
 
   return (
@@ -145,7 +136,12 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
             Submit
           </Submit>
         </Form.Footer>
-        {message && <Form.Message isError={isError} message={message} />}
+        {errors.root?.submissionError && (
+          <Form.Message
+            isError={true}
+            message={`${errors.root.submissionError.message}`}
+          />
+        )}
       </form>
     </FormProvider>
   );
