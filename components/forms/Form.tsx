@@ -1,6 +1,12 @@
 "use client";
 
-import { PropsWithChildren, useCallback, useState } from "react";
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import {
   DefaultValues,
   FieldValues,
@@ -75,22 +81,35 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
 }: FormProps<FormValues, Entity>) {
   const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const defaultValues: DefaultValues<any> = entity // TODO any
-    ? databaseToForm(entity)
-    : initialValues;
-
   const methods = useForm<FormValues>({
-    defaultValues: defaultValues,
+    defaultValues: useMemo(() => {
+      const defaultValues = entity ? databaseToForm(entity) : initialValues;
+      return defaultValues as DefaultValues<any>; // TODO any
+    }, [entity, initialValues]),
     resolver: yupResolver(validator),
   });
 
+  const {
+    formState: {
+      errors,
+      isLoading,
+      isSubmitting,
+      isSubmitSuccessful,
+      isSubmitted,
+      isValidating,
+    },
+  } = methods;
+
+  // Publish validation errors to the console
+  useEffect(() => {
+    isSubmitted && console.info(errors);
+  }, [errors, isSubmitted]);
+
   const formSubmitted = useCallback(
     async (values: FormValues) => {
-      setIsLoading(true);
       setIsError(false);
       setMessage("");
 
@@ -109,18 +128,8 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
         setIsError(false);
         setMessage(`Status ${status}`);
       }
-
-      setIsLoading(false);
     },
-    [
-      setIsLoading,
-      setIsError,
-      setMessage,
-      router,
-      formToDatabase,
-      mutation,
-      table,
-    ],
+    [setIsError, setMessage, router, formToDatabase, mutation, table],
   );
 
   return (
@@ -128,7 +137,13 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
       <form onSubmit={methods.handleSubmit(formSubmitted)}>
         <FormContent />
         <Form.Footer>
-          <Submit isLoading={isLoading}>Submit</Submit>
+          <Submit
+            isLoading={
+              isLoading || isValidating || isSubmitting || isSubmitSuccessful
+            }
+          >
+            Submit
+          </Submit>
         </Form.Footer>
         {message && <Form.Message isError={isError} message={message} />}
       </form>
