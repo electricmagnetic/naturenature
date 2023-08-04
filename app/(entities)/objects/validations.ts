@@ -1,13 +1,15 @@
 import * as yup from "yup";
 
-import type { ValidationDto, InsertDto, TableRow } from "@/types/database";
+import type { InsertDto, TableRow } from "@/types/database";
 
 // Types
 type Object = TableRow<"objects">;
-type ObjectForm = ValidationDto<InsertDto<"objects">>;
+type ObjectDto = InsertDto<"objects">;
 
 // Validations
-export const validate: yup.ObjectSchema<ObjectForm> = yup.object({
+export const validate: yup.ObjectSchema<ObjectDto> = yup.object({
+  id: yup.mixed(),
+  created_at: yup.mixed(),
   class: yup.string().required(),
   type: yup.string().required(),
   name: yup.string(),
@@ -15,13 +17,13 @@ export const validate: yup.ObjectSchema<ObjectForm> = yup.object({
 });
 
 // Transformations
-export const formToDatabase = (objectForm: ObjectForm): Object =>
+export const formToDto = (objectForm: ObjectDto): ObjectDto =>
   Object.assign(objectForm);
-export const databaseToForm = (object: Object): ObjectForm =>
+export const databaseToForm = (object: Object): ObjectDto =>
   Object.assign(object);
 
 // Initial values
-export const initialValues: ObjectForm = {
+export const initialValues: ObjectDto = {
   class: "",
   type: "",
   name: "",

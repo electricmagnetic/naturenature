@@ -39,7 +39,7 @@ const FormFooter = ({ children }: PropsWithChildren) => (
 
 /**
  * - table: the Supabase table (for redirection on success)
- * - formToDatabase: function for transforming validated form data to a database object
+ * - formToDto: function for transforming validated form data to a valid DTO
  * - databaseToForm: function for transforming database objects into form initial values
  * - mutation: function for upserting the data
  * - render: JSX function for rendering the form
@@ -47,39 +47,39 @@ const FormFooter = ({ children }: PropsWithChildren) => (
  * - validator: Yup object schema for form validation
  * - entity: if provided, the Form will use this for the default values (instead of initialValues)
  */
-type FormProps<FormValues, Entity> = {
+type FormProps<Dto, Entity> = {
   table: string;
-  formToDatabase: (values: FormValues) => Entity;
-  databaseToForm: (values: Entity) => FormValues;
-  mutation: (entity: Entity) => Promise<{
+  formToDto: (values: Dto) => Dto;
+  databaseToForm: (values: Entity) => Dto;
+  mutation: (dto: Dto) => Promise<{
     status: number;
     data: Entity | null;
     error: PostgrestError | null;
   }>;
   render: () => JSX.Element;
   validator: ObjectSchema<any>;
-  initialValues: FormValues;
+  initialValues: Dto;
   entity?: Entity;
 };
 
-function Form<FormValues extends FieldValues, Entity extends { id: string }>({
+function Form<Dto extends { id?: string }, Entity extends { id?: string }>({
   // TODO tidy "extends" section
   table,
-  formToDatabase,
+  formToDto,
   databaseToForm,
   mutation,
   render: FormContent,
   initialValues,
   validator,
   entity,
-}: FormProps<FormValues, Entity>) {
+}: FormProps<Dto, Entity>) {
   const router = useRouter();
 
-  const methods = useForm<FormValues>({
+  const methods = useForm<Dto>({
     defaultValues: useMemo(() => {
       const defaultValues = entity ? databaseToForm(entity) : initialValues;
       return defaultValues as DefaultValues<any>; // TODO any
-    }, [entity, initialValues]),
+    }, [entity, initialValues, databaseToForm]),
     resolver: yupResolver(validator),
     criteriaMode: "all",
   });
@@ -102,8 +102,8 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
   }, [errors, isSubmitted]);
 
   const formSubmitted = useCallback(
-    async (values: FormValues) => {
-      const entity = formToDatabase(values);
+    async (values: Dto) => {
+      const entity = formToDto(values);
       const { status, data, error } = await mutation(entity);
 
       if (!error && data && status == 201) {
@@ -120,7 +120,7 @@ function Form<FormValues extends FieldValues, Entity extends { id: string }>({
         console.info(status);
       }
     },
-    [router, formToDatabase, mutation, table, setError],
+    [router, formToDto, mutation, table, setError],
   );
 
   return (

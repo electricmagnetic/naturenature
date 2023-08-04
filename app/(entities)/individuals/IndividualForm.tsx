@@ -6,7 +6,7 @@ import { upsertIndividual } from "./api/mutations";
 import {
   validate,
   initialValues,
-  formToDatabase,
+  formToDto,
   databaseToForm,
 } from "./validations";
 import type { TableRow } from "@/types/database";
@@ -29,7 +29,7 @@ export default function IndividualForm({
   return (
     <Form
       table="individuals"
-      formToDatabase={formToDatabase}
+      formToDto={formToDto}
       databaseToForm={databaseToForm}
       mutation={upsertIndividual}
       render={IndividualFormContent}

@@ -8,7 +8,7 @@ import { upsertObject } from "./api/mutations";
 import {
   validate,
   initialValues,
-  formToDatabase,
+  formToDto,
   databaseToForm,
 } from "./validations";
 import type { TableRow } from "@/types/database";
@@ -62,7 +62,7 @@ export default function ObjectForm({
   return (
     <Form
       table="objects"
-      formToDatabase={formToDatabase}
+      formToDto={formToDto}
       databaseToForm={databaseToForm}
       mutation={upsertObject}
       render={ObjectFormContent}

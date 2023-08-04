@@ -6,6 +6,3 @@ export type ViewRow<T extends keyof Database['public']['Views']> = Database['pub
 
 export type InsertDto<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Insert'];
 export type UpdateDto<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Update'];
-
-// Remove auto-generated fields from type (for yup validation)
-export type ValidationDto<T> = Omit<T, "created_at" | "id">;
