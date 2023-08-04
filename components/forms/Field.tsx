@@ -103,6 +103,7 @@ const Field = ({
   return (
     <Wrapper name={name} label={label} error={error}>
       <input
+        type={type}
         className={clsx("form-control", invalid && "is-invalid")}
         placeholder={label}
         id={name}
