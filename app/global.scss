@@ -58,8 +58,10 @@ $card-border-radius: 0;
 /* Custom SCSS */
 
 // Navbar
+.footer-brand,
 .navbar-brand {
   font-family: $headings-font-family;
+  font-weight: 600;
 }
 
 // Bootstrap Icons

@@ -7,9 +7,7 @@ export default async function Footer({ session }: { session: Session | null }) {
   return (
     <footer className="bg-light py-3 mt-5 text-center fs-6">
       <div className="container-fluid">
-        <p>
-          <strong>{process.env.NEXT_PUBLIC_DATABASE_NAME}</strong>
-        </p>
+        <p className="footer-brand">{process.env.NEXT_PUBLIC_DATABASE_NAME}</p>
         <p className="mb-0">
           {session?.user && (
             <small>
