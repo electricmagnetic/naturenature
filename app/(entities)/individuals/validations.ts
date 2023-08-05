@@ -11,6 +11,7 @@ export const validate: yup.ObjectSchema<IndividualDto> = yup.object({
   id: yup.mixed(),
   created_at: yup.mixed(),
   name: yup.string().required(),
+  reference: yup.string(),
 });
 
 // Transformations

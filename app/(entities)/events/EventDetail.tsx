@@ -37,6 +37,7 @@ export default async function EventDetail({
           <Properties.Item name="Visibility">
             <PublicPrivate>{event.is_public}</PublicPrivate>
           </Properties.Item>
+          <Properties.Item name="Reference">{event.reference}</Properties.Item>
         </Properties>
       </Section>
       {records && (

@@ -12,6 +12,9 @@ export default async function IndividualDetail({
       <Section isPrimary>
         <Properties>
           <Properties.Item name="Name">{individual.name}</Properties.Item>
+          <Properties.Item name="Reference">
+            {individual.reference}
+          </Properties.Item>
         </Properties>
       </Section>
     </>
