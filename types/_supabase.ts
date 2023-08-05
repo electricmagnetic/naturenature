@@ -43,6 +43,7 @@ export interface Database {
           id: string
           is_public: boolean
           place: string | null
+          reference: number | null
           source: string | null
           status: string | null
         }
@@ -55,6 +56,7 @@ export interface Database {
           id?: string
           is_public?: boolean
           place?: string | null
+          reference?: number | null
           source?: string | null
           status?: string | null
         }
@@ -67,6 +69,7 @@ export interface Database {
           id?: string
           is_public?: boolean
           place?: string | null
+          reference?: number | null
           source?: string | null
           status?: string | null
         }
@@ -96,16 +99,19 @@ export interface Database {
           created_at: string | null
           id: string
           name: string | null
+          reference: string | null
         }
         Insert: {
           created_at?: string | null
           id?: string
           name?: string | null
+          reference?: string | null
         }
         Update: {
           created_at?: string | null
           id?: string
           name?: string | null
+          reference?: string | null
         }
         Relationships: []
       }
