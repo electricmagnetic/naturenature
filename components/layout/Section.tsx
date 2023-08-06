@@ -8,12 +8,13 @@ export default function Section({
 }: PropsWithChildren<{ title?: string; isPrimary?: boolean }>) {
   return (
     <section
-      className={clsx(`card mb-3`, isPrimary && "border-primary-subtle")}
+      className={clsx(
+        `mb-3 border p-3 bg-white shadow-sm`,
+        isPrimary && "border-primary-subtle",
+      )}
     >
-      <div className="card-body">
-        {title && <h2 className="card-title">{title}</h2>}
-        {children}
-      </div>
+      {title && <h2 className="text-uppercase fs-6 fw-bold">{title}</h2>}
+      {children}
     </section>
   );
 }

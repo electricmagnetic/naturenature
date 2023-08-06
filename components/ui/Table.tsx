@@ -4,9 +4,7 @@ const TableHead = ({ children }: PropsWithChildren) => (
   <thead>{children}</thead>
 );
 const TableHeading = ({ children }: PropsWithChildren) => (
-  <th scope="col" className="text-uppercase">
-    {children}
-  </th>
+  <th scope="col">{children}</th>
 );
 const TableBody = ({ children }: PropsWithChildren) => (
   <tbody>{children}</tbody>

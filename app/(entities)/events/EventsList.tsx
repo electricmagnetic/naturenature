@@ -5,6 +5,7 @@ import Table from "@/components/ui/Table";
 import DateTime from "@/components/ui/DateTime";
 import Lookup from "@/components/dictionary/Lookup";
 import PublicPrivate from "@/components/ui/PublicPrivate";
+import Section from "@/components/layout/Section";
 import type { TableRow } from "@/types/database";
 
 export default function EventsList({
@@ -13,7 +14,7 @@ export default function EventsList({
   events: TableRow<"events">[];
 }) {
   return (
-    <>
+    <Section>
       <Table>
         <Table.Head>
           <Table.Row>
@@ -46,6 +47,6 @@ export default function EventsList({
           ))}
         </Table.Body>
       </Table>
-    </>
+    </Section>
   );
 }
