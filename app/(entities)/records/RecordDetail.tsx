@@ -5,11 +5,7 @@ import type { CompleteRecord } from "./types";
 import Protocol from "./protocols/Protocol";
 import Lookup from "@/components/dictionary/Lookup";
 
-export default async function RecordDetail({
-  record,
-}: {
-  record: CompleteRecord;
-}) {
+export default function RecordDetail({ record }: { record: CompleteRecord }) {
   return (
     <>
       <Section isPrimary>

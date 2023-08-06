@@ -5,7 +5,7 @@ import Lookup from "@/components/dictionary/Lookup";
 import Table from "@/components/ui/Table";
 import type { TableRow } from "@/types/database";
 
-export default async function ObjectsList({
+export default function ObjectsList({
   objects,
 }: {
   objects: TableRow<"objects">[];

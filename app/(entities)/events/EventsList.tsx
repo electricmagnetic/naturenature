@@ -7,7 +7,7 @@ import Lookup from "@/components/dictionary/Lookup";
 import PublicPrivate from "@/components/ui/PublicPrivate";
 import type { TableRow } from "@/types/database";
 
-export default async function EventsList({
+export default function EventsList({
   events,
 }: {
   events: TableRow<"events">[];

@@ -16,7 +16,7 @@ const Map = dynamic(() => import("@/components/geospatial/Map"), {
   ssr: false,
 });
 
-export default async function EventDetail({
+export default function EventDetail({
   event,
   records,
 }: {

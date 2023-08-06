@@ -11,11 +11,7 @@ const Map = dynamic(() => import("@/components/geospatial/Map"), {
   ssr: false,
 });
 
-export default async function PlaceDetail({
-  place,
-}: {
-  place: TableRow<"places">;
-}) {
+export default function PlaceDetail({ place }: { place: TableRow<"places"> }) {
   return (
     <>
       <Section isPrimary>

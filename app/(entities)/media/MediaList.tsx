@@ -1,11 +1,7 @@
 import Table from "@/components/ui/Table";
 import type { TableRow } from "@/types/database";
 
-export default async function MediaList({
-  media,
-}: {
-  media: TableRow<"media">[];
-}) {
+export default function MediaList({ media }: { media: TableRow<"media">[] }) {
   return (
     <Table>
       <Table.Head>

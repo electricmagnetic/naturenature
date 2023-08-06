@@ -2,7 +2,7 @@ import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
 import type { TableRow } from "@/types/database";
 
-export default async function PersonDetail({
+export default function PersonDetail({
   person,
 }: {
   person: TableRow<"people">;

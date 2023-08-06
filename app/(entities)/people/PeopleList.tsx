@@ -4,7 +4,7 @@ import ActionButton from "@/components/ui/ActionButton";
 import Table from "@/components/ui/Table";
 import type { TableRow } from "@/types/database";
 
-export default async function PeopleList({
+export default function PeopleList({
   people,
 }: {
   people: TableRow<"people">[];

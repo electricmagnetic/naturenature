@@ -3,7 +3,7 @@ import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
 import type { TableRow } from "@/types/database";
 
-export default async function ObjectDetail({
+export default function ObjectDetail({
   object,
 }: {
   object: TableRow<"objects">;
