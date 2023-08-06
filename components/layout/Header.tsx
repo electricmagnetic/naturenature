@@ -71,7 +71,7 @@ const Header = ({
   children,
 }: PropsWithChildren<{ title: string; iconName?: string }>) => {
   return (
-    <div className="border-top border-bottom py-2 bg-light-subtle mb-3">
+    <div className="border-top border-bottom p-2 bg-light-subtle mb-3">
       <div className="row align-items-center justify-content-between">
         <div className="col-md-auto">
           <h1 className="h4 my-1">

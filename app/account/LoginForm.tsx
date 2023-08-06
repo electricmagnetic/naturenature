@@ -69,7 +69,7 @@ export default function LoginForm() {
   };
 
   return (
-    <main className="container">
+    <main className="container my-5">
       <div className="row align-items-center justify-content-center">
         <div className="col-sm-8 col-md-6 col-lg-5 col-xl-4">
           <div className="card">
