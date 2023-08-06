@@ -16,10 +16,11 @@ export const validate: yup.ObjectSchema<PersonDto> = yup.object({
 
 // Transformations
 export const formToDto = (personForm: PersonDto): PersonDto => {
-  return Object.assign({}, personForm, { user: !personForm.user && null });
+  return Object.assign({}, personForm, { user: personForm.user || null });
 };
-export const databaseToForm = (person: Person): PersonDto =>
-  Object.assign(person);
+export const databaseToForm = (person: Person): PersonDto => {
+  return Object.assign({}, person, { user: person.user || "" });
+};
 
 // Initial values
 export const initialValues: PersonDto = {
