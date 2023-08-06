@@ -5,21 +5,28 @@ $nature-orange-dark: #cc4b05;
 
 $nature-green: #314023;
 
-$brown-light: hsl(42, 37%, 80%);
+$brown-light: #dfd4b9;
 $brown-lighter: #f7f4ee;
+$brown-lightest: #f9f8f7;
+
+$black-almost: #212529;
 
 /* Variable overrides */
 
 // Colours
-$body-color: #212529;
+$body-bg: $brown-lightest;
+$body-color: $black-almost;
 
 $primary: $nature-orange-dark;
 $secondary: $nature-green;
 $light: $brown-lighter;
-$light-bg-subtle: mix($light, $white);
+$light-bg-subtle: $brown-lightest;
 
 $border-color: $brown-light;
 $table-striped-bg: $brown-lighter;
+$input-bg: $white;
+$card-bg: $white;
+$table-bg: $white;
 
 // Fonts
 $font-family-base:
@@ -39,6 +46,13 @@ $font-family-base:
   "Noto Color Emoji";
 $headings-font-family: var(--font-archivo), $font-family-base;
 $headings-font-weight: 600;
+
+$font-size-base: 1rem;
+
+$h1-font-size: $font-size-base * 1.6;
+$h2-font-size: $font-size-base * 1.4;
+$h3-font-size: $font-size-base * 1.2;
+$h4-font-size: $font-size-base;
 
 // Sizing
 $input-btn-padding-y: 0.3rem;

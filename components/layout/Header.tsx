@@ -71,10 +71,10 @@ const Header = ({
   children,
 }: PropsWithChildren<{ title: string; iconName?: string }>) => {
   return (
-    <div className="border-top border-bottom p-2 bg-light-subtle mb-3">
+    <div className="mb-3">
       <div className="row align-items-center justify-content-between">
         <div className="col-md-auto">
-          <h1 className="h4 my-1">
+          <h1 className="my-1">
             {iconName && <Icon iconName={iconName} />}
             {title}
           </h1>

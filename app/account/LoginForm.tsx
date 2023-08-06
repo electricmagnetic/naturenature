@@ -74,7 +74,7 @@ export default function LoginForm() {
         <div className="col-sm-8 col-md-6 col-lg-5 col-xl-4">
           <div className="card">
             <div className="card-body">
-              <h1 className="card-title h3">Login</h1>
+              <h1 className="card-title">Login</h1>
               <p>to {process.env.NEXT_PUBLIC_DATABASE_NAME}</p>
               {status && (
                 <Message className="mb-3" isError={isError}>

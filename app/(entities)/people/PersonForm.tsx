@@ -14,7 +14,7 @@ import type { TableRow } from "@/types/database";
 const PersonFormContent = () => {
   return (
     <>
-      <Form.Fieldset title="Basic details">
+      <Form.Fieldset title="Basic details" isPrimary>
         <Field.Input type="text" label="Name" name="name" />
       </Form.Fieldset>
       <Form.Fieldset title="Advanced details">

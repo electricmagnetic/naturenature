@@ -7,7 +7,7 @@ export default function Card({
   return (
     <div className="card">
       <div className="card-body">
-        {title && <h3 className="card-title h5 text-uppercase">{title}</h3>}
+        {title && <h3 className="card-title text-uppercase">{title}</h3>}
         {children}
       </div>
     </div>

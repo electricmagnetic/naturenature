@@ -27,7 +27,7 @@ const ObjectFormContent = () => {
 
   return (
     <>
-      <Form.Fieldset title="Object class/type">
+      <Form.Fieldset title="Object class/type" isPrimary>
         <div className="row">
           <div className="col-sm-6">
             <Field.Select

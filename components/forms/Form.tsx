@@ -1,11 +1,8 @@
 "use client";
 
 import { PropsWithChildren, useCallback, useEffect, useMemo } from "react";
-import {
-  DefaultValues,
-  FormProvider,
-  useForm,
-} from "react-hook-form";
+import clsx from "clsx";
+import { DefaultValues, FormProvider, useForm } from "react-hook-form";
 import { ObjectSchema } from "yup";
 import { useRouter } from "next/navigation";
 import type { PostgrestError } from "@supabase/supabase-js";
@@ -26,9 +23,15 @@ const FormMessage = ({
 
 const FormFieldset = ({
   title,
+  isPrimary = false,
   children,
-}: PropsWithChildren<{ title?: string }>) => (
-  <fieldset className="border pt-3 px-3 mb-3">
+}: PropsWithChildren<{ title?: string; isPrimary?: boolean }>) => (
+  <fieldset
+    className={clsx(
+      "border pt-3 px-3 mb-3 bg-white",
+      isPrimary && "border-primary-subtle",
+    )}
+  >
     {title && <legend className="text-uppercase fs-6 fw-bold">{title}</legend>}
     {children}
   </fieldset>

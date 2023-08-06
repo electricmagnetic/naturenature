@@ -17,31 +17,18 @@ const PoweredBy = () => (
   </p>
 );
 
-const FooterAnonymous = () => (
-  <footer className="py-3 mt-5 text-center fs-6">
-    <Brand />
-    <PoweredBy />
-  </footer>
-);
-
-const FooterAuthenticated = ({ session }: { session: Session }) => (
-  <footer className="bg-light py-3 mt-5 text-center fs-6">
-    <Brand />
-    <p className="mb-0 mt-3">
-      {session?.user && (
-        <small>
-          Logged in as <Link href="/account">{session.user.email}</Link>
-        </small>
-      )}
-    </p>
-    <PoweredBy />
-  </footer>
-);
-
 export default async function Footer({ session }: { session: Session | null }) {
-  return session ? (
-    <FooterAuthenticated session={session} />
-  ) : (
-    <FooterAnonymous />
+  return (
+    <footer className="py-3 mt-5 text-center fs-6">
+      <Brand />
+      {session?.user && (
+        <p className="mb-0 mt-3">
+          <small>
+            Logged in as <Link href="/account">{session.user.email}</Link>
+          </small>
+        </p>
+      )}
+      <PoweredBy />
+    </footer>
   );
 }
