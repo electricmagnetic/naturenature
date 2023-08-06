@@ -38,7 +38,7 @@ export default function FieldCombobox({
   entity: string;
 }) {
   const {
-    field,
+    field: { onChange, value, ...fieldOthers },
     fieldState: { invalid, error },
   } = useController({ name });
 
@@ -53,14 +53,18 @@ export default function FieldCombobox({
     highlightedIndex,
     getItemProps,
     selectedItem,
-  } = useCombobox({
+  } = useCombobox<Place>({
+    items,
     onInputValueChange({ inputValue }) {
       setItems(places.filter(getPlacesFilter(inputValue)));
     },
-    items,
+    onSelectedItemChange({ selectedItem }) {
+      onChange(selectedItem?.id);
+    },
     itemToString(item) {
       return item ? item.name : "";
     },
+    initialSelectedItem: value,
     id: name,
   });
 
@@ -92,7 +96,7 @@ export default function FieldCombobox({
         <input
           placeholder={label}
           className={clsx("form-control", invalid && "is-invalid")}
-          {...field}
+          // {...fieldOthers}
           {...others}
           {...getInputProps()}
         />
