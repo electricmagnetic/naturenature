@@ -26,6 +26,9 @@ dependencies:
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
+  downshift:
+    specifier: ^8.1.0
+    version: 8.1.0(react@18.2.0)
   eslint:
     specifier: 8.45.0
     version: 8.45.0
@@ -1831,6 +1834,10 @@ packages:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
     dev: false
 
+  /compute-scroll-into-view@2.0.4:
+    resolution: {integrity: sha512-y/ZA3BGnxoM/QHHQ2Uy49CLtnWPbt4tTPpEEZiEmmiWBFKjej7nEyH8Ryz54jH0MLXflUYA3Er2zUxPSJu5R+g==}
+    dev: false
+
   /concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: false
@@ -1998,6 +2005,19 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: false
+
+  /downshift@8.1.0(react@18.2.0):
+    resolution: {integrity: sha512-e9EBBLZvB2G73qT272x3hExttGCH1q1usbjirm+1aMcFXuzSWhgBdbnAHPlFI2rEq61cU/kDrEIMrY+ozMhvmg==}
+    peerDependencies:
+      react: '>=16.12.0'
+    dependencies:
+      '@babel/runtime': 7.22.6
+      compute-scroll-into-view: 2.0.4
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-is: 17.0.2
+      tslib: 2.6.1
     dev: false
 
   /earcut@2.2.4:
@@ -3439,6 +3459,10 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+    dev: false
+
+  /react-is@17.0.2:
+    resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
   /react-leaflet@4.2.1(leaflet@1.9.4)(react-dom@18.2.0)(react@18.2.0):
