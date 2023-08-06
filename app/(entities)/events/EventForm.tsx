@@ -10,7 +10,6 @@ import {
   databaseToForm,
 } from "./validations";
 import type { TableRow } from "@/types/database";
-import ComboBoxExample from "@/components/forms/Combobox";
 
 type Event = TableRow<"events">;
 
@@ -37,8 +36,7 @@ const EventFormContent = () => {
               name="event_place_geometry"
             />
             {/* event place metadata */}
-            {/* place */}
-            <ComboBoxExample />
+            <Field.Combobox label="Place" name="place" entity="place" />
           </Form.Fieldset>
         </div>
       </div>
