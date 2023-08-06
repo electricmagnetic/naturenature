@@ -66,11 +66,10 @@ export default function FieldCombobox({
 
   return (
     <div className="dropdown">
-      <Wrapper
+      <Wrapper.InputGroup
         name={name}
         label={label}
         error={error}
-        isInputGroup
         renderInputGroupLabel={() => (
           <label className="form-label" htmlFor={name} {...getLabelProps()}>
             {label}
@@ -117,7 +116,7 @@ export default function FieldCombobox({
               </li>
             ))}
         </ul>
-      </Wrapper>
+      </Wrapper.InputGroup>
     </div>
   );
 }
