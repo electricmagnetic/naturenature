@@ -65,7 +65,7 @@ export default function FieldCombobox({
     itemToString(item) {
       return item ? item.name : "";
     },
-    initialSelectedItem: value,
+    initialSelectedItem: places.filter((place) => place.id === value)[0],
     id: name,
   });
 

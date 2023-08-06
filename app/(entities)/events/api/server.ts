@@ -19,6 +19,22 @@ export const getEvent = async (id: string) => {
 
   const { data: event, error } = await supabase
     .from("events")
+    .select("*")
+    .eq("id", id)
+    .limit(1)
+    .single();
+
+  if (error) throw Error(error.message);
+  if (!event) return notFound();
+
+  return event;
+};
+
+export const getCompleteEvent = async (id: string) => {
+  const supabase = createServerSupabaseClient();
+
+  const { data: event, error } = await supabase
+    .from("events")
     .select("*, place(*)")
     .eq("id", id)
     .returns<CompleteEvent[]>()

@@ -16,7 +16,7 @@ export const validate: yup.ObjectSchema<EventDto> = yup.object({
   event_place_geometry: yup.mixed(), // TODO
   event_place_metadata: yup.mixed(), // TODO
   is_public: yup.bool(),
-  place: yup.string().uuid(), // TODO
+  place: yup.string(), // TODO UUID validation
   source: yup.string(), // TODO
   status: yup.string(), // TODO
   reference: yup.number().nullable(),
