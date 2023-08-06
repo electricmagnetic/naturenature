@@ -18,14 +18,20 @@ const EventFormContent = () => {
     <>
       <div className="row">
         <div className="col-md-6">
-          <Form.Fieldset title="Basic details">
+          <Form.Fieldset title="Basic details" isPrimary>
             <Field.Input
               type="datetime-local"
               label="Date/time"
               name="datetime"
             />
+          </Form.Fieldset>
+          <Form.Fieldset title="Status">
             {/* status */}
-            {/* is_public */}
+            <Field.Select
+              label="Source"
+              name="source"
+              dictionaryClass="source"
+            />
             <Field.Check label="Is public?" name="is_public" />
           </Form.Fieldset>
         </div>
@@ -42,7 +48,6 @@ const EventFormContent = () => {
         </div>
       </div>
       <Form.Fieldset title="Additional information">
-        <Field.Select label="Source" name="source" dictionaryClass="source" />
         <Field.Input type="text" label="Comments" name="comments" />
       </Form.Fieldset>
     </>
