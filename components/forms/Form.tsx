@@ -3,7 +3,6 @@
 import { PropsWithChildren, useCallback, useEffect, useMemo } from "react";
 import {
   DefaultValues,
-  FieldValues,
   FormProvider,
   useForm,
 } from "react-hook-form";
@@ -14,6 +13,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Message from "@/components/ui/Message";
 import Submit from "@/components/forms/Submit";
+
+const IS_PRODUCTION = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 
 const FormMessage = ({
   message,
@@ -98,13 +99,16 @@ function Form<Dto extends { id?: string }, Entity extends { id?: string }>({
 
   // Publish validation errors to the console
   useEffect(() => {
-    isSubmitted && console.info(errors);
+    isSubmitted && console.warn(errors);
   }, [errors, isSubmitted]);
 
   const formSubmitted = useCallback(
     async (values: Dto) => {
       const entity = formToDto(values);
       const { status, data, error } = await mutation(entity);
+
+      // To assist in debugging form flows
+      if (!IS_PRODUCTION) console.info(values);
 
       if (!error && data && status == 201) {
         router.refresh();
