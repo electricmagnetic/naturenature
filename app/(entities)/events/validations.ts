@@ -16,7 +16,7 @@ export const validate: yup.ObjectSchema<EventDto> = yup.object({
   event_place_geometry: yup.mixed(), // TODO
   event_place_metadata: yup.mixed(), // TODO
   is_public: yup.bool(),
-  place: yup.string(), // TODO
+  place: yup.string().uuid(), // TODO
   source: yup.string(), // TODO
   status: yup.string(), // TODO
   reference: yup.number().nullable(),
@@ -28,6 +28,7 @@ export const formToDto = (eventForm: EventDto): EventDto => {
     source: eventForm.source || null,
     status: eventForm.status || null,
     event_place_metadata: eventForm.event_place_metadata || null,
+    event_place_geometry: eventForm.event_place_geometry || null,
     place: eventForm.place || null,
   });
   // TODO
@@ -42,7 +43,9 @@ export const databaseToForm = (event: Event): EventDto => {
     status: event.status || "",
     event_place_metadata: event.event_place_metadata || "",
     place: event.place || "",
-    event_place_geometry: JSON.stringify(event.event_place_geometry),
+    event_place_geometry: event.event_place_geometry
+      ? JSON.stringify(event.event_place_geometry)
+      : "",
     datetime: LuxonDateTime.fromISO(event.datetime).toISO({
       includeOffset: false,
       suppressSeconds: true,
