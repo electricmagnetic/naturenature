@@ -48,7 +48,7 @@ const ObjectFormContent = () => {
         </div>
       </Form.Fieldset>
       <Form.Fieldset title="Basic details">
-        <Field type="text" label="Name" name="name" />
+        <Field.Input type="text" label="Name" name="name" />
       </Form.Fieldset>
     </>
   );

@@ -15,8 +15,8 @@ const IndividualFormContent = () => {
   return (
     <>
       <Form.Fieldset title="Basic details">
-        <Field type="text" label="Name" name="name" />
-        <Field type="text" label="Reference" name="reference" />
+        <Field.Input type="text" label="Name" name="name" />
+        <Field.Input type="text" label="Reference" name="reference" />
       </Form.Fieldset>
     </>
   );

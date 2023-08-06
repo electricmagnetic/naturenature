@@ -15,10 +15,10 @@ const PersonFormContent = () => {
   return (
     <>
       <Form.Fieldset title="Basic details">
-        <Field type="text" label="Name" name="name" />
+        <Field.Input type="text" label="Name" name="name" />
       </Form.Fieldset>
       <Form.Fieldset title="Advanced details">
-        <Field type="text" label="Associated user ID" name="user" />
+        <Field.Input type="text" label="Associated user ID" name="user" />
       </Form.Fieldset>
     </>
   );
