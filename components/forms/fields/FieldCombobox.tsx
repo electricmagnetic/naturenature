@@ -53,6 +53,7 @@ export default function FieldCombobox({
     highlightedIndex,
     getItemProps,
     selectedItem,
+    reset,
   } = useCombobox<Place>({
     items,
     onInputValueChange({ inputValue }) {
@@ -80,17 +81,29 @@ export default function FieldCombobox({
           </label>
         )}
         renderInputGroupButton={() => (
-          <button
-            aria-label="toggle menu"
-            className="btn btn-outline-primary"
-            type="button"
-            {...getToggleButtonProps()}
-          >
-            <Icon
-              iconName={isOpen ? "chevron-up" : "chevron-down"}
-              label={isOpen ? "Open" : "Closed"}
-            />
-          </button>
+          <>
+            <button
+              aria-label="toggle menu"
+              className="btn btn-outline-secondary"
+              type="button"
+              {...getToggleButtonProps()}
+            >
+              <Icon
+                iconName={isOpen ? "chevron-up" : "chevron-down"}
+                label={isOpen ? "Open" : "Closed"}
+              />
+            </button>
+            <button
+              aria-label=""
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={() => {
+                reset();
+              }}
+            >
+              <Icon iconName="x-circle" label="Reset" />
+            </button>
+          </>
         )}
       >
         <input
@@ -111,7 +124,7 @@ export default function FieldCombobox({
                   className={clsx(
                     "dropdown-item",
                     highlightedIndex === index && "active",
-                    selectedItem === item && "active",
+                    selectedItem === item && "disabled",
                   )}
                   type="button"
                 >
