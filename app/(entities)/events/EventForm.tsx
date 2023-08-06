@@ -26,6 +26,7 @@ const EventFormContent = () => {
             />
             {/* status */}
             {/* is_public */}
+            <Field.Check label="Is public?" name="is_public" />
           </Form.Fieldset>
         </div>
         <div className="col-md-6">

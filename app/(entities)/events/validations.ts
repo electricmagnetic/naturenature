@@ -17,18 +17,18 @@ export const validate: yup.ObjectSchema<EventDto> = yup.object({
   event_place_metadata: yup.mixed(), // TODO
   is_public: yup.bool(),
   place: yup.string(), // TODO
-  source: yup.string(), //TODO
-  status: yup.string(), //TODO
-  reference: yup.number(),
+  source: yup.string(), // TODO
+  status: yup.string(), // TODO
+  reference: yup.number().nullable(),
 });
 
 // Transformations
 export const formToDto = (eventForm: EventDto): EventDto => {
   const event = Object.assign({}, eventForm, {
-    source: !eventForm.source && null,
-    status: !eventForm.status && null,
-    event_place_metadata: !eventForm.event_place_metadata && null,
-    place: !eventForm.place && null,
+    source: eventForm.source || null,
+    status: eventForm.status || null,
+    event_place_metadata: eventForm.event_place_metadata || null,
+    place: eventForm.place || null,
   });
   // TODO
   console.log("formToDatabase");
@@ -38,10 +38,10 @@ export const formToDto = (eventForm: EventDto): EventDto => {
 
 export const databaseToForm = (event: Event): EventDto => {
   const eventForm = Object.assign({}, event, {
-    source: !event.source && "",
-    status: !event.status && "",
-    event_place_metadata: !event.event_place_metadata && "",
-    place: !event.place && "",
+    source: event.source || "",
+    status: event.status || "",
+    event_place_metadata: event.event_place_metadata || "",
+    place: event.place || "",
     event_place_geometry: JSON.stringify(event.event_place_geometry),
     datetime: LuxonDateTime.fromISO(event.datetime).toISO({
       includeOffset: false,
