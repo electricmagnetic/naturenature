@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getIndividuals } from "./api/queries";
+import { getIndividuals } from "./api/server";
 import IndividualsList from "./IndividualsList";
 
 export default async function Individuals() {

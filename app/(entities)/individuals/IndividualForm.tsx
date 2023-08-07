@@ -2,7 +2,7 @@
 
 import Form from "@/components/forms/Form";
 import Field from "@/components/forms/Field";
-import { upsertIndividual } from "./api/mutations";
+import { upsertIndividual } from "./api/client";
 import {
   validate,
   initialValues,

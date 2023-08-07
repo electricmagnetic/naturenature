@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getPlace } from "../api";
+import { getPlace } from "../api/server";
 import PlaceDetail from "../PlaceDetail";
 
 export default async function Place({

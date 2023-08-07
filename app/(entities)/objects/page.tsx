@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getObjects } from "./api/queries";
+import { getObjects } from "./api/server";
 import ObjectsList from "./ObjectsList";
 
 export default async function Objects() {

@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getPerson } from "../../api/queries";
+import { getPerson } from "../../api/server";
 import PersonForm from "../../PersonForm";
 
 export default async function EditPerson({

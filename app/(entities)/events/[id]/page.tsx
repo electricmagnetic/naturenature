@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
 
 import { getRecordsByEvent } from "@/app/(entities)/records/api";
-import { getEvent } from "../api/queries";
+import { getEvent } from "../api/server";
 import EventDetail from "../EventDetail";
 
 export default async function Event({

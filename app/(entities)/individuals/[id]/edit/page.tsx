@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getIndividual } from "../../api/queries";
+import { getIndividual } from "../../api/server";
 import IndividualForm from "../../IndividualForm";
 
 export default async function EditIndividual({
