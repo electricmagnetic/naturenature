@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getEvent } from "../../api/queries";
+import { getEvent } from "../../api/server";
 import EventForm from "../../EventForm";
 
 export default async function EditEvent({
