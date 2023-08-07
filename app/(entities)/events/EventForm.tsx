@@ -9,6 +9,7 @@ import {
   formToDto,
   databaseToForm,
 } from "./validations";
+import { searchPlaces } from "../places/api/client";
 import type { TableRow } from "@/types/database";
 
 type Event = TableRow<"events">;
@@ -43,7 +44,11 @@ const EventFormContent = () => {
               name="event_place_geometry"
             />
             {/* event place metadata */}
-            <Field.Combobox label="Place" name="place" entity="place" />
+            <Field.Combobox
+              label="Place"
+              name="place"
+              searchItems={searchPlaces}
+            />
           </Form.Fieldset>
         </div>
       </div>

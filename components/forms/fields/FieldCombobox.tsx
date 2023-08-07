@@ -1,18 +1,22 @@
 "use client";
 
+import { useCallback, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { useController } from "react-hook-form";
+import { useCombobox } from "downshift";
+import debounce from "lodash.debounce";
 
+import Icon from "@/components/ui/Icon";
 import Wrapper from "./Wrapper";
 import type FieldProperties from "./Properties";
-import { useCombobox } from "downshift";
-import Icon from "@/components/ui/Icon";
-import { useState } from "react";
+import type { PostgrestError } from "@supabase/supabase-js";
+
+const DEBOUNCE_MS = 1000;
+
+type Item = { id: string; name: string };
 
 /* TEMP */
-type Place = { id: string; name: string };
-
-const places: Place[] = [
+const places: Item[] = [
   {
     id: "6a4f66c9-8eb1-4684-9279-158198c0268f",
     name: "South Island Wildlife Hospital",
@@ -20,51 +24,74 @@ const places: Place[] = [
   { id: "cc6a4f89-46bb-4cff-8e6d-6aed74770b2a", name: "Deaths Corner" },
 ];
 
-function getPlacesFilter(inputValue: string | undefined) {
-  return function placesFilter(place: Place) {
-    return (
-      !inputValue || place.name.toLowerCase().includes(inputValue.toLowerCase())
-    );
-  };
-}
 /* TEMP END */
 
 export default function FieldCombobox({
   name,
   label,
-  entity,
+  searchItems,
   ...others
 }: FieldProperties & {
-  entity: string;
+  searchItems: (string?: string) => Promise<{
+    data: Item[] | null;
+    error: PostgrestError | null;
+  }>;
 }) {
   const {
     field: { onChange, value, ...fieldOthers },
     fieldState: { invalid, error },
   } = useController({ name });
 
-  const [items, setItems] = useState(places);
+  const [items, setItems] = useState<Item[]>([]);
+  const [search, setSearch] = useState<string>("");
+
+  // Fetch items from provided function
+  const getItems = useCallback(async () => {
+    const { data, error } = await searchItems(search);
+    if (error) throw Error(error.message);
+    if (data) setItems(data);
+  }, [searchItems, setItems, search]);
+
+  // Get items when search changes
+  useEffect(() => {
+    getItems();
+  }, [getItems, search]);
+
+  // Handle debouncing
+  const onInputValueChange = useMemo(
+    () =>
+      debounce(
+        ({ inputValue }: { inputValue?: string }) =>
+          setSearch(inputValue || ""),
+        DEBOUNCE_MS,
+      ),
+    [],
+  );
+
+  // Cancel any timeouts on unmount
+  useEffect(() => {
+    return () => {
+      onInputValueChange.cancel();
+    };
+  }, []);
 
   const {
     isOpen,
+    highlightedIndex,
+    selectedItem,
     getToggleButtonProps,
     getLabelProps,
     getMenuProps,
     getInputProps,
-    highlightedIndex,
     getItemProps,
-    selectedItem,
     reset,
-  } = useCombobox<Place>({
+  } = useCombobox<Item>({
     items,
-    onInputValueChange({ inputValue }) {
-      setItems(places.filter(getPlacesFilter(inputValue)));
-    },
-    onSelectedItemChange({ selectedItem }) {
+    onInputValueChange: onInputValueChange,
+    onSelectedItemChange: ({ selectedItem }) => {
       onChange(selectedItem?.id);
     },
-    itemToString(item) {
-      return item ? item.name : "";
-    },
+    itemToString: (item) => (item ? item.name : ""),
     initialSelectedItem: places.filter((place) => place.id === value)[0],
     id: name,
   });
@@ -109,7 +136,7 @@ export default function FieldCombobox({
         <input
           placeholder={label}
           className={clsx("form-control", invalid && "is-invalid")}
-          // {...fieldOthers}
+          {...fieldOthers}
           {...others}
           {...getInputProps()}
         />
