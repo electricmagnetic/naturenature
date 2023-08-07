@@ -16,7 +16,7 @@ export const validate: yup.ObjectSchema<EventDto> = yup.object({
   event_place_geometry: yup.mixed(), // TODO
   event_place_metadata: yup.mixed(), // TODO
   is_public: yup.bool(),
-  place: yup.string(), // TODO UUID validation
+  place_id: yup.string(), // TODO UUID validation
   source: yup.string(), // TODO
   status: yup.string(), // TODO
   reference: yup.number().nullable(),
@@ -29,7 +29,7 @@ export const formToDto = (eventForm: EventDto): EventDto => {
     status: eventForm.status || null,
     event_place_metadata: eventForm.event_place_metadata || null,
     event_place_geometry: eventForm.event_place_geometry || null,
-    place: eventForm.place || null,
+    place_id: eventForm.place_id || null,
   });
   // TODO
   console.log("formToDatabase");
@@ -42,7 +42,7 @@ export const databaseToForm = (event: Event): EventDto => {
     source: event.source || "",
     status: event.status || "",
     event_place_metadata: event.event_place_metadata || "",
-    place: event.place || "",
+    place_id: event.place_id || "",
     event_place_geometry: event.event_place_geometry
       ? JSON.stringify(event.event_place_geometry)
       : "",
@@ -65,7 +65,7 @@ export const initialValues: EventDto = {
   event_place_geometry: "",
   event_place_metadata: "",
   is_public: false,
-  place: "",
+  place_id: "",
   source: "",
   status: "",
 };

@@ -46,7 +46,7 @@ const EventFormContent = () => {
             {/* event place metadata */}
             <Field.Combobox
               label="Place"
-              name="place"
+              name="place_id"
               searchItems={searchPlaces}
             />
           </Form.Fieldset>
