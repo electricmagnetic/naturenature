@@ -28,7 +28,7 @@ const FormFieldset = ({
 }: PropsWithChildren<{ title?: string; isPrimary?: boolean }>) => (
   <fieldset
     className={clsx(
-      "border pt-3 px-3 mb-3 bg-white",
+      "border pt-3 px-3 mb-3 bg-white shadow-sm",
       isPrimary && "border-primary-subtle",
     )}
   >
