@@ -42,7 +42,7 @@ export interface Database {
           event_place_metadata: Json | null
           id: string
           is_public: boolean
-          place: string | null
+          place_id: string | null
           reference: number | null
           source: string | null
           status: string | null
@@ -55,7 +55,7 @@ export interface Database {
           event_place_metadata?: Json | null
           id?: string
           is_public?: boolean
-          place?: string | null
+          place_id?: string | null
           reference?: number | null
           source?: string | null
           status?: string | null
@@ -68,15 +68,15 @@ export interface Database {
           event_place_metadata?: Json | null
           id?: string
           is_public?: boolean
-          place?: string | null
+          place_id?: string | null
           reference?: number | null
           source?: string | null
           status?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "events_place_fkey"
-            columns: ["place"]
+            foreignKeyName: "events_place_id_fkey"
+            columns: ["place_id"]
             referencedRelation: "places"
             referencedColumns: ["id"]
           },
