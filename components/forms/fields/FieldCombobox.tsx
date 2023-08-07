@@ -8,56 +8,51 @@ import debounce from "lodash.debounce";
 
 import Icon from "@/components/ui/Icon";
 import Wrapper from "./Wrapper";
+import type { LookupItem } from "@/types/database";
 import type FieldProperties from "./Properties";
-import type { PostgrestError } from "@supabase/supabase-js";
 
 const DEBOUNCE_MS = 1000;
-
-type Item = { id: string; name: string };
-
-/* TEMP */
-const places: Item[] = [
-  {
-    id: "6a4f66c9-8eb1-4684-9279-158198c0268f",
-    name: "South Island Wildlife Hospital",
-  },
-  { id: "cc6a4f89-46bb-4cff-8e6d-6aed74770b2a", name: "Deaths Corner" },
-];
-
-/* TEMP END */
 
 export default function FieldCombobox({
   name,
   label,
-  searchItems,
+  lookupItems,
+  lookupItem,
   ...others
 }: FieldProperties & {
-  searchItems: (string?: string) => Promise<{
-    data: Item[] | null;
-    error: PostgrestError | null;
-  }>;
+  lookupItems: (string?: string) => Promise<LookupItem[]>;
+  lookupItem: (id?: string) => Promise<LookupItem | null>;
 }) {
   const {
-    field: { onChange, value, ...fieldOthers },
+    field: { onChange: fieldOnChange, value: fieldValue, ...fieldOthers },
     fieldState: { invalid, error },
   } = useController({ name });
 
-  const [items, setItems] = useState<Item[]>([]);
-  const [search, setSearch] = useState<string>("");
+  const [items, setItems] = useState<LookupItem[]>([]); // List of items in dropdown
+  const [search, setSearch] = useState<string>(""); // Search term (text)
+  const [selectedItem, setSelectedItem] = useState<LookupItem | null>(null); // selected item
 
-  // Fetch items from provided function
+  // Lookup items from provided function
   const getItems = useCallback(async () => {
-    const { data, error } = await searchItems(search);
-    if (error) throw Error(error.message);
-    if (data) setItems(data);
-  }, [searchItems, setItems, search]);
+    lookupItems(search).then((data) => setItems(data));
+  }, [lookupItems, setItems, search]);
 
   // Get items when search changes
   useEffect(() => {
     getItems();
   }, [getItems, search]);
 
-  // Handle debouncing
+  // Handle selected item change
+  const onSelectedItemChange = useMemo(
+    () =>
+      ({ selectedItem }: { selectedItem?: LookupItem | null }) => {
+        setSelectedItem(selectedItem || null);
+        fieldOnChange(selectedItem?.id);
+      },
+    [],
+  );
+
+  // Handle debouncing (to avoid spamming API)
   const onInputValueChange = useMemo(
     () =>
       debounce(
@@ -75,24 +70,21 @@ export default function FieldCombobox({
     };
   }, []);
 
-  const {
-    isOpen,
-    highlightedIndex,
-    selectedItem,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    getInputProps,
-    getItemProps,
-    reset,
-  } = useCombobox<Item>({
+  // TEMP (to resolve)
+  const foo = useCallback(() => {
+    lookupItem(fieldValue).then((data) => setSelectedItem(data));
+  }, [lookupItem, setSelectedItem, fieldValue]);
+
+  useEffect(() => {
+    foo();
+  }, [foo, fieldValue]);
+
+  const combobox = useCombobox<LookupItem>({
     items,
-    onInputValueChange: onInputValueChange,
-    onSelectedItemChange: ({ selectedItem }) => {
-      onChange(selectedItem?.id);
-    },
+    onInputValueChange,
+    onSelectedItemChange,
     itemToString: (item) => (item ? item.name : ""),
-    initialSelectedItem: places.filter((place) => place.id === value)[0],
+    selectedItem: selectedItem,
     id: name,
   });
 
@@ -103,7 +95,11 @@ export default function FieldCombobox({
         label={label}
         error={error}
         renderInputGroupLabel={() => (
-          <label className="form-label" htmlFor={name} {...getLabelProps()}>
+          <label
+            className="form-label"
+            htmlFor={name}
+            {...combobox.getLabelProps()}
+          >
             {label}
           </label>
         )}
@@ -113,19 +109,20 @@ export default function FieldCombobox({
               aria-label="toggle menu"
               className="btn btn-outline-secondary"
               type="button"
-              {...getToggleButtonProps()}
+              {...combobox.getToggleButtonProps()}
             >
-              <Icon
-                iconName={isOpen ? "chevron-up" : "chevron-down"}
-                label={isOpen ? "Open" : "Closed"}
-              />
+              {combobox.isOpen ? (
+                <Icon iconName="chevron-up" label="Open" />
+              ) : (
+                <Icon iconName="chevron-down" label="Closed" />
+              )}
             </button>
             <button
               aria-label=""
               className="btn btn-outline-secondary"
               type="button"
               onClick={() => {
-                reset();
+                combobox.reset();
               }}
             >
               <Icon iconName="x-circle" label="Reset" />
@@ -138,19 +135,25 @@ export default function FieldCombobox({
           className={clsx("form-control", invalid && "is-invalid")}
           {...fieldOthers}
           {...others}
-          {...getInputProps()}
+          {...combobox.getInputProps()}
         />
         <ul
-          className={clsx(`dropdown-menu`, isOpen && items.length && "show")}
-          {...getMenuProps()}
+          className={clsx(
+            `dropdown-menu`,
+            combobox.isOpen && items.length && "show",
+          )}
+          {...combobox.getMenuProps()}
         >
-          {isOpen &&
+          {combobox.isOpen &&
             items.map((item, index) => (
-              <li key={`${item.id}`} {...getItemProps({ item, index })}>
+              <li
+                key={`${item.id}`}
+                {...combobox.getItemProps({ item, index })}
+              >
                 <button
                   className={clsx(
                     "dropdown-item",
-                    highlightedIndex === index && "active",
+                    combobox.highlightedIndex === index && "active",
                     selectedItem === item && "disabled",
                   )}
                   type="button"

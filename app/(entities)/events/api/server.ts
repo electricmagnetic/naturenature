@@ -35,7 +35,7 @@ export const getCompleteEvent = async (id: string) => {
 
   const { data: event, error } = await supabase
     .from("events")
-    .select("*, place(*)")
+    .select("*, place:places(*)")
     .eq("id", id)
     .returns<CompleteEvent[]>()
     .limit(1)

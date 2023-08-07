@@ -9,7 +9,7 @@ import {
   formToDto,
   databaseToForm,
 } from "./validations";
-import { searchPlaces } from "../places/api/client";
+import { lookupPlaces, lookupPlace } from "../places/api/client";
 import type { TableRow } from "@/types/database";
 
 type Event = TableRow<"events">;
@@ -47,7 +47,8 @@ const EventFormContent = () => {
             <Field.Combobox
               label="Place"
               name="place_id"
-              searchItems={searchPlaces}
+              lookupItem={lookupPlace}
+              lookupItems={lookupPlaces}
             />
           </Form.Fieldset>
         </div>
