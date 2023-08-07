@@ -210,6 +210,7 @@ export interface Database {
       places: {
         Row: {
           created_at: string | null
+          fts: unknown | null
           geometry: unknown
           id: string
           metadata: Json | null
@@ -218,6 +219,7 @@ export interface Database {
         }
         Insert: {
           created_at?: string | null
+          fts?: unknown | null
           geometry: unknown
           id?: string
           metadata?: Json | null
@@ -226,6 +228,7 @@ export interface Database {
         }
         Update: {
           created_at?: string | null
+          fts?: unknown | null
           geometry?: unknown
           id?: string
           metadata?: Json | null
