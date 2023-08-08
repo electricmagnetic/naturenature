@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { useController } from "react-hook-form";
 import { useCombobox } from "downshift";
@@ -10,23 +10,30 @@ import Icon from "@/components/ui/Icon";
 import Wrapper from "./Wrapper";
 import type { LookupItem } from "@/types/database";
 import type FieldProperties from "./Properties";
+import { CompleteEntityContext } from "../CompleteEntityContext";
 
 const DEBOUNCE_MS = 1000;
 
+/**
+ * - lookupItems: an async function that returns a list of id/names based on a search term (or provides a default if no search term)
+ * - entityKey: the key necessary to lookup the object in the provided entity (for initial value)
+ */
 export default function FieldCombobox({
   name,
   label,
   lookupItems,
-  lookupItem,
+  entityKey,
   ...others
 }: FieldProperties & {
   lookupItems: (string?: string) => Promise<LookupItem[]>;
-  lookupItem: (id?: string) => Promise<LookupItem | null>;
+  entityKey: string;
 }) {
   const {
     field: { onChange: fieldOnChange, value: fieldValue, ...fieldOthers },
     fieldState: { invalid, error },
   } = useController({ name });
+
+  const completeEntity = useContext(CompleteEntityContext); // Get complete entity from provider (for default value)
 
   const [items, setItems] = useState<LookupItem[]>([]); // List of items in dropdown
   const [search, setSearch] = useState<string>(""); // Search term (text)
@@ -70,21 +77,12 @@ export default function FieldCombobox({
     };
   }, []);
 
-  // TEMP (to resolve)
-  const foo = useCallback(() => {
-    lookupItem(fieldValue).then((data) => setSelectedItem(data));
-  }, [lookupItem, setSelectedItem, fieldValue]);
-
-  useEffect(() => {
-    foo();
-  }, [foo, fieldValue]);
-
   const combobox = useCombobox<LookupItem>({
     items,
     onInputValueChange,
     onSelectedItemChange,
     itemToString: (item) => (item ? item.name : ""),
-    selectedItem: selectedItem,
+    initialSelectedItem: completeEntity ? completeEntity[entityKey] : null,
     id: name,
   });
 

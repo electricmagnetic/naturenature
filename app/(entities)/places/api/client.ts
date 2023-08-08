@@ -25,22 +25,3 @@ export const lookupPlaces = async (search?: string) => {
 
   return data;
 };
-
-export const lookupPlace = async (id?: string) => {
-  const supabase = createClientComponentClient<Database>();
-
-  if (!id) return null;
-
-  const { data, error } = await supabase
-    .from("places")
-    .select("id, name")
-    .eq("id", id)
-    .limit(1)
-    .returns<LookupItem>()
-    .single();
-
-  if (error) throw Error(error.message);
-  if (!data) return null;
-
-  return data;
-};
