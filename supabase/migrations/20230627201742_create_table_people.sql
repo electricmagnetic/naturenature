@@ -6,7 +6,6 @@ create table "public"."people" (
     "name" text not null
 );
 
-
 create unique index people_pkey on public.people using btree (id);
 
 alter table "public"."people" add constraint "people_pkey" primary key using index "people_pkey";
