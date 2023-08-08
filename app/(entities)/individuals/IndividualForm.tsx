@@ -9,7 +9,7 @@ import {
   formToDto,
   databaseToForm,
 } from "./validations";
-import type { TableRow } from "@/types/database";
+import type { Individual } from "./types";
 
 const IndividualFormContent = () => {
   return (
@@ -25,7 +25,7 @@ const IndividualFormContent = () => {
 export default function IndividualForm({
   individual,
 }: {
-  individual?: TableRow<"individuals">;
+  individual?: Individual;
 }) {
   return (
     <Form

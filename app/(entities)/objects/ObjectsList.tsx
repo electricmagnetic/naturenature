@@ -4,13 +4,9 @@ import ActionButton from "@/components/ui/ActionButton";
 import Lookup from "@/components/dictionary/Lookup";
 import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
-import type { TableRow } from "@/types/database";
+import type { Object } from "./types";
 
-export default function ObjectsList({
-  objects,
-}: {
-  objects: TableRow<"objects">[];
-}) {
+export default function ObjectsList({ objects }: { objects: Object[] }) {
   return (
     <Section>
       <Table>

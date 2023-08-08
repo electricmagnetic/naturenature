@@ -1,10 +1,6 @@
 import * as yup from "yup";
 
-import type { InsertDto, TableRow } from "@/types/database";
-
-// Types
-type Individual = TableRow<"individuals">;
-type IndividualDto = InsertDto<"individuals">;
+import type { Individual, IndividualDto } from "./types";
 
 // Validations
 export const validate: yup.ObjectSchema<IndividualDto> = yup.object({

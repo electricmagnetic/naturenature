@@ -3,12 +3,12 @@ import Link from "next/link";
 import ActionButton from "@/components/ui/ActionButton";
 import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
-import type { TableRow } from "@/types/database";
+import type { Individual } from "./types";
 
 export default function IndividualsList({
   individuals,
 }: {
-  individuals: TableRow<"individuals">[];
+  individuals: Individual[];
 }) {
   return (
     <Section>

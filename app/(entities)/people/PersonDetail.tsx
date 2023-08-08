@@ -1,12 +1,8 @@
 import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
-import type { TableRow } from "@/types/database";
+import type { Person } from "./types";
 
-export default function PersonDetail({
-  person,
-}: {
-  person: TableRow<"people">;
-}) {
+export default function PersonDetail({ person }: { person: Person }) {
   return (
     <>
       <Section isPrimary>

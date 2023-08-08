@@ -9,7 +9,7 @@ import {
   formToDto,
   databaseToForm,
 } from "./validations";
-import type { TableRow } from "@/types/database";
+import type { Person } from "./types";
 
 const PersonFormContent = () => {
   return (
@@ -24,11 +24,7 @@ const PersonFormContent = () => {
   );
 };
 
-export default function PersonForm({
-  person,
-}: {
-  person?: TableRow<"people">;
-}) {
+export default function PersonForm({ person }: { person?: Person }) {
   return (
     <Form
       table="people"

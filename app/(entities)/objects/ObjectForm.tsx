@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import Form from "@/components/forms/Form";
@@ -11,8 +12,7 @@ import {
   formToDto,
   databaseToForm,
 } from "./validations";
-import type { TableRow } from "@/types/database";
-import { useEffect } from "react";
+import type { Object } from "./types";
 
 const ObjectFormContent = () => {
   const methods = useFormContext();
@@ -54,11 +54,7 @@ const ObjectFormContent = () => {
   );
 };
 
-export default function ObjectForm({
-  object,
-}: {
-  object?: TableRow<"objects">;
-}) {
+export default function ObjectForm({ object }: { object?: Object }) {
   return (
     <Form
       table="objects"

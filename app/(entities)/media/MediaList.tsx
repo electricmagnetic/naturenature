@@ -1,8 +1,8 @@
 import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
-import type { TableRow } from "@/types/database";
+import { Media } from "./types";
 
-export default function MediaList({ media }: { media: TableRow<"media">[] }) {
+export default function MediaList({ media }: { media: Media[] }) {
   return (
     <Section>
       <Table>

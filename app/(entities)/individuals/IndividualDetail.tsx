@@ -1,11 +1,11 @@
 import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
-import type { TableRow } from "@/types/database";
+import type { Individual } from "./types";
 
 export default function IndividualDetail({
   individual,
 }: {
-  individual: TableRow<"individuals">;
+  individual: Individual;
 }) {
   return (
     <>
