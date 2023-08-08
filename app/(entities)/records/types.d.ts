@@ -12,7 +12,7 @@ export type RecordRelatedObjects = {
   individual: TableRow<"individuals"> | null;
   object: TableRow<"objects"> | null;
   media: TableRow<"media"> | null;
-}
+};
 
 export type CompleteRecord = Record & RecordRelatedObjects;
 

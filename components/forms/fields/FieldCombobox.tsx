@@ -56,7 +56,7 @@ export default function FieldCombobox({
         setSelectedItem(selectedItem || null);
         fieldOnChange(selectedItem?.id);
       },
-    [],
+    [fieldOnChange],
   );
 
   // Handle debouncing (to avoid spamming API)

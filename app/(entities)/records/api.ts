@@ -19,7 +19,9 @@ export const getRecord = async (id: string) => {
 
   const { data: record, error } = await supabase
     .from("records")
-    .select("*, event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)")
+    .select(
+      "*, event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)",
+    )
     .eq("id", id)
     .returns<CompleteRecord[]>()
     .limit(1)
@@ -36,7 +38,9 @@ export const getRecordsByEvent = async (id: string) => {
 
   const { data: record, error } = await supabase
     .from("records")
-    .select("*, event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)")
+    .select(
+      "*, event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)",
+    )
     .eq("event_id", id)
     .returns<CompleteRecord[]>();
 

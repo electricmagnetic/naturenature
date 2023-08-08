@@ -6,11 +6,7 @@ import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
 import type { Record } from "./types";
 
-export default function RecordsList({
-  records,
-}: {
-  records: Record[];
-}) {
+export default function RecordsList({ records }: { records: Record[] }) {
   return (
     <Section>
       <Table>
