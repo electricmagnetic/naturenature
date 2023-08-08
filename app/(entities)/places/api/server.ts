@@ -4,7 +4,9 @@ import createServerSupabaseClient from "@/components/helpers/createServerSupabas
 
 export const getPlaces = async () => {
   const supabase = createServerSupabaseClient();
-  const { data: places, error } = await supabase.from("places").select("*");
+  const { data: places, error } = await supabase
+    .from("places")
+    .select("id, name, type");
 
   if (error) throw Error(error.message);
   if (!places) return notFound();
