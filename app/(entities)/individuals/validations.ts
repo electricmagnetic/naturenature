@@ -23,4 +23,5 @@ export const databaseToForm = (individual: Individual): IndividualDto =>
 // Initial values
 export const initialValues: IndividualDto = {
   name: "",
+  reference: "",
 };

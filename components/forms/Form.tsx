@@ -30,7 +30,7 @@ const FormFieldset = ({
   <fieldset
     className={clsx(
       "border pt-3 px-3 mb-3 bg-white shadow-sm",
-      isPrimary && "border-primary-subtle",
+      isPrimary && "border-primary-subtle border-2",
     )}
   >
     {title && <legend className="text-uppercase fs-6 fw-bold">{title}</legend>}
@@ -51,7 +51,7 @@ const FormFooter = ({ children }: PropsWithChildren) => (
  * - initialValues: initial values for the form
  * - validator: Yup object schema for form validation
  * - entity: if provided, the Form will use this for the default values (instead of initialValues)
- * - completeEntity: if provided
+ * - relatedObjects: object that should be used with 'entity' to provided related objects for form controls like 'Combobox'
  */
 type FormProps<Dto, Entity, RelatedObjects> = {
   table: string;

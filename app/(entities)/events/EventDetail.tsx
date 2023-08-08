@@ -7,6 +7,7 @@ import Properties from "@/components/ui/Properties";
 import PublicPrivate from "@/components/ui/PublicPrivate";
 import DateTime from "@/components/ui/DateTime";
 import Protocol from "@/app/(entities)/records/protocols/Protocol";
+import Message from "@/components/ui/Message";
 
 import type { Json } from "@/types/_supabase";
 import type { CompleteRecord } from "@/app/(entities)/records/types";
@@ -25,7 +26,7 @@ export default function EventDetail({
 }) {
   return (
     <>
-      <Section isPrimary>
+      <Section title="Basic details" isPrimary>
         <Properties>
           <Properties.Item name="Date/Time">
             <DateTime datetime={event.datetime} />
@@ -40,29 +41,34 @@ export default function EventDetail({
           <Properties.Item name="Reference">{event.reference}</Properties.Item>
         </Properties>
       </Section>
-      {records && (
-        <Section title="Records">
+      <Section title="Records">
+        {records && records.length > 0 ? (
           <div className="row row-cols-md-3 g-3">
             {records.map((record) => (
               <Protocol record={record} className="col-md" key={record.id} />
             ))}
           </div>
-        </Section>
-      )}
-      {event.place && (
-        <Section title="Map (place)">
-          <Map scrollWheelZoom={false}>
-            <GeoJSON data={event.place.geometry as Json} />
-          </Map>
-        </Section>
-      )}
-      {event.event_place_geometry && (
-        <Section title="Map (event place)">
-          <Map scrollWheelZoom={false}>
-            <GeoJSON data={event.event_place_geometry as Json} />
-          </Map>
-        </Section>
-      )}
+        ) : (
+          <Message>No records associated with this event</Message>
+        )}
+      </Section>
+      <Section title="Place">
+        <>
+          {event.place && (
+            <Map scrollWheelZoom={false}>
+              <GeoJSON data={event.place.geometry as Json} />
+            </Map>
+          )}
+          {event.event_place_geometry && (
+            <Map scrollWheelZoom={false}>
+              <GeoJSON data={event.event_place_geometry as Json} />
+            </Map>
+          )}
+          {!event.place && !event.event_place_geometry && (
+            <Message>No place associated with this event</Message>
+          )}
+        </>
+      </Section>
     </>
   );
 }

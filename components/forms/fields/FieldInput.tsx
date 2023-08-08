@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useController } from "react-hook-form";
 
 import Wrapper from "./Wrapper";
+import type { HTMLInputTypeAttribute } from "react";
 import type FieldProperties from "./Properties";
 
 export default function FieldInput({
@@ -10,7 +11,7 @@ export default function FieldInput({
   label,
   ...others
 }: FieldProperties & {
-  type: string;
+  type: HTMLInputTypeAttribute;
 }) {
   const {
     field,
