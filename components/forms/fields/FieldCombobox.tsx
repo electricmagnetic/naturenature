@@ -3,7 +3,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { useController } from "react-hook-form";
-import { useCombobox } from "downshift";
+import { UseComboboxStateChangeTypes, useCombobox } from "downshift";
 import debounce from "lodash.debounce";
 
 import Icon from "@/components/ui/Icon";
@@ -49,6 +49,24 @@ export default function FieldCombobox({
     getItems();
   }, [getItems, search]);
 
+  // Handle debouncing (to avoid spamming API). Also only activates when input is changed (to avoid pinging API when item selected).
+  const onInputValueChange = useMemo(
+    () =>
+      debounce(
+        ({
+          inputValue,
+          type,
+        }: {
+          inputValue?: string;
+          type: UseComboboxStateChangeTypes;
+        }) =>
+          type === useCombobox.stateChangeTypes.InputChange &&
+          setSearch(inputValue || ""),
+        DEBOUNCE_MS,
+      ),
+    [],
+  );
+
   // Handle selected item change
   const onSelectedItemChange = useMemo(
     () =>
@@ -59,23 +77,12 @@ export default function FieldCombobox({
     [fieldOnChange],
   );
 
-  // Handle debouncing (to avoid spamming API)
-  const onInputValueChange = useMemo(
-    () =>
-      debounce(
-        ({ inputValue }: { inputValue?: string }) =>
-          setSearch(inputValue || ""),
-        DEBOUNCE_MS,
-      ),
-    [],
-  );
-
   // Cancel any timeouts on unmount
   useEffect(() => {
     return () => {
       onInputValueChange.cancel();
     };
-  }, []);
+  }, [onInputValueChange]);
 
   const combobox = useCombobox<LookupItem>({
     items,
