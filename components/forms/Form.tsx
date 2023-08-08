@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Message from "@/components/ui/Message";
 import Submit from "@/components/forms/Submit";
-import { CompleteEntityProvider } from "./CompleteEntityContext";
+import { RelatedObjectsProvider } from "./RelatedObjectsContext";
 
 const IS_PRODUCTION = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 
@@ -53,7 +53,7 @@ const FormFooter = ({ children }: PropsWithChildren) => (
  * - entity: if provided, the Form will use this for the default values (instead of initialValues)
  * - completeEntity: if provided
  */
-type FormProps<Dto, Entity, CompleteEntity> = {
+type FormProps<Dto, Entity, RelatedObjects> = {
   table: string;
   formToDto: (values: Dto) => Dto;
   databaseToForm: (values: Entity) => Dto;
@@ -66,13 +66,13 @@ type FormProps<Dto, Entity, CompleteEntity> = {
   validator: ObjectSchema<any>;
   initialValues: Dto;
   entity?: Entity;
-  completeEntity?: CompleteEntity;
+  relatedObjects?: RelatedObjects;
 };
 
 function Form<
   Dto extends { id?: string },
   Entity extends { id?: string },
-  CompleteEntity extends { id?: string },
+  RelatedObjects extends {},
 >({
   // TODO tidy "extends" section
   table,
@@ -83,8 +83,8 @@ function Form<
   initialValues,
   validator,
   entity,
-  completeEntity,
-}: FormProps<Dto, Entity, CompleteEntity>) {
+  relatedObjects,
+}: FormProps<Dto, Entity, RelatedObjects>) {
   const router = useRouter();
 
   const methods = useForm<Dto>({
@@ -139,7 +139,7 @@ function Form<
   );
 
   return (
-    <CompleteEntityProvider value={completeEntity}>
+    <RelatedObjectsProvider value={relatedObjects}>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(formSubmitted)}>
           <FormContent />
@@ -160,7 +160,7 @@ function Form<
           )}
         </form>
       </FormProvider>
-    </CompleteEntityProvider>
+    </RelatedObjectsProvider>
   );
 }
 

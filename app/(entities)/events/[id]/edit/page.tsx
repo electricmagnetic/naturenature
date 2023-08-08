@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getEvent, getCompleteEvent } from "../../api/server";
+import { getEvent, getEventRelatedObjects } from "../../api/server";
 import EventForm from "../../EventForm";
 
 export default async function EditEvent({
@@ -9,12 +9,12 @@ export default async function EditEvent({
   params: { id: string };
 }) {
   const event = await getEvent(id);
-  const completeEvent = await getCompleteEvent(id);
+  const eventRelatedObjects = await getEventRelatedObjects(id);
 
   return (
     <main>
       <Header.Entity entity="event" action={Header.Action.Edit} id={id} />
-      <EventForm event={event} completeEvent={completeEvent} />
+      <EventForm event={event} eventRelatedObjects={eventRelatedObjects} />
     </main>
   );
 }

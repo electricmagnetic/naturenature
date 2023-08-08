@@ -10,30 +10,30 @@ import Icon from "@/components/ui/Icon";
 import Wrapper from "./Wrapper";
 import type { LookupItem } from "@/types/database";
 import type FieldProperties from "./Properties";
-import { CompleteEntityContext } from "../CompleteEntityContext";
+import { RelatedObjectsContext } from "../RelatedObjectsContext";
 
 const DEBOUNCE_MS = 1000;
 
 /**
  * - lookupItems: an async function that returns a list of id/names based on a search term (or provides a default if no search term)
- * - entityKey: the key necessary to lookup the object in the provided entity (for initial value)
+ * - relatedObjectKey: the key necessary to lookup the object in the provided relatedObjects (from context)
  */
 export default function FieldCombobox({
   name,
   label,
   lookupItems,
-  entityKey,
+  relatedObjectKey,
   ...others
 }: FieldProperties & {
   lookupItems: (string?: string) => Promise<LookupItem[]>;
-  entityKey: string;
+  relatedObjectKey: string;
 }) {
   const {
     field: { onChange: fieldOnChange, value: fieldValue, ...fieldOthers },
     fieldState: { invalid, error },
   } = useController({ name });
 
-  const completeEntity = useContext(CompleteEntityContext); // Get complete entity from provider (for default value)
+  const relatedObjects = useContext(RelatedObjectsContext); // Get complete entity from provider (for default value)
 
   const [items, setItems] = useState<LookupItem[]>([]); // List of items in dropdown
   const [search, setSearch] = useState<string>(""); // Search term (text)
@@ -82,7 +82,9 @@ export default function FieldCombobox({
     onInputValueChange,
     onSelectedItemChange,
     itemToString: (item) => (item ? item.name : ""),
-    initialSelectedItem: completeEntity ? completeEntity[entityKey] : null,
+    initialSelectedItem: relatedObjects
+      ? relatedObjects[relatedObjectKey]
+      : null,
     id: name,
   });
 

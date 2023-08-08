@@ -10,10 +10,7 @@ import {
   databaseToForm,
 } from "./validations";
 import { lookupPlaces } from "../places/api/client";
-import type { CompleteEvent } from "./types";
-import type { TableRow } from "@/types/database";
-
-type Event = TableRow<"events">;
+import type { Event, EventRelatedObjects } from "./types";
 
 const EventFormContent = () => {
   return (
@@ -48,7 +45,7 @@ const EventFormContent = () => {
             <Field.Combobox
               label="Place"
               name="place_id"
-              entityKey="place"
+              relatedObjectKey="place"
               lookupItems={lookupPlaces}
             />
           </Form.Fieldset>
@@ -63,10 +60,10 @@ const EventFormContent = () => {
 
 export default function EventForm({
   event,
-  completeEvent,
+  eventRelatedObjects,
 }: {
   event?: Event;
-  completeEvent?: CompleteEvent;
+  eventRelatedObjects?: EventRelatedObjects;
 }) {
   return (
     <Form
@@ -76,7 +73,7 @@ export default function EventForm({
       mutation={upsertEvent}
       render={EventFormContent}
       entity={event}
-      completeEntity={completeEvent}
+      relatedObjects={eventRelatedObjects}
       initialValues={initialValues}
       validator={validate}
     />

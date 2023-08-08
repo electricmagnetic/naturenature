@@ -1,11 +1,7 @@
 import * as yup from "yup";
 import { DateTime as LuxonDateTime } from "luxon";
 
-import type { InsertDto, TableRow } from "@/types/database";
-
-// Types
-type Event = TableRow<"events">;
-type EventDto = InsertDto<"events">;
+import type { Event, EventDto } from "./types";
 
 // Validations
 export const validate: yup.ObjectSchema<EventDto> = yup.object({
