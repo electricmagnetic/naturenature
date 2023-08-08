@@ -4,12 +4,12 @@ import ActionButton from "@/components/ui/ActionButton";
 import Lookup from "@/components/dictionary/Lookup";
 import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
-import type { TableRow } from "@/types/database";
+import type { Place } from "./types";
 
 export default function PlacesList({
   places,
 }: {
-  places: TableRow<"places">[];
+  places: Partial<Place>[]; // TODO
 }) {
   return (
     <Section>
@@ -31,7 +31,7 @@ export default function PlacesList({
                 <Lookup>{place.type}</Lookup>
               </Table.Data>
               <Table.Data>
-                <ActionButton.View entity="place" id={place.id} />
+                {place.id && <ActionButton.View entity="place" id={place.id} />}
               </Table.Data>
             </Table.Row>
           ))}

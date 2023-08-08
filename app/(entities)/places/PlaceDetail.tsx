@@ -5,13 +5,13 @@ import GeoJSON from "@/components/geospatial/GeoJSON";
 import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
 import type { Json } from "@/types/_supabase";
-import type { TableRow } from "@/types/database";
+import type { Place } from "./types";
 
 const Map = dynamic(() => import("@/components/geospatial/Map"), {
   ssr: false,
 });
 
-export default function PlaceDetail({ place }: { place: TableRow<"places"> }) {
+export default function PlaceDetail({ place }: { place: Place }) {
   return (
     <>
       <Section isPrimary>
