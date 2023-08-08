@@ -6,13 +6,9 @@ import DateTime from "@/components/ui/DateTime";
 import Lookup from "@/components/dictionary/Lookup";
 import PublicPrivate from "@/components/ui/PublicPrivate";
 import Section from "@/components/layout/Section";
-import type { TableRow } from "@/types/database";
+import type { Event } from "./types";
 
-export default function EventsList({
-  events,
-}: {
-  events: TableRow<"events">[];
-}) {
+export default function EventsList({ events }: { events: Event[] }) {
   return (
     <Section>
       <Table>
@@ -42,6 +38,8 @@ export default function EventsList({
               </Table.Data>
               <Table.Data>
                 <ActionButton.View entity="event" id={event.id} />
+                <ActionButton.Edit entity="event" id={event.id} />
+                <ActionButton.Delete entity="event" id={event.id} />
               </Table.Data>
             </Table.Row>
           ))}

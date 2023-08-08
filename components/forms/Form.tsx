@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Message from "@/components/ui/Message";
 import Submit from "@/components/forms/Submit";
+import { RelatedObjectsProvider } from "./RelatedObjectsContext";
 
 const IS_PRODUCTION = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 
@@ -50,8 +51,9 @@ const FormFooter = ({ children }: PropsWithChildren) => (
  * - initialValues: initial values for the form
  * - validator: Yup object schema for form validation
  * - entity: if provided, the Form will use this for the default values (instead of initialValues)
+ * - completeEntity: if provided
  */
-type FormProps<Dto, Entity> = {
+type FormProps<Dto, Entity, RelatedObjects> = {
   table: string;
   formToDto: (values: Dto) => Dto;
   databaseToForm: (values: Entity) => Dto;
@@ -64,9 +66,14 @@ type FormProps<Dto, Entity> = {
   validator: ObjectSchema<any>;
   initialValues: Dto;
   entity?: Entity;
+  relatedObjects?: RelatedObjects;
 };
 
-function Form<Dto extends { id?: string }, Entity extends { id?: string }>({
+function Form<
+  Dto extends { id?: string },
+  Entity extends { id?: string },
+  RelatedObjects extends {},
+>({
   // TODO tidy "extends" section
   table,
   formToDto,
@@ -76,7 +83,8 @@ function Form<Dto extends { id?: string }, Entity extends { id?: string }>({
   initialValues,
   validator,
   entity,
-}: FormProps<Dto, Entity>) {
+  relatedObjects,
+}: FormProps<Dto, Entity, RelatedObjects>) {
   const router = useRouter();
 
   const methods = useForm<Dto>({
@@ -131,26 +139,28 @@ function Form<Dto extends { id?: string }, Entity extends { id?: string }>({
   );
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(formSubmitted)}>
-        <FormContent />
-        <Form.Footer>
-          <Submit
-            isLoading={
-              isLoading || isValidating || isSubmitting || isSubmitSuccessful
-            }
-          >
-            Submit
-          </Submit>
-        </Form.Footer>
-        {errors.root?.submissionError && (
-          <Form.Message
-            isError={true}
-            message={`${errors.root.submissionError.message}`}
-          />
-        )}
-      </form>
-    </FormProvider>
+    <RelatedObjectsProvider value={relatedObjects}>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(formSubmitted)}>
+          <FormContent />
+          <Form.Footer>
+            <Submit
+              isLoading={
+                isLoading || isValidating || isSubmitting || isSubmitSuccessful
+              }
+            >
+              Submit
+            </Submit>
+          </Form.Footer>
+          {errors.root?.submissionError && (
+            <Form.Message
+              isError={true}
+              message={`${errors.root.submissionError.message}`}
+            />
+          )}
+        </form>
+      </FormProvider>
+    </RelatedObjectsProvider>
   );
 }
 

@@ -4,12 +4,15 @@ import metadata from "@/app/(entities)/metadata";
 import Header from "@/components/layout/Header";
 import Message from "@/components/ui/Message";
 
+import EventForm from "@/app/(entities)/events/EventForm";
 import IndividualForm from "@/app/(entities)/individuals/IndividualForm";
 import ObjectForm from "@/app/(entities)/objects/ObjectForm";
 import PersonForm from "@/app/(entities)/people/PersonForm";
 
 const EntityForm = ({ entity }: { entity: string }) => {
   switch (entity) {
+    case "event":
+      return <EventForm />;
     case "individual":
       return <IndividualForm />;
     case "object":

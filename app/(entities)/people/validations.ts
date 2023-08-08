@@ -11,7 +11,7 @@ export const validate: yup.ObjectSchema<PersonDto> = yup.object({
   id: yup.mixed(),
   created_at: yup.mixed(),
   name: yup.string().required(),
-  user: yup.string(),
+  user: yup.string().uuid(),
 });
 
 // Transformations

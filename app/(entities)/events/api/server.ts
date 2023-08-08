@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 
-import type { CompleteEvent } from "../types";
+import type { CompleteEvent, EventRelatedObjects } from "../types";
 
 export const getEvents = async () => {
   const supabase = createServerSupabaseClient();
@@ -19,9 +19,42 @@ export const getEvent = async (id: string) => {
 
   const { data: event, error } = await supabase
     .from("events")
-    .select("*, place(*)")
+    .select("*")
+    .eq("id", id)
+    .limit(1)
+    .single();
+
+  if (error) throw Error(error.message);
+  if (!event) return notFound();
+
+  return event;
+};
+
+export const getCompleteEvent = async (id: string) => {
+  const supabase = createServerSupabaseClient();
+
+  const { data: event, error } = await supabase
+    .from("events")
+    .select("*, place:places(*)")
     .eq("id", id)
     .returns<CompleteEvent[]>()
+    .limit(1)
+    .single();
+
+  if (error) throw Error(error.message);
+  if (!event) return notFound();
+
+  return event;
+};
+
+export const getEventRelatedObjects = async (id: string) => {
+  const supabase = createServerSupabaseClient();
+
+  const { data: event, error } = await supabase
+    .from("events")
+    .select("place:places(*)")
+    .eq("id", id)
+    .returns<EventRelatedObjects[]>()
     .limit(1)
     .single();
 
