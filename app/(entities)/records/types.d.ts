@@ -1,14 +1,20 @@
 import type { FC } from "react";
-import type { TableRow } from "@/types/database";
+import type { InsertDto, TableRow } from "@/types/database";
+
+// Supabase types
+export type Record = TableRow<"records">;
+export type RecordDto = InsertDto<"records">;
 
 // Expanded definitions (when using related lookups)
-export type CompleteRecord = TableRow<"records"> & {
+export type RecordRelatedObjects = {
   event: TableRow<"events">;
   person: TableRow<"people"> | null;
   individual: TableRow<"individuals"> | null;
   object: TableRow<"objects"> | null;
   media: TableRow<"media"> | null;
-};
+}
+
+export type CompleteRecord = Record & RecordRelatedObjects;
 
 // Type for protocol components (responsible for rendering the different protocols)
 export type ProtocolComponent = {

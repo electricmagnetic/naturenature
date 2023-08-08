@@ -4,7 +4,9 @@ create table "public"."objects" (
     "id" uuid not null default gen_random_uuid(),
     "created_at" timestamp with time zone default now(),
     "class" text not null,
-    "type" text not null
+    "type" text not null,
+    "data" jsonb null,
+    "name" text
 );
 
 
@@ -29,15 +31,3 @@ alter table "public"."objects" validate constraint "objects_type_fkey";
 alter table "public"."objects" enable row level security;
 create policy "Authenticated users can select objects" on objects
 for select to authenticated using (true);
-
--- update records table to include link to object
-
-alter table "public"."records" add column "object" uuid;
-
-alter table "public"."records" add constraint "records_object_fkey" foreign key (
-    object
-) references objects (id) on delete restrict not valid;
-
-alter table "public"."records" validate constraint "records_object_fkey";
-
-create index idx_records_object on records (object);

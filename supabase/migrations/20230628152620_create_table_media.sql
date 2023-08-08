@@ -17,15 +17,3 @@ alter table "public"."media" add constraint "media_pkey" primary key using index
 alter table "public"."media" enable row level security;
 create policy "Authenticated users can select media" on media
 for select to authenticated using (true);
-
--- update records table to include link to media
-
-alter table "public"."records" add column "media" uuid;
-
-alter table "public"."records" add constraint "records_media_fkey" foreign key (
-    media
-) references media (id) on delete restrict not valid;
-
-alter table "public"."records" validate constraint "records_media_fkey";
-
-create index idx_records_media on records (media);

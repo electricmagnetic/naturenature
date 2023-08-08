@@ -11,19 +11,19 @@ export const validate: yup.ObjectSchema<PersonDto> = yup.object({
   id: yup.mixed(),
   created_at: yup.mixed(),
   name: yup.string().required(),
-  user: yup.string().uuid(),
+  user_id: yup.string().uuid(),
 });
 
 // Transformations
 export const formToDto = (personForm: PersonDto): PersonDto => {
-  return Object.assign({}, personForm, { user: personForm.user || null });
+  return Object.assign({}, personForm, { user: personForm.user_id || null });
 };
 export const databaseToForm = (person: Person): PersonDto => {
-  return Object.assign({}, person, { user: person.user || "" });
+  return Object.assign({}, person, { user: person.user_id || "" });
 };
 
 // Initial values
 export const initialValues: PersonDto = {
   name: "",
-  user: "",
+  user_id: "",
 };

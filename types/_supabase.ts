@@ -184,24 +184,24 @@ export interface Database {
           created_at: string | null
           id: string
           name: string
-          user: string | null
+          user_id: string | null
         }
         Insert: {
           created_at?: string | null
           id?: string
           name: string
-          user?: string | null
+          user_id?: string | null
         }
         Update: {
           created_at?: string | null
           id?: string
           name?: string
-          user?: string | null
+          user_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "people_user_fkey"
-            columns: ["user"]
+            foreignKeyName: "people_user_id_fkey"
+            columns: ["user_id"]
             referencedRelation: "users"
             referencedColumns: ["id"]
           }
@@ -249,12 +249,12 @@ export interface Database {
           action: string | null
           created_at: string | null
           data: Json | null
-          event: string
+          event_id: string | null
           id: string
-          individual: string | null
-          media: string | null
-          object: string | null
-          person: string | null
+          individual_id: string | null
+          media_id: string | null
+          object_id: string | null
+          person_id: string | null
           protocol: string
           type: string | null
         }
@@ -262,12 +262,12 @@ export interface Database {
           action?: string | null
           created_at?: string | null
           data?: Json | null
-          event: string
+          event_id?: string | null
           id?: string
-          individual?: string | null
-          media?: string | null
-          object?: string | null
-          person?: string | null
+          individual_id?: string | null
+          media_id?: string | null
+          object_id?: string | null
+          person_id?: string | null
           protocol: string
           type?: string | null
         }
@@ -275,12 +275,12 @@ export interface Database {
           action?: string | null
           created_at?: string | null
           data?: Json | null
-          event?: string
+          event_id?: string | null
           id?: string
-          individual?: string | null
-          media?: string | null
-          object?: string | null
-          person?: string | null
+          individual_id?: string | null
+          media_id?: string | null
+          object_id?: string | null
+          person_id?: string | null
           protocol?: string
           type?: string | null
         }
@@ -292,32 +292,32 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "records_event_fkey"
-            columns: ["event"]
+            foreignKeyName: "records_event_id_fkey"
+            columns: ["event_id"]
             referencedRelation: "events"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "records_individual_fkey"
-            columns: ["individual"]
+            foreignKeyName: "records_individual_id_fkey"
+            columns: ["individual_id"]
             referencedRelation: "individuals"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "records_media_fkey"
-            columns: ["media"]
+            foreignKeyName: "records_media_id_fkey"
+            columns: ["media_id"]
             referencedRelation: "media"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "records_object_fkey"
-            columns: ["object"]
+            foreignKeyName: "records_object_id_fkey"
+            columns: ["object_id"]
             referencedRelation: "objects"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "records_person_fkey"
-            columns: ["person"]
+            foreignKeyName: "records_person_id_fkey"
+            columns: ["person_id"]
             referencedRelation: "people"
             referencedColumns: ["id"]
           },

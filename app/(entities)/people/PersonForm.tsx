@@ -18,7 +18,7 @@ const PersonFormContent = () => {
         <Field.Input type="text" label="Name" name="name" />
       </Form.Fieldset>
       <Form.Fieldset title="Advanced details">
-        <Field.Input type="text" label="Associated user ID" name="user" />
+        <Field.Input type="text" label="Associated user ID" name="user_id" />
       </Form.Fieldset>
     </>
   );

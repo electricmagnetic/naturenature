@@ -4,12 +4,12 @@ import ActionButton from "@/components/ui/ActionButton";
 import Lookup from "@/components/dictionary/Lookup";
 import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
-import type { TableRow } from "@/types/database";
+import type { Record } from "./types";
 
 export default function RecordsList({
   records,
 }: {
-  records: TableRow<"records">[];
+  records: Record[];
 }) {
   return (
     <Section>
@@ -37,14 +37,14 @@ export default function RecordsList({
                 <Lookup>{record.type}</Lookup>
               </Table.Data>
               <Table.Data>
-                <Link href={`/events/${record.event}`}>
-                  Event: {record.event}
+                <Link href={`/events/${record.event_id}`}>
+                  Event: {record.event_id}
                 </Link>
               </Table.Data>
               <Table.Data>
-                {record.individual && (
-                  <Link href={`/individuals/${record.individual}`}>
-                    Individual: {record.individual}
+                {record.individual_id && (
+                  <Link href={`/individuals/${record.individual_id}`}>
+                    Individual: {record.individual_id}
                   </Link>
                 )}
               </Table.Data>

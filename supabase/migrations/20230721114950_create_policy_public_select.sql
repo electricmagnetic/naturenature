@@ -11,5 +11,5 @@ to anon
 using (exists (
     select
     from events
-    where ((events.id = records.event) and (events.is_public = true))
+    where ((events.id = records.event_id) and (events.is_public = true))
 ))

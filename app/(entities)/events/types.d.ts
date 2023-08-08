@@ -9,4 +9,4 @@ export type EventRelatedObjects = {
   place: TableRow<"places"> | null;
 };
 
-export type CompleteEvent = TableRow<"events"> & EventRelatedObjects;
+export type CompleteEvent = Event & EventRelatedObjects;

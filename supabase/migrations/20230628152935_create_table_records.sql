@@ -3,29 +3,25 @@
 create table "public"."records" (
     "id" uuid not null default gen_random_uuid(),
     "created_at" timestamp with time zone default now(),
-    "event" uuid not null,
+    "event_id" uuid not null,
     "protocol" text not null,
     "action" text null,
     "type" text null,
-    "individual" uuid null
+    "individual_id" uuid null,
+    "person_id" uuid null,
+    "object_id" uuid null,
+    "media_id" uuid null
 );
 
 create unique index records_pkey on public.records using btree (id);
 alter table "public"."records" add constraint "records_pkey" primary key using index "records_pkey";
 
 alter table "public"."records" add constraint "records_event_fkey" foreign key (
-    event
+    event_id
 ) references events (id) on delete restrict not valid;
 alter table "public"."records" validate constraint "records_event_fkey";
 
-create index idx_records_event on records (event);
-
-alter table "public"."records" add constraint "records_individual_fkey" foreign key (
-    individual
-) references individuals (id) on delete restrict not valid;
-alter table "public"."records" validate constraint "records_individual_fkey";
-
-create index idx_records_individual on records (individual);
+create index idx_records_event on records (event_id);
 
 -- add dictionary
 
@@ -50,16 +46,46 @@ alter table "public"."records" validate constraint "records_type_fkey";
 
 create index idx_records_type on records (type);
 
+-- individual
+
+alter table "public"."records" add constraint "records_individual_fkey" foreign key (
+    individual_id
+) references individuals (id) on delete restrict not valid;
+
+alter table "public"."records" validate constraint "records_individual_fkey";
+
+create index idx_records_individual on records (individual_id);
+
 -- person
 
-alter table "public"."records" add column "person" uuid null;
-
 alter table "public"."records" add constraint "records_person_fkey" foreign key (
-    person
+    person_id
 ) references people (id) on delete restrict not valid;
+
 alter table "public"."records" validate constraint "records_person_fkey";
 
-create index idx_records_person on records (person);
+create index idx_records_person on records (person_id);
+
+-- object
+
+alter table "public"."records" add constraint "records_object_fkey" foreign key (
+    object_id
+) references objects (id) on delete restrict not valid;
+
+alter table "public"."records" validate constraint "records_object_fkey";
+
+create index idx_records_object on records (object_id);
+
+-- media
+
+alter table "public"."records" add constraint "records_media_fkey" foreign key (
+    media_id
+) references media (id) on delete restrict not valid;
+
+alter table "public"."records" validate constraint "records_media_fkey";
+
+create index idx_records_media on records (media_id);
+
 
 -- data
 
