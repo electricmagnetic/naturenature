@@ -30,6 +30,7 @@ export const formToDto = (eventForm: EventDto): EventDto => {
     event_place_metadata: eventForm.event_place_metadata || null,
     event_place_geometry: eventForm.event_place_geometry || null,
     place_id: eventForm.place_id || null,
+    datetime: LuxonDateTime.fromISO(eventForm.datetime).toUTC().toISO(),
   });
   // TODO
   console.log("formToDatabase");
@@ -46,13 +47,12 @@ export const databaseToForm = (event: Event): EventDto => {
     event_place_geometry: event.event_place_geometry
       ? JSON.stringify(event.event_place_geometry)
       : "",
-    datetime: LuxonDateTime.fromISO(event.datetime).toISO({
+    datetime: LuxonDateTime.fromISO(event.datetime).toLocal().toISO({
       includeOffset: false,
       suppressSeconds: true,
       suppressMilliseconds: true,
     }),
   });
-  // TODO
   console.log("databaseToForm");
   console.log(eventForm);
   return eventForm;
