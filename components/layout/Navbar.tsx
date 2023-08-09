@@ -11,7 +11,7 @@ export default function Navbar({ session }: { session: Session | null }) {
       data-bs-theme="dark"
     >
       <div className="container-fluid">
-        <Link className="navbar-brand" href="/">
+        <Link className="navbar-brand brand" href="/">
           {process.env.NEXT_PUBLIC_DATABASE_NAME}
         </Link>
         {session?.user ? (

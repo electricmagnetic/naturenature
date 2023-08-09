@@ -4,7 +4,7 @@ import { Session } from "@supabase/auth-helpers-nextjs";
 const { name } = require("@/package.json");
 
 const Brand = () => (
-  <p className="footer-brand mb-0">{process.env.NEXT_PUBLIC_DATABASE_NAME}</p>
+  <p className="brand mb-0">{process.env.NEXT_PUBLIC_DATABASE_NAME}</p>
 );
 
 const PoweredBy = () => (
