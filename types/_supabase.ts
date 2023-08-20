@@ -249,7 +249,7 @@ export interface Database {
           action: string | null
           created_at: string | null
           data: Json | null
-          event_id: string | null
+          event_id: string
           id: string
           individual_id: string | null
           media_id: string | null
@@ -262,7 +262,7 @@ export interface Database {
           action?: string | null
           created_at?: string | null
           data?: Json | null
-          event_id?: string | null
+          event_id: string
           id?: string
           individual_id?: string | null
           media_id?: string | null
@@ -275,7 +275,7 @@ export interface Database {
           action?: string | null
           created_at?: string | null
           data?: Json | null
-          event_id?: string | null
+          event_id?: string
           id?: string
           individual_id?: string | null
           media_id?: string | null
