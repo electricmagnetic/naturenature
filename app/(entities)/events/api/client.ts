@@ -2,9 +2,9 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import revalidate from "@/components/helpers/revalidate";
 import type { Database } from "@/types/_supabase";
-import { InsertDto } from "@/types/database";
+import type { EventDto } from "../types";
 
-export const upsertEvent = async (entity: InsertDto<"events">) => {
+export const upsertEvent = async (entity: EventDto) => {
   const supabase = createClientComponentClient<Database>();
 
   const { status, data, error } = await supabase
