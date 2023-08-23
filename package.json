@@ -30,7 +30,6 @@
     "sass": "^1.66.1",
     "swr": "^2.2.1",
     "typescript": "5.1.6",
-    "yup": "^1.2.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {

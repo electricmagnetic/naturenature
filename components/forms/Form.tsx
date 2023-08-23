@@ -49,7 +49,7 @@ const FormFooter = ({ children }: PropsWithChildren) => (
  * - mutation: function for upserting the data
  * - render: JSX function for rendering the form
  * - initialValues: initial values for the form
- * - schema: Yup object schema for form validation
+ * - schema: Zod object schema for form validation
  * - entity: if provided, the Form will use this for the default values (instead of initialValues)
  * - relatedObjects: object that should be used with 'entity' to provided related objects for form controls like 'Combobox'
  */
