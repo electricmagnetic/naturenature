@@ -19,7 +19,7 @@ export default function FieldSelect({
   dictionaryType?: string;
 }) {
   const {
-    field,
+    field: { value, onChange, ...fieldOthers },
     fieldState: { invalid, error },
   } = useController({ name });
 
@@ -49,7 +49,9 @@ export default function FieldSelect({
     <Wrapper name={name} label={label} error={error}>
       <select
         className={clsx("form-select", invalid && "is-invalid")}
-        {...field}
+        value={value || ""}
+        onChange={(event) => onChange(event.target.value || null)}
+        {...fieldOthers}
         {...others}
         disabled={disabled}
       >
