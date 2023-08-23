@@ -12,12 +12,11 @@ export const PersonFormSchema = BaseFormSchema.extend({
 export type PersonFormInput = z.infer<typeof PersonFormSchema>;
 
 // Transformations
-export const formToDto = (personForm: PersonFormInput): PersonDto => {
-  return Object.assign({}, personForm, { user: personForm.user_id || null });
-};
-export const entityToForm = (person: Person): PersonFormInput => {
-  return Object.assign({}, person, { user: person.user_id || "" });
-};
+export const formToDto = (personForm: PersonFormInput): PersonDto =>
+  Object.assign(personForm);
+
+export const entityToForm = (person: Person): PersonFormInput =>
+  Object.assign(person);
 
 // Initial values
 export const initialValues: PersonFormInput = {
