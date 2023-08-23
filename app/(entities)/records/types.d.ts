@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { InsertDto, TableRow } from "@/types/database";
+import type { UpdateDto, TableRow, InsertDto } from "@/types/database";
 
 // Supabase types
 export type Record = TableRow<"records">;

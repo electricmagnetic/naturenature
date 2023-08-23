@@ -1,12 +1,11 @@
 import { z } from "zod";
 import { DateTime as LuxonDateTime } from "luxon";
 
+import { BaseFormSchema } from "@/components/forms/helpers";
 import type { Event, EventDto } from "./types";
 
 // Validations
-export const EventFormSchema = z.object({
-  id: z.string().optional(), // Zod strips out unknown keys by default
-
+export const EventFormSchema = BaseFormSchema.extend({
   comments: z.string().nullable(),
   datetime: z.string(), //TODO z.string().datetime(),
   event_place_geometry: z.string().nullable(), // geometry validated by database

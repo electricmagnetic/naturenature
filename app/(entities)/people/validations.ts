@@ -1,24 +1,26 @@
-import * as yup from "yup";
+import { z } from "zod";
+
+import { BaseFormSchema } from "@/components/forms/helpers";
 import type { Person, PersonDto } from "./types";
 
 // Validations
-export const validate: yup.ObjectSchema<PersonDto> = yup.object({
-  id: yup.mixed(),
-  created_at: yup.mixed(),
-  name: yup.string().required(),
-  user_id: yup.string().uuid(),
+export const PersonFormSchema = BaseFormSchema.extend({
+  name: z.string(),
+  user_id: z.string().uuid().nullable(),
 });
 
+export type PersonFormInput = z.infer<typeof PersonFormSchema>;
+
 // Transformations
-export const formToDto = (personForm: PersonDto): PersonDto => {
+export const formToDto = (personForm: PersonFormInput): PersonDto => {
   return Object.assign({}, personForm, { user: personForm.user_id || null });
 };
-export const databaseToForm = (person: Person): PersonDto => {
+export const entityToForm = (person: Person): PersonFormInput => {
   return Object.assign({}, person, { user: person.user_id || "" });
 };
 
 // Initial values
-export const initialValues: PersonDto = {
+export const initialValues: PersonFormInput = {
   name: "",
-  user_id: "",
+  user_id: null,
 };

@@ -1,23 +1,24 @@
-import * as yup from "yup";
+import { z } from "zod";
 
+import { BaseFormSchema } from "@/components/forms/helpers";
 import type { Individual, IndividualDto } from "./types";
 
 // Validations
-export const validate: yup.ObjectSchema<IndividualDto> = yup.object({
-  id: yup.mixed(),
-  created_at: yup.mixed(),
-  name: yup.string().required(),
-  reference: yup.string(),
+export const IndividualFormSchema = BaseFormSchema.extend({
+  name: z.string(),
+  reference: z.string().nullable(),
 });
 
+export type IndividualFormInput = z.infer<typeof IndividualFormSchema>;
+
 // Transformations
-export const formToDto = (individualForm: IndividualDto): IndividualDto =>
+export const formToDto = (individualForm: IndividualFormInput): IndividualDto =>
   Object.assign(individualForm);
-export const databaseToForm = (individual: Individual): IndividualDto =>
+export const entityToForm = (individual: Individual): IndividualFormInput =>
   Object.assign(individual);
 
 // Initial values
-export const initialValues: IndividualDto = {
+export const initialValues: IndividualFormInput = {
   name: "",
-  reference: "",
+  reference: null,
 };
