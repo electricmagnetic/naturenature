@@ -3,10 +3,10 @@
 import { PropsWithChildren, useCallback, useEffect, useMemo } from "react";
 import clsx from "clsx";
 import { DefaultValues, FormProvider, useForm } from "react-hook-form";
-import { ObjectSchema } from "yup";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { PostgrestError } from "@supabase/supabase-js";
-import { yupResolver } from "@hookform/resolvers/yup";
+import type { ZodType } from "zod";
 
 import Message from "@/components/ui/Message";
 import Submit from "@/components/forms/Submit";
@@ -44,55 +44,56 @@ const FormFooter = ({ children }: PropsWithChildren) => (
 
 /**
  * - table: the Supabase table (for redirection on success)
- * - formToDto: function for transforming validated form data to a valid DTO
- * - databaseToForm: function for transforming database objects into form initial values
+ * - formSchemaToDto: function for transforming validated form data to a valid DTO
+ * - databaseToFormSchema: function for transforming database objects into form initial values
  * - mutation: function for upserting the data
  * - render: JSX function for rendering the form
  * - initialValues: initial values for the form
- * - validator: Yup object schema for form validation
+ * - schema: Yup object schema for form validation
  * - entity: if provided, the Form will use this for the default values (instead of initialValues)
  * - relatedObjects: object that should be used with 'entity' to provided related objects for form controls like 'Combobox'
  */
-type FormProps<Dto, Entity, RelatedObjects> = {
+type FormProps<FormInput, EntityDto, Entity, RelatedObjects> = {
   table: string;
-  formToDto: (values: Dto) => Dto;
-  databaseToForm: (values: Entity) => Dto;
-  mutation: (dto: Dto) => Promise<{
+  formToDto: (values: FormInput) => EntityDto;
+  entityToForm: (values: Entity) => FormInput;
+  mutation: (dto: EntityDto) => Promise<{
     status: number;
     data: Entity | null;
     error: PostgrestError | null;
   }>;
   render: () => JSX.Element;
-  validator: ObjectSchema<any>;
-  initialValues: Dto;
+  schema: ZodType<FormInput>;
+  initialValues: FormInput;
   entity?: Entity;
   relatedObjects?: RelatedObjects;
 };
 
 function Form<
-  Dto extends { id?: string },
+  FormInput extends {},
+  EntityDto extends {},
   Entity extends { id?: string },
   RelatedObjects extends {},
 >({
   // TODO tidy "extends" section
   table,
   formToDto,
-  databaseToForm,
+  entityToForm,
   mutation,
   render: FormContent,
   initialValues,
-  validator,
+  schema,
   entity,
   relatedObjects,
-}: FormProps<Dto, Entity, RelatedObjects>) {
+}: FormProps<FormInput, EntityDto, Entity, RelatedObjects>) {
   const router = useRouter();
 
-  const methods = useForm<Dto>({
+  const methods = useForm<FormInput>({
     defaultValues: useMemo(() => {
-      const defaultValues = entity ? databaseToForm(entity) : initialValues;
-      return defaultValues as DefaultValues<any>; // TODO any
-    }, [entity, initialValues, databaseToForm]),
-    resolver: yupResolver(validator),
+      const defaultValues = entity ? entityToForm(entity) : initialValues;
+      return defaultValues as DefaultValues<FormInput>;
+    }, [entity, initialValues, entityToForm]),
+    resolver: zodResolver(schema),
     criteriaMode: "all",
   });
 
@@ -110,11 +111,11 @@ function Form<
 
   // Publish validation errors to the console
   useEffect(() => {
-    isSubmitted && console.warn(errors);
+    isSubmitted && Object.keys(errors).length !== 0 && console.warn(errors);
   }, [errors, isSubmitted]);
 
   const formSubmitted = useCallback(
-    async (values: Dto) => {
+    async (values: FormInput) => {
       const entity = formToDto(values);
       const { status, data, error } = await mutation(entity);
 
@@ -131,8 +132,6 @@ function Form<
           type: `${status}`,
           message: `${error.message} (${error.code})`,
         });
-      } else {
-        console.info(status);
       }
     },
     [router, formToDto, mutation, table, setError],

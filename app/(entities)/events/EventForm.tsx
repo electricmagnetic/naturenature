@@ -4,10 +4,10 @@ import Form from "@/components/forms/Form";
 import Field from "@/components/forms/Field";
 import { upsertEvent } from "./api/client";
 import {
-  validate,
+  EventFormSchema,
   initialValues,
   formToDto,
-  databaseToForm,
+  entityToForm,
 } from "./validations";
 import { lookupPlaces } from "../places/api/client";
 import type { Event, EventRelatedObjects } from "./types";
@@ -25,7 +25,11 @@ const EventFormContent = () => {
             />
           </Form.Fieldset>
           <Form.Fieldset title="Status">
-            {/* status */}
+            <Field.Select
+              label="Status"
+              name="status"
+              dictionaryClass="status"
+            />
             <Field.Select
               label="Source"
               name="source"
@@ -52,6 +56,7 @@ const EventFormContent = () => {
         </div>
       </div>
       <Form.Fieldset title="Additional information">
+        <Field.Input type="number" label="Reference" name="reference" />
         <Field.Input type="text" label="Comments" name="comments" />
       </Form.Fieldset>
     </>
@@ -69,13 +74,13 @@ export default function EventForm({
     <Form
       table="events"
       formToDto={formToDto}
-      databaseToForm={databaseToForm}
+      entityToForm={entityToForm}
       mutation={upsertEvent}
       render={EventFormContent}
       entity={event}
       relatedObjects={eventRelatedObjects}
       initialValues={initialValues}
-      validator={validate}
+      schema={EventFormSchema}
     />
   );
 }
