@@ -2,7 +2,7 @@ import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
 import type { CompleteRecord } from "./types";
 
-import Protocol from "./protocols/Protocol";
+import ProtocolDetail from "./protocols/ProtocolDetail";
 import Lookup from "@/components/dictionary/Lookup";
 
 export default function RecordDetail({ record }: { record: CompleteRecord }) {
@@ -16,7 +16,7 @@ export default function RecordDetail({ record }: { record: CompleteRecord }) {
         </Properties>
       </Section>
       <Section>
-        <Protocol record={record} />
+        <ProtocolDetail record={record} />
       </Section>
     </>
   );

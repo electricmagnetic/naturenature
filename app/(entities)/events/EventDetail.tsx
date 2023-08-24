@@ -6,7 +6,7 @@ import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
 import PublicPrivate from "@/components/ui/PublicPrivate";
 import DateTime from "@/components/ui/DateTime";
-import Protocol from "@/app/(entities)/records/protocols/Protocol";
+import Protocol from "@/app/(entities)/records/protocols/ProtocolDetail";
 import Message from "@/components/ui/Message";
 
 import type { Json } from "@/types/_supabase";

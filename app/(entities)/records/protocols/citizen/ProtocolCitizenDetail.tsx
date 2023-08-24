@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
-import type { CompleteRecord, ProtocolCitizenData } from "../types";
+import type { CompleteRecord, ProtocolCitizenData } from "../../types";
 export default function ProtocolCitizen({
   record,
 }: {

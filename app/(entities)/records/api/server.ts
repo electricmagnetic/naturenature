@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 import uuidOrNotFound from "@/components/helpers/uuidOrNotFound";
 
-import type { CompleteRecord } from "./types";
+import type { CompleteRecord } from "../types";
 
 export const getRecords = async () => {
   const supabase = createServerSupabaseClient();

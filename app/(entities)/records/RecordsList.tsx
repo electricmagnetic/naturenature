@@ -46,6 +46,8 @@ export default function RecordsList({ records }: { records: Record[] }) {
               </Table.Data>
               <Table.Data>
                 <ActionButton.View entity="record" id={record.id} />
+                <ActionButton.Edit entity="record" id={record.id} />
+                <ActionButton.Delete entity="record" id={record.id} />
               </Table.Data>
             </Table.Row>
           ))}

@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getRecordsByEvent } from "@/app/(entities)/records/api";
+import { getRecordsByEvent } from "@/app/(entities)/records/api/server";
 import { getCompleteEvent } from "../api/server";
 import EventDetail from "../EventDetail";
 

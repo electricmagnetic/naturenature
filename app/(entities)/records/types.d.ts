@@ -18,7 +18,7 @@ export type CompleteRecord = Record & RecordRelatedObjects;
 
 // Type for protocol components (responsible for rendering the different protocols)
 export type ProtocolComponent = {
-  [key: string]: FC<{ record: CompleteRecord }>;
+  [key: string]: FC<{ record: Record | CompleteRecord }>;
 };
 
 // Types for JSON fields in Records
