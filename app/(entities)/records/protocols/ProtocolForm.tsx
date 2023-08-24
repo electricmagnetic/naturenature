@@ -1,8 +1,21 @@
 import Message from "@/components/ui/Message";
 
-import type { Record, ProtocolComponent } from "../types";
+import type { Protocol } from "./metadata";
+import type { Record, ProtocolComponents } from "../types";
 
-const protocolComponents: ProtocolComponent = {};
+const ProtocolDummyForm = () => <span>Dummy Form</span>;
+
+const protocolComponents: ProtocolComponents<Record> = {
+  CITIZEN: ProtocolDummyForm,
+  GROUP: ProtocolDummyForm,
+  IDENTIFIER: ProtocolDummyForm,
+  INTERVENTION: ProtocolDummyForm,
+  MEASUREMENT: ProtocolDummyForm,
+  MEDIA: ProtocolDummyForm,
+  OBSERVATION: ProtocolDummyForm,
+  PERSON: ProtocolDummyForm,
+  SAMPLE: ProtocolDummyForm,
+};
 
 export default function ProtocolForm({
   record,
@@ -15,9 +28,7 @@ export default function ProtocolForm({
   if (record) {
     const { protocol } = record;
 
-    const SpecificProtocol = protocolComponents[protocol];
-    if (!SpecificProtocol)
-      return <Message>Protocol form view not found</Message>;
+    const SpecificProtocol = protocolComponents[protocol as Protocol];
 
     return (
       <div className={className}>

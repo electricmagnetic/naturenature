@@ -9,9 +9,10 @@ import ProtocolObservationDetail from "./observation/ProtocolObservationDetail";
 import ProtocolPersonDetail from "./person/ProtocolPersonDetail";
 import ProtocolSampleDetail from "./sample/ProtocolSampleDetail";
 
-import type { CompleteRecord, ProtocolComponent } from "../types";
+import type { Protocol } from "./metadata";
+import type { CompleteRecord, ProtocolComponents } from "../types";
 
-const protocolComponents: ProtocolComponent = {
+const protocolComponents: ProtocolComponents<CompleteRecord> = {
   CITIZEN: ProtocolCitizenDetail,
   GROUP: ProtocolGroupDetail,
   IDENTIFIER: ProtocolIdentifierDetail,
@@ -33,9 +34,7 @@ export default function ProtocolDetail({
 }) {
   const { protocol } = record;
 
-  const SpecificProtocol = protocolComponents[protocol];
-  if (!SpecificProtocol)
-    return <Message>Protocol detail view not found</Message>;
+  const SpecificProtocol = protocolComponents[protocol as Protocol];
 
   return (
     <div className={className}>

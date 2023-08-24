@@ -1,5 +1,7 @@
 import type { FC } from "react";
+
 import type { UpdateDto, TableRow, InsertDto } from "@/types/database";
+import { Protocol } from "./protocols/metadata";
 
 // Supabase types
 export type Record = TableRow<"records">;
@@ -17,8 +19,8 @@ export type RecordRelatedObjects = {
 export type CompleteRecord = Record & RecordRelatedObjects;
 
 // Type for protocol components (responsible for rendering the different protocols)
-export type ProtocolComponent = {
-  [key: string]: FC<{ record: Record | CompleteRecord }>;
+export type ProtocolComponents<T> = {
+  [key in Protocol]: FC<{ record: T }>;
 };
 
 // Types for JSON fields in Records

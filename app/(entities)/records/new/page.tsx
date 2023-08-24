@@ -1,9 +1,9 @@
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 
-import metadata from "@/app/(entities)/records/protocols/metadata";
 import Lookup from "@/components/dictionary/Lookup";
 import NavLink from "@/components/layout/NavLink";
+import { protocolMetadata } from "@/app/(entities)/records/protocols/metadata";
 
 export default function CreateRecord() {
   return (
@@ -11,16 +11,16 @@ export default function CreateRecord() {
       <Header.Entity entity="record" action={Header.Action.Create} />
       <Section title="Protocol">
         <ul className="nav flex-column nav-special">
-          {Object.keys(metadata).map((protocol) => (
+          {Object.entries(protocolMetadata).map(([protocol, metadatum]) => (
             <NavLink
               key={protocol}
-              href={`/records/new/${protocol}`}
-              iconName={metadata[protocol].iconName}
+              href={`/records/new/${metadatum.routeId}`}
+              iconName={metadatum.iconName}
             >
-              <strong>{metadata[protocol].name}</strong>
+              <strong>{metadatum.name}</strong>
               <br />
               <small>
-                <Lookup description>{metadata[protocol].dictionaryId}</Lookup>
+                <Lookup description>{protocol}</Lookup>
               </small>
             </NavLink>
           ))}

@@ -1,55 +1,69 @@
+// List of protocols, corresponds with those defined in the database dictionary
+
+export enum Protocol {
+  CITIZEN = "CITIZEN",
+  GROUP = "GROUP",
+  IDENTIFIER = "IDENTIFIER",
+  INTERVENTION = "INTERVENTION",
+  MEASUREMENT = "MEASUREMENT",
+  MEDIA = "MEDIA",
+  OBSERVATION = "OBSERVATION",
+  PERSON = "PERSON",
+  SAMPLE = "SAMPLE",
+}
+
+// Protocol metadata
+
 export type ProtocolMetadatum = {
   name: string;
   iconName: string;
-  dictionaryId: string;
+  routeId: string;
 };
 
-const metadata: { [key: string]: ProtocolMetadatum } = {
-  citizen: {
+export const protocolMetadata: { [key in Protocol]: ProtocolMetadatum } = {
+  CITIZEN: {
     name: "Citizen",
     iconName: "globe",
-    dictionaryId: "CITIZEN",
+    routeId: "citizen",
   },
-  group: {
+  GROUP: {
     name: "Group",
     iconName: "boxes",
-    dictionaryId: "GROUP",
+    routeId: "group",
   },
-  identifier: {
+  IDENTIFIER: {
     name: "Identifier",
     iconName: "circle",
-    dictionaryId: "IDENTIFIER",
+    routeId: "identifier",
   },
-  intervention: {
+  INTERVENTION: {
     name: "Intervention",
     iconName: "check-square",
-    dictionaryId: "INTERVENTION",
+    routeId: "intervention",
   },
-  measurement: {
+  MEASUREMENT: {
     name: "Measurement",
     iconName: "rulers",
-    dictionaryId: "MEASUREMENT",
+    routeId: "measurement",
   },
-  media: {
+  MEDIA: {
     name: "Media",
     iconName: "images",
-    dictionaryId: "MEDIA",
+    routeId: "media",
   },
-  observation: {
+  OBSERVATION: {
     name: "Observation",
     iconName: "binoculars",
-    dictionaryId: "OBSERVATION",
+    routeId: "observation",
   },
-  person: {
+  PERSON: {
     name: "Person",
     iconName: "people",
-    dictionaryId: "PERSON",
+    routeId: "person",
   },
-  sample: {
+  SAMPLE: {
     name: "Sample",
     iconName: "file-earmark-medical",
-    dictionaryId: "SAMPLE",
+    routeId: "sample",
   },
 };
-
-export default metadata;
