@@ -10,8 +10,9 @@ import useDictionary from "./useDictionary";
  */
 export default function Lookup({
   formatted = false,
+  description = false,
   children,
-}: PropsWithChildren<{ formatted?: boolean }>) {
+}: PropsWithChildren<{ formatted?: boolean; description?: boolean }>) {
   const dictionary = useDictionary();
 
   if (typeof children !== "string") return null;
@@ -20,6 +21,7 @@ export default function Lookup({
 
   if (!term)
     return <span className="text-body-secondary fst-italic">{children}</span>;
+  if (description) return term.description;
   if (formatted)
     return (
       <span
