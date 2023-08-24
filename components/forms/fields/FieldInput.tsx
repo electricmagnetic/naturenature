@@ -14,7 +14,7 @@ export default function FieldInput({
   type: HTMLInputTypeAttribute;
 }) {
   const {
-    field,
+    field: { value, onChange, ...fieldOthers },
     fieldState: { invalid, error },
   } = useController({ name });
 
@@ -25,7 +25,9 @@ export default function FieldInput({
         className={clsx("form-control", invalid && "is-invalid")}
         placeholder={label}
         id={name}
-        {...field}
+        value={value || ""}
+        onChange={(event) => onChange(event.target.value || null)}
+        {...fieldOthers}
         {...others}
       />
     </Wrapper>

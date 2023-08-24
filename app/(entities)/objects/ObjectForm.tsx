@@ -7,10 +7,10 @@ import Form from "@/components/forms/Form";
 import Field from "@/components/forms/Field";
 import { upsertObject } from "./api/client";
 import {
-  validate,
+  ObjectFormSchema,
   initialValues,
   formToDto,
-  databaseToForm,
+  entityToForm,
 } from "./validations";
 import type { Object } from "./types";
 
@@ -59,12 +59,12 @@ export default function ObjectForm({ object }: { object?: Object }) {
     <Form
       table="objects"
       formToDto={formToDto}
-      databaseToForm={databaseToForm}
+      entityToForm={entityToForm}
       mutation={upsertObject}
       render={ObjectFormContent}
       entity={object}
       initialValues={initialValues}
-      validator={validate}
+      schema={ObjectFormSchema}
     />
   );
 }

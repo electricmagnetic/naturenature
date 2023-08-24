@@ -72,7 +72,7 @@ export default function FieldCombobox({
     () =>
       ({ selectedItem }: { selectedItem?: LookupItem | null }) => {
         setSelectedItem(selectedItem || null);
-        fieldOnChange(selectedItem?.id);
+        fieldOnChange(selectedItem?.id || null);
       },
     [fieldOnChange],
   );

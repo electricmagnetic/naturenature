@@ -4,10 +4,10 @@ import Form from "@/components/forms/Form";
 import Field from "@/components/forms/Field";
 import { upsertIndividual } from "./api/client";
 import {
-  validate,
+  IndividualFormSchema,
   initialValues,
   formToDto,
-  databaseToForm,
+  entityToForm,
 } from "./validations";
 import type { Individual } from "./types";
 
@@ -31,12 +31,12 @@ export default function IndividualForm({
     <Form
       table="individuals"
       formToDto={formToDto}
-      databaseToForm={databaseToForm}
+      entityToForm={entityToForm}
       mutation={upsertIndividual}
       render={IndividualFormContent}
       entity={individual}
       initialValues={initialValues}
-      validator={validate}
+      schema={IndividualFormSchema}
     />
   );
 }
