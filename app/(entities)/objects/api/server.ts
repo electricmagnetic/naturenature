@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
+import uuidOrNotFound from "@/components/helpers/uuidOrNotFound";
 
 export const getObjects = async () => {
   const supabase = createServerSupabaseClient();
@@ -13,6 +14,8 @@ export const getObjects = async () => {
 };
 
 export const getObject = async (id: string) => {
+  uuidOrNotFound(id);
+
   const supabase = createServerSupabaseClient();
 
   const { data: object, error } = await supabase
@@ -20,7 +23,7 @@ export const getObject = async (id: string) => {
     .select("*")
     .eq("id", id)
     .limit(1)
-    .single();
+    .maybeSingle();
 
   if (error) throw Error(error.message);
   if (!object) return notFound();

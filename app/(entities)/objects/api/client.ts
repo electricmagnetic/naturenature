@@ -11,7 +11,7 @@ export const upsertObject = async (values: ObjectDto) => {
     .from("objects")
     .upsert(values)
     .select()
-    .single();
+    .maybeSingle();
 
   if (status === 201) await revalidate("/objects");
 

@@ -11,7 +11,7 @@ export const upsertIndividual = async (values: IndividualDto) => {
     .from("individuals")
     .upsert(values)
     .select()
-    .single();
+    .maybeSingle();
 
   if (status === 201) await revalidate("/individuals");
 

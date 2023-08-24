@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
+import uuidOrNotFound from "@/components/helpers/uuidOrNotFound";
 
 export const getIndividuals = async () => {
   const supabase = createServerSupabaseClient();
@@ -16,6 +17,8 @@ export const getIndividuals = async () => {
 };
 
 export const getIndividual = async (id: string) => {
+  uuidOrNotFound(id);
+
   const supabase = createServerSupabaseClient();
 
   const { data: individual, error } = await supabase
@@ -23,7 +26,7 @@ export const getIndividual = async (id: string) => {
     .select("*")
     .eq("id", id)
     .limit(1)
-    .single();
+    .maybeSingle();
 
   if (error) throw Error(error.message);
   if (!individual) return notFound();

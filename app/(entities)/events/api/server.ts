@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 
 import type { CompleteEvent, EventRelatedObjects } from "../types";
+import uuidOrNotFound from "@/components/helpers/uuidOrNotFound";
 
 export const getEvents = async () => {
   const supabase = createServerSupabaseClient();
@@ -15,6 +16,8 @@ export const getEvents = async () => {
 };
 
 export const getEvent = async (id: string) => {
+  uuidOrNotFound(id);
+
   const supabase = createServerSupabaseClient();
 
   const { data: event, error } = await supabase
@@ -22,7 +25,7 @@ export const getEvent = async (id: string) => {
     .select("*")
     .eq("id", id)
     .limit(1)
-    .single();
+    .maybeSingle();
 
   if (error) throw Error(error.message);
   if (!event) return notFound();
@@ -31,6 +34,8 @@ export const getEvent = async (id: string) => {
 };
 
 export const getCompleteEvent = async (id: string) => {
+  uuidOrNotFound(id);
+
   const supabase = createServerSupabaseClient();
 
   const { data: event, error } = await supabase
@@ -39,7 +44,7 @@ export const getCompleteEvent = async (id: string) => {
     .eq("id", id)
     .returns<CompleteEvent[]>()
     .limit(1)
-    .single();
+    .maybeSingle();
 
   if (error) throw Error(error.message);
   if (!event) return notFound();
@@ -48,6 +53,8 @@ export const getCompleteEvent = async (id: string) => {
 };
 
 export const getEventRelatedObjects = async (id: string) => {
+  uuidOrNotFound(id);
+
   const supabase = createServerSupabaseClient();
 
   const { data: event, error } = await supabase
@@ -56,7 +63,7 @@ export const getEventRelatedObjects = async (id: string) => {
     .eq("id", id)
     .returns<EventRelatedObjects[]>()
     .limit(1)
-    .single();
+    .maybeSingle();
 
   if (error) throw Error(error.message);
   if (!event) return notFound();

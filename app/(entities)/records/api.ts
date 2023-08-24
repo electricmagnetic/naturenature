@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
+import uuidOrNotFound from "@/components/helpers/uuidOrNotFound";
 
 import type { CompleteRecord } from "./types";
 
@@ -15,6 +16,8 @@ export const getRecords = async () => {
 };
 
 export const getRecord = async (id: string) => {
+  uuidOrNotFound(id);
+
   const supabase = createServerSupabaseClient();
 
   const { data: record, error } = await supabase
@@ -25,7 +28,7 @@ export const getRecord = async (id: string) => {
     .eq("id", id)
     .returns<CompleteRecord[]>()
     .limit(1)
-    .single();
+    .maybeSingle();
 
   if (error) throw Error(error.message);
   if (!record) return notFound();
@@ -34,6 +37,8 @@ export const getRecord = async (id: string) => {
 };
 
 export const getRecordsByEvent = async (id: string) => {
+  uuidOrNotFound(id);
+
   const supabase = createServerSupabaseClient();
 
   const { data: record, error } = await supabase

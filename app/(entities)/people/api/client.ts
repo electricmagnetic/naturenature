@@ -11,7 +11,7 @@ export const upsertPerson = async (values: PersonDto) => {
     .from("people")
     .upsert(values)
     .select()
-    .single();
+    .maybeSingle();
 
   if (status === 201) await revalidate("/people");
 
