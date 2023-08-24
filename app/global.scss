@@ -93,3 +93,20 @@ $card-border-radius: 0;
 .map {
   height: 640px;
 }
+
+// Nav (special)
+.nav-special {
+  --bs-nav-link-padding-x: 0;
+  li {
+    border-bottom: 1px solid var(--bs-border-color);
+    &:last-child {
+      border-bottom: 0;
+    }
+    strong {
+      text-decoration: underline;
+    }
+    small {
+      color: var(--bs-body-color);
+    }
+  }
+}

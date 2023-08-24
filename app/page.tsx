@@ -19,7 +19,7 @@ const EntityPill = ({
 
 const QuickLinks = () => (
   <Section title="Quick Links">
-    <ul className="nav flex-column">
+    <ul className="nav flex-column nav-special">
       {Object.keys(metadata).map((entity) => (
         <NavLink
           key={entity}
