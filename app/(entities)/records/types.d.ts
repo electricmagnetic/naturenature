@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
 import type { UpdateDto, TableRow, InsertDto } from "@/types/database";
-import { Protocol } from "./protocols/metadata";
+import type { Protocol } from "./protocols/metadata";
 
 // Supabase types
 export type Record = TableRow<"records">;

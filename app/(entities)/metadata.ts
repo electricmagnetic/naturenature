@@ -1,3 +1,15 @@
+// List of entities, corresponds with entities (singluar) defined in database tables (plural)
+
+export enum Entity {
+  event = "event",
+  record = "record",
+  individual = "individual",
+  object = "object",
+  place = "place",
+  media = "media",
+  person = "person",
+}
+
 export type EntityMetadatum = {
   table: string;
   name: string;
@@ -5,8 +17,7 @@ export type EntityMetadatum = {
   iconName: string;
 };
 
-// A register of the different types of entities, to ensure standardisation across the app. Ordering is reflected in the interface.
-const metadata: { [key: string]: EntityMetadatum } = {
+export const entityMetadata: { [key in Entity]: EntityMetadatum } = {
   event: {
     table: "events",
     name: "Event",
@@ -51,4 +62,9 @@ const metadata: { [key: string]: EntityMetadatum } = {
   },
 };
 
-export default metadata;
+export const getMetadatum = (entity: string) =>
+  entityMetadata[entity as Entity];
+export const getMetadatumByTable = (table: string) =>
+  Object.values(entityMetadata).filter(
+    (metadatum) => table === metadatum.table,
+  )[0];

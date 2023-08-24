@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
 import Section from "@/components/layout/Section";
 import Icon from "@/components/ui/Icon";
-import metadata from "@/app/(entities)/metadata";
+import { entityMetadata, getMetadatum } from "@/app/(entities)/metadata";
 import NavLink from "@/components/layout/NavLink";
 
 const EntityPill = ({
@@ -10,23 +10,26 @@ const EntityPill = ({
 }: {
   entity: string;
   plural?: boolean;
-}) => (
-  <span className="badge text-bg-light">
-    <Icon iconName={metadata[entity].iconName} />
-    {plural ? metadata[entity].pluralName : metadata[entity].name}
-  </span>
-);
+}) => {
+  const metadatum = getMetadatum(entity);
+  return (
+    <span className="badge text-bg-light">
+      <Icon iconName={metadatum.iconName} />
+      {plural ? metadatum.pluralName : metadatum.name}
+    </span>
+  );
+};
 
 const QuickLinks = () => (
   <Section title="Quick Links">
     <ul className="nav flex-column nav-special">
-      {Object.keys(metadata).map((entity) => (
+      {Object.entries(entityMetadata).map(([entity, metadatum]) => (
         <NavLink
           key={entity}
-          href={`/${metadata[entity].table}`}
-          iconName={metadata[entity].iconName}
+          href={`/${metadatum.table}`}
+          iconName={metadatum.iconName}
         >
-          {metadata[entity].pluralName}
+          {metadatum.pluralName}
         </NavLink>
       ))}
     </ul>
