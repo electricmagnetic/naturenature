@@ -42,7 +42,7 @@ export default function FieldSelect({
   }, [dictionary, dictionaryType, dictionaryClass, setOptions]);
 
   // Field should be disabled if a dictionaryType is expected but not provided (i.e. an empty string)
-  // Note that this is different to a select field without a dictionarType (i.e. undefined)
+  // Note that this is different to a select field without a dictionaryType (i.e. undefined)
   const disabled = !!(!dictionaryType && dictionaryType !== undefined);
 
   return (
