@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 
-import metadata from "@/app/(entities)/metadata";
+import metadata, { EntityMetadatum } from "@/app/(entities)/metadata";
 import ActionButton from "@/components/ui/ActionButton";
 import Icon from "@/components/ui/Icon";
 import Toolbar from "@/components/ui/Toolbar";
@@ -11,6 +11,21 @@ export enum Action {
   Edit = "Edit",
   Delete = "Delete",
 }
+
+const getTitle = (
+  entityMetadatum: EntityMetadatum,
+  action?: string,
+): string => {
+  switch (action) {
+    case Action.Create:
+    case Action.View:
+    case Action.Edit:
+    case Action.Delete:
+      return `${Action[action]} ${entityMetadatum.name}`;
+    default:
+      return `${entityMetadatum.pluralName}`;
+  }
+};
 
 /**
  * Header specifically for entities (automatically figures out title and icon from metadata)
@@ -27,15 +42,13 @@ const HeaderEntity = ({
   action?: Action;
   actionButtons?: Action[];
 }>) => {
-  const entityMetadata = metadata[entity];
-  if (!entityMetadata) throw Error("Entity metadata not found");
+  const entityMetadatum = metadata[entity];
+  if (!entityMetadatum) throw Error("Entity metadata not found");
 
   return (
     <Header
-      title={`${action ? `${Action[action]} ` : ""}${
-        id ? entityMetadata.name : entityMetadata.pluralName
-      }`}
-      iconName={entityMetadata.iconName}
+      title={getTitle(entityMetadatum, action)}
+      iconName={entityMetadatum.iconName}
     >
       {actionButtons && (
         <Toolbar>

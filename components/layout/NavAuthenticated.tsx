@@ -53,7 +53,7 @@ export default function NavAuthenticated({ session }: { session: Session }) {
                 <NavLink
                   key={entity}
                   isDropdownItem
-                  href={`/create/${entity}`}
+                  href={`/${metadata[entity].table}/new`}
                   iconName={metadata[entity].iconName}
                 >
                   {metadata[entity].name}

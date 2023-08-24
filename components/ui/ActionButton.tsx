@@ -25,12 +25,10 @@ type ActionButton = ActionButtonTable | ActionButtonEntity;
 type ActionButtonWithId = { id: string };
 
 const getTable = (entity: string) => metadata[entity].table;
-const getEntity = (table: string) =>
-  Object.values(metadata).filter((metadatum) => table === metadatum.table)[0];
 
 const ActionButtonCreate = ({ entity, table, ...others }: ActionButton) => (
   <ActionButton
-    href={`/create/${table ? getEntity(table) : entity}`}
+    href={`/${entity ? getTable(entity) : table}/new`}
     {...others}
     iconName="plus-circle"
   >

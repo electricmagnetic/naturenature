@@ -1,4 +1,4 @@
-type EntityMetadatum = {
+export type EntityMetadatum = {
   table: string;
   name: string;
   pluralName: string;
