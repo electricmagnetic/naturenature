@@ -46,9 +46,9 @@ export const entityToForm = (event: Event): EventFormInput => {
 };
 
 // Initial values
-export const initialValues: EventFormInput = {
+export const initialValues: Partial<EventFormInput> = {
   comments: null,
-  datetime: "",
+  // datetime is undefined here, requiring user input
   event_place_geometry: null,
   event_place_metadata: null,
   is_public: false,
