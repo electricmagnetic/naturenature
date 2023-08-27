@@ -1,4 +1,3 @@
-import Message from "@/components/ui/Message";
 import ProtocolCitizenDetail from "./citizen/ProtocolCitizenDetail";
 import ProtocolGroupDetail from "./group/ProtocolGroupDetail";
 import ProtocolIdentifierDetail from "./identifier/ProtocolIdentifierDetail";
@@ -11,8 +10,9 @@ import ProtocolSampleDetail from "./sample/ProtocolSampleDetail";
 
 import type { Protocol } from "./metadata";
 import type { CompleteRecord, ProtocolComponents } from "../types";
+import { isProtocol } from "./helpers";
 
-const protocolComponents: ProtocolComponents<CompleteRecord> = {
+const protocolComponents: ProtocolComponents<{ record: CompleteRecord }> = {
   CITIZEN: ProtocolCitizenDetail,
   GROUP: ProtocolGroupDetail,
   IDENTIFIER: ProtocolIdentifierDetail,
@@ -25,20 +25,15 @@ const protocolComponents: ProtocolComponents<CompleteRecord> = {
 };
 
 export default function ProtocolDetail({
+  protocol,
   record,
-  className,
   ...others
 }: {
+  protocol: Protocol | string;
   record: CompleteRecord;
-  className?: string;
 }) {
-  const { protocol } = record;
+  if (!isProtocol(protocol)) throw Error("Invalid protocol");
 
-  const SpecificProtocol = protocolComponents[protocol as Protocol];
-
-  return (
-    <div className={className}>
-      <SpecificProtocol record={record} {...others} />
-    </div>
-  );
+  const SpecificProtocol = protocolComponents[protocol];
+  return <SpecificProtocol record={record} {...others} />;
 }

@@ -6,7 +6,7 @@ import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
 import PublicPrivate from "@/components/ui/PublicPrivate";
 import DateTime from "@/components/ui/DateTime";
-import Protocol from "@/app/(entities)/records/protocols/ProtocolDetail";
+import ProtocolDetail from "@/app/(entities)/records/protocols/ProtocolDetail";
 import Message from "@/components/ui/Message";
 
 import type { Json } from "@/types/_supabase";
@@ -45,7 +45,9 @@ export default function EventDetail({
         {records && records.length > 0 ? (
           <div className="row row-cols-md-3 g-3">
             {records.map((record) => (
-              <Protocol record={record} className="col-md" key={record.id} />
+              <div className="col-md" key={record.id}>
+                <ProtocolDetail protocol={record.protocol} record={record} />
+              </div>
             ))}
           </div>
         ) : (

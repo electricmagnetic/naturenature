@@ -20,7 +20,7 @@ export type CompleteRecord = Record & RecordRelatedObjects;
 
 // Type for protocol components (responsible for rendering the different protocols)
 export type ProtocolComponents<T> = {
-  [key in Protocol]: FC<{ record: T }>;
+  [key in Protocol]: FC<T>;
 };
 
 // Types for JSON fields in Records

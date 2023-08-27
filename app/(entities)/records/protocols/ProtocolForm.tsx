@@ -1,11 +1,9 @@
-import Message from "@/components/ui/Message";
-
 import type { Protocol } from "./metadata";
 import type { Record, ProtocolComponents } from "../types";
 
 const ProtocolDummyForm = () => <span>Dummy Form</span>;
 
-const protocolComponents: ProtocolComponents<Record> = {
+const protocolComponents: ProtocolComponents<{ record?: Record }> = {
   CITIZEN: ProtocolDummyForm,
   GROUP: ProtocolDummyForm,
   IDENTIFIER: ProtocolDummyForm,
@@ -18,24 +16,13 @@ const protocolComponents: ProtocolComponents<Record> = {
 };
 
 export default function ProtocolForm({
+  protocol,
   record,
-  className,
   ...others
 }: {
+  protocol: Protocol;
   record?: Record;
-  className?: string;
 }) {
-  if (record) {
-    const { protocol } = record;
-
-    const SpecificProtocol = protocolComponents[protocol as Protocol];
-
-    return (
-      <div className={className}>
-        <SpecificProtocol record={record} {...others} />
-      </div>
-    );
-  }
-
-  return <span>TODO CREATE PROTOCOL</span>;
+  const SpecificProtocolForm = protocolComponents[protocol];
+  return <SpecificProtocolForm record={record} {...others} />;
 }
