@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 import uuidOrNotFound from "@/components/helpers/uuidOrNotFound";
 
-import type { CompleteRecord } from "../types";
+import type { CompleteRecord, RecordRelatedObjects } from "../types";
 
 export const getRecords = async () => {
   const supabase = createServerSupabaseClient();
@@ -53,4 +53,25 @@ export const getRecordsByEvent = async (id: string) => {
   if (!record) return notFound();
 
   return record;
+};
+
+export const getRecordRelatedObjects = async (id: string) => {
+  uuidOrNotFound(id);
+
+  const supabase = createServerSupabaseClient();
+
+  const { data: event, error } = await supabase
+    .from("records")
+    .select(
+      "event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)",
+    )
+    .eq("id", id)
+    .returns<RecordRelatedObjects[]>()
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw Error(error.message);
+  if (!event) return notFound();
+
+  return event;
 };
