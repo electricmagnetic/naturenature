@@ -24,7 +24,8 @@ const EventFormContent = () => {
               name="datetime"
             />
           </Form.Fieldset>
-          <Form.Fieldset title="Status">
+          <Form.Fieldset title="Metadata">
+            <Field.Check label="Is public?" name="is_public" />
             <Field.Select
               label="Status"
               name="status"
@@ -35,7 +36,10 @@ const EventFormContent = () => {
               name="source"
               dictionaryClass="source"
             />
-            <Field.Check label="Is public?" name="is_public" />
+            <Field.Input type="number" label="Reference" name="reference" />
+          </Form.Fieldset>
+          <Form.Fieldset title="Comments">
+            <Field.Input type="text" label="Comments" name="comments" />
           </Form.Fieldset>
         </div>
         <div className="col-md-6">
@@ -55,10 +59,6 @@ const EventFormContent = () => {
           </Form.Fieldset>
         </div>
       </div>
-      <Form.Fieldset title="Additional information">
-        <Field.Input type="number" label="Reference" name="reference" />
-        <Field.Input type="text" label="Comments" name="comments" />
-      </Form.Fieldset>
     </>
   );
 };

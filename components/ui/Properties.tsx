@@ -6,7 +6,7 @@ const PropertiesItem = ({
 }: PropsWithChildren<{ name: string }>) => (
   <div className="col">
     <dt>{name}</dt>
-    <dd className="m-0">{children}</dd>
+    <dd className="m-0">{children || '-'}</dd>
   </div>
 );
 
