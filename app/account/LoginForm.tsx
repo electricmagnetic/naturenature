@@ -91,9 +91,9 @@ export default function LoginForm() {
                     className="form-control"
                     id="email"
                     name="email"
-                    aria-describedby="emailHelp"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
+                    autoFocus
                   />
                 </div>
                 <div className="mb-3">
