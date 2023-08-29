@@ -70,6 +70,13 @@ $paragraph-margin-bottom: 0.75rem;
 // Other
 $card-border-radius: 0;
 
+// Accordion
+$accordion-border-radius: 0;
+
+$accordion-bg: $body-bg;
+$accordion-button-bg: $brown-lighter;
+$accordion-button-active-bg: $accordion-button-bg;
+
 /* Bootstrap */
 @import "bootstrap";
 
@@ -87,11 +94,6 @@ $card-border-radius: 0;
 // Bootstrap Icons
 .bi {
   width: 1em;
-}
-
-// Map
-.map {
-  height: 640px;
 }
 
 // Nav (special)

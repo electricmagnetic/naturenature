@@ -1,12 +1,14 @@
 import { DateTime as LuxonDateTime } from "luxon";
 
-export default function DateTime({ datetime }: { datetime: string }) {
+export default function DateTime({ datetime }: { datetime?: string | null }) {
   return (
-    <>
-      {LuxonDateTime.fromISO(datetime).toLocaleString(
-        LuxonDateTime.DATETIME_MED,
-        { locale: process.env.NEXT_PUBLIC_LOCALE },
-      )}
-    </>
+    datetime && (
+      <>
+        {LuxonDateTime.fromISO(datetime).toLocaleString(
+          LuxonDateTime.DATETIME_MED,
+          { locale: process.env.NEXT_PUBLIC_LOCALE },
+        )}
+      </>
+    )
   );
 }

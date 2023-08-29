@@ -13,7 +13,11 @@ export default function Section({
         isPrimary && "border-primary-subtle border-2",
       )}
     >
-      {title && <h2 className="text-uppercase fs-5 fw-bold">{title}</h2>}
+      {title && (
+        <h2 className="text-uppercase fs-6 text-secondary fw-normal">
+          {title}
+        </h2>
+      )}
       {children}
     </section>
   );

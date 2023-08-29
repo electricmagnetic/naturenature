@@ -10,7 +10,11 @@ import "leaflet/dist/leaflet.css";
 /**
  * Provides a map with a single tile-based basemap (specified in the project's environment variables)
  */
-const Map = ({ children, ...props }: PropsWithChildren<MapContainerProps>) => {
+const Map = ({
+  children,
+  height,
+  ...props
+}: PropsWithChildren<MapContainerProps & { height?: number }>) => {
   // Convert environment variables
   const zoom = process.env.NEXT_PUBLIC_MAP_DEFAULT_ZOOM
     ? parseInt(process.env.NEXT_PUBLIC_MAP_DEFAULT_ZOOM, 10)
@@ -30,10 +34,10 @@ const Map = ({ children, ...props }: PropsWithChildren<MapContainerProps>) => {
 
   return (
     <MapContainer
-      className="map"
       center={center}
       zoom={zoom}
       maxZoom={maxZoom}
+      style={{ height: height || 640 }}
       {...props}
     >
       <TileLayer

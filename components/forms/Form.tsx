@@ -33,7 +33,11 @@ const FormFieldset = ({
       isPrimary && "border-primary-subtle border-2",
     )}
   >
-    {title && <legend className="text-uppercase fs-5 fw-bold">{title}</legend>}
+    {title && (
+      <legend className="text-uppercase fs-6 text-secondary fw-normal">
+        {title}
+      </legend>
+    )}
     {children}
   </fieldset>
 );

@@ -15,7 +15,7 @@ export default function Lookup({
 }: PropsWithChildren<{ formatted?: boolean; description?: boolean }>) {
   const dictionary = useDictionary();
 
-  if (typeof children !== "string") return null;
+  if (typeof children !== "string") return;
 
   const term = dictionary?.filter((term) => term.id === children)[0];
 
