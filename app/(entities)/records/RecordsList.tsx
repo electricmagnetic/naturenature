@@ -12,8 +12,8 @@ export default function RecordsList({ records }: { records: Record[] }) {
       <Table>
         <Table.Head>
           <Table.Row>
-            <Table.Heading>ID</Table.Heading>
-            <Table.Heading>Protocol</Table.Heading>
+            <Table.Heading>Protocol (Action)</Table.Heading>
+            <Table.Heading>Action</Table.Heading>
             <Table.Heading>Type</Table.Heading>
             <Table.Heading>Event</Table.Heading>
             <Table.Heading>Individual</Table.Heading>
@@ -24,23 +24,25 @@ export default function RecordsList({ records }: { records: Record[] }) {
           {records.map((record) => (
             <Table.Row key={record.id}>
               <Table.Data>
-                <Link href={`/records/${record.id}`}>{record.id}</Link>
+                <Link href={`/records/${record.id}`}>
+                  <Lookup formatted>{record.protocol}</Lookup>
+                </Link>
               </Table.Data>
               <Table.Data>
-                <Lookup formatted>{record.protocol}</Lookup>
+                <Lookup>{record.action}</Lookup>
               </Table.Data>
               <Table.Data>
                 <Lookup>{record.type}</Lookup>
               </Table.Data>
               <Table.Data>
                 <Link href={`/events/${record.event_id}`}>
-                  Event: {record.event_id}
+                  {record.event_id}
                 </Link>
               </Table.Data>
               <Table.Data>
                 {record.individual_id && (
                   <Link href={`/individuals/${record.individual_id}`}>
-                    Individual: {record.individual_id}
+                    {record.individual_id}
                   </Link>
                 )}
               </Table.Data>
