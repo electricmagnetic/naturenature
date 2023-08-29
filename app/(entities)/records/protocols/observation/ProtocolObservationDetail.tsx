@@ -12,7 +12,7 @@ export default function ProtocolObservation({
   record: CompleteRecord;
 }) {
   return (
-    <Card title="Observation">
+    <Card>
       <Lookup>{record.type}</Lookup> of{" "}
       {record.individual && (
         <Link href={`/individuals/${record.individual.id}`}>

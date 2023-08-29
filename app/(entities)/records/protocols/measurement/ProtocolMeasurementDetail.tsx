@@ -13,7 +13,7 @@ export default function ProtocolMeasurement({
   record: CompleteRecord & ProtocolMeasurement;
 }) {
   return (
-    <Card title="Measurement">
+    <Card>
       <div>
         <Lookup formatted>{record.action}</Lookup>{" "}
         <Lookup>{record.type}</Lookup> of{" "}

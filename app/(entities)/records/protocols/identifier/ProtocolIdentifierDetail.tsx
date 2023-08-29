@@ -13,7 +13,7 @@ export default function ProtocolIdentifier({
   record: CompleteRecord & ProtocolIdentifier;
 }) {
   return (
-    <Card title="Identifier">
+    <Card>
       <Lookup formatted>{record.action}</Lookup>{" "}
       {record.object && (
         <Link href={`/objects/${record.object.id}`}>

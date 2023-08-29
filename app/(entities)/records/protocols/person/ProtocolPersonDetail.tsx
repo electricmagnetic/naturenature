@@ -13,7 +13,7 @@ export default function ProtocolPerson({
   record: CompleteRecord & ProtocolPerson;
 }) {
   return (
-    <Card title="Person">
+    <Card>
       <Link href={`/people/${record.person?.id}`}>{record.person?.name}</Link> (
       <Lookup>{record.type}</Lookup>)
     </Card>

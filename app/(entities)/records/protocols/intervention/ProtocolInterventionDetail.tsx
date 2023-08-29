@@ -12,7 +12,7 @@ export default function ProtocolIntervention({
   record: CompleteRecord;
 }) {
   return (
-    <Card title="Intervention">
+    <Card>
       <Lookup formatted>{record.action}</Lookup>{" "}
       {record.individual && (
         <Link href={`/individuals/${record.individual.id}`}>

@@ -13,15 +13,16 @@ export default function ProtocolCitizen({
   record: CompleteRecord & ProtocolCitizen;
 }) {
   return (
-    <Card title="Citizen">
+    <Card>
       <Lookup>{record.type}</Lookup>
       {record.data && (
         <div>
           <p>
-            {record.data.banded} {record.data.band_combo}
+            <Lookup>{record.data.banded}</Lookup> {record.data.band_combo}
           </p>
           <p>
-            {record.data.life_stage_guess} {record.data.sex_guess}
+            <Lookup>{record.data.life_stage_guess}</Lookup>{" "}
+            <Lookup>{record.data.sex_guess}</Lookup>
           </p>
         </div>
       )}

@@ -7,7 +7,7 @@ const ProtocolMeasurementSchema = RecordFormSchema.extend({
   type: z.string(),
   data: z.object({
     value: z.string().or(z.number()),
-    units: z.string().optional(),
+    units: z.string().nullish(),
   }),
   individual_id: z.string().uuid(),
 });

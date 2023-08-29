@@ -42,7 +42,11 @@ const ProtocolMeasurementForm = () => {
             <Field.Input type="text" label="Value" name="data.value" />
           </div>
           <div className="col-md-6">
-            <Field.Input type="text" label="Units" name="data.units" />
+            <Field.Select
+              label="Units"
+              name="data.units"
+              dictionaryClass="unit"
+            />
           </div>
         </div>
       </Form.Fieldset>

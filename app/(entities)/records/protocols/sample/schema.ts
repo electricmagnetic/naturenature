@@ -5,8 +5,9 @@ import { RecordFormSchema } from "../../validations";
 const ProtocolSampleSchema = RecordFormSchema.extend({
   action: z.string(),
   data: z.object({
-    value: z.string().or(z.number()),
-    units: z.string().optional(),
+    value: z.string().or(z.number()).nullish(),
+    units: z.string().nullish(),
+    comments: z.string().nullish(),
   }),
   individual_id: z.string().uuid(),
   object_id: z.string().uuid(),

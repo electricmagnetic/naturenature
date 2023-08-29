@@ -39,11 +39,18 @@ const ProtocolSampleForm = () => {
       </Form.Fieldset>
       <Form.Fieldset title="Sample">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-3">
             <Field.Input type="text" label="Value" name="data.value" />
           </div>
+          <div className="col-md-3">
+            <Field.Select
+              label="Units"
+              name="data.units"
+              dictionaryClass="unit"
+            />
+          </div>
           <div className="col-md-6">
-            <Field.Input type="text" label="Units" name="data.units" />
+            <Field.Input type="text" label="Comments" name="data.comments" />
           </div>
         </div>
       </Form.Fieldset>

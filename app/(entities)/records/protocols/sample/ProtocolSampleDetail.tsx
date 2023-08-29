@@ -13,7 +13,7 @@ export default function ProtocolSample({
   record: CompleteRecord & ProtocolSample;
 }) {
   return (
-    <Card title="Sample">
+    <Card>
       <div>
         <Lookup formatted>{record.action}</Lookup>{" "}
         {record.object && (
@@ -30,7 +30,10 @@ export default function ProtocolSample({
       </div>
       {record.data && (
         <div>
-          {record.data.value} {record.data.units}
+          <div>
+            {record.data.value} <Lookup>{record.data.units}</Lookup>
+          </div>
+          {record.data.comments && <small>{record.data.comments}</small>}
         </div>
       )}
     </Card>
