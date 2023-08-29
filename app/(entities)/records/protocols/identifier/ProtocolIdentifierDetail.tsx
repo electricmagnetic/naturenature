@@ -5,11 +5,12 @@ import Link from "next/link";
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
 import type { CompleteRecord } from "../../types";
+import type { ProtocolIdentifier } from "./schema";
 
 export default function ProtocolIdentifier({
   record,
 }: {
-  record: CompleteRecord;
+  record: CompleteRecord & ProtocolIdentifier;
 }) {
   return (
     <Card title="Identifier">

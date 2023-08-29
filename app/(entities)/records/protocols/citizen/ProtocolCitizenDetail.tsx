@@ -4,24 +4,24 @@ import Link from "next/link";
 
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
-import type { CompleteRecord, ProtocolCitizenData } from "../../types";
+import type { CompleteRecord } from "../../types";
+import type { ProtocolCitizen } from "./schema";
+
 export default function ProtocolCitizen({
   record,
 }: {
-  record: CompleteRecord;
+  record: CompleteRecord & ProtocolCitizen;
 }) {
-  const data = record.data as ProtocolCitizenData;
-
   return (
     <Card title="Citizen">
       <Lookup>{record.type}</Lookup>
-      {data && (
+      {record.data && (
         <div>
           <p>
-            {data.banded} {data.band_combo}
+            {record.data.banded} {record.data.band_combo}
           </p>
           <p>
-            {data.life_stage_guess} {data.sex_guess}
+            {record.data.life_stage_guess} {record.data.sex_guess}
           </p>
         </div>
       )}
