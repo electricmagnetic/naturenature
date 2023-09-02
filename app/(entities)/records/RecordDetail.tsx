@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
 import Lookup from "@/components/dictionary/Lookup";
@@ -15,6 +17,9 @@ export default function RecordDetail({ record }: { record: CompleteRecord }) {
     <>
       <Section isPrimary>
         <Properties>
+          <Properties.Item name="Linked Event">
+            <Link href={`/events/${record.event_id}`}>Event</Link>
+          </Properties.Item>
           <Properties.Item name="Protocol">
             <Lookup formatted>{protocol}</Lookup>
           </Properties.Item>
