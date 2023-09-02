@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { BaseFormSchema } from "@/components/forms/helpers";
+import { Protocol } from "./protocols/metadata";
 import type { Record, RecordDto } from "./types";
 
 // Validations
@@ -12,7 +13,7 @@ export const RecordFormSchema = BaseFormSchema.extend({
   media_id: z.string().uuid().nullable(),
   object_id: z.string().uuid().nullable(),
   person_id: z.string().uuid().nullable(),
-  protocol: z.string(),
+  protocol: z.nativeEnum(Protocol),
   type: z.string().nullable(),
 });
 
