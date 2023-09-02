@@ -71,6 +71,10 @@ $paragraph-margin-bottom: 0.75rem;
 $card-border-radius: 0;
 
 // Accordion
+$accordion-padding-y: 0.75rem;
+$accordion-padding-x: $accordion-padding-y;
+$accordion-body-padding-y: 1rem;
+$accordion-body-padding-x: $accordion-body-padding-y;
 $accordion-border-radius: 0;
 
 $accordion-bg: $body-bg;
