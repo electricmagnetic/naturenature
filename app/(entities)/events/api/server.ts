@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
 
 import type { CompleteEvent, EventRelatedObjects } from "../types";
-import uuidOrNotFound from "@/components/helpers/uuidOrNotFound";
+import { uuidOrNotFound } from "@/components/helpers/uuid";
 
 export const getEvents = async () => {
   const supabase = createServerSupabaseClient();

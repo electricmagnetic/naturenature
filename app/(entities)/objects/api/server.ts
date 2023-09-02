@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
-import uuidOrNotFound from "@/components/helpers/uuidOrNotFound";
+import { uuidOrNotFound } from "@/components/helpers/uuid";
 
 export const getObjects = async () => {
   const supabase = createServerSupabaseClient();
