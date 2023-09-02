@@ -20,6 +20,7 @@ import {
   initialValues,
   formToDto,
   entityToForm,
+  RecordFormInput,
 } from "../validations";
 import type { Protocol } from "./metadata";
 import type {
@@ -58,19 +59,24 @@ const protocolSchemas: ProtocolSchemas = {
 export default function ProtocolForm({
   protocol,
   record,
+  valuesFromParams,
   recordRelatedObjects,
   ...others
 }: {
   protocol: Protocol;
   record?: Record;
+  valuesFromParams?: Partial<RecordFormInput>;
   recordRelatedObjects?: RecordRelatedObjects;
 }) {
   const SpecificProtocolForm = protocolComponents[protocol];
   const specificProtocolValidation = protocolSchemas[protocol];
 
-  const initialValueWithSelectedProtocol = Object.assign({}, initialValues, {
-    protocol: protocol,
-  });
+  // Replace initial values with already-validated values from search params (if provided)
+  const initialValuesWithParams = Object.assign(
+    {},
+    initialValues,
+    valuesFromParams,
+  );
 
   return (
     <Form
@@ -81,7 +87,7 @@ export default function ProtocolForm({
       render={SpecificProtocolForm}
       entity={record}
       relatedObjects={recordRelatedObjects}
-      initialValues={initialValueWithSelectedProtocol}
+      initialValues={initialValuesWithParams}
       schema={specificProtocolValidation}
       {...others}
     />

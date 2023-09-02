@@ -5,6 +5,7 @@ import GeoJSON from "@/components/geospatial/GeoJSON";
 import Section from "@/components/layout/Section";
 import Header from "@/components/layout/Header";
 import Accordion from "@/components/ui/Accordion";
+import ActionButton from "@/components/ui/ActionButton";
 import DateTime from "@/components/ui/DateTime";
 import Icon from "@/components/ui/Icon";
 import Message from "@/components/ui/Message";
@@ -97,44 +98,49 @@ export default function EventDetail({
           </Section>
         </div>
       </div>
-      <>
+      <section>
+        <Header.Entity entity="record">
+          <ActionButton
+            iconName="plus-circle"
+            href={`/records/new?event_id=${event.id}`}
+          >
+            Create Linked Record
+          </ActionButton>
+        </Header.Entity>
         {records && records.length > 0 ? (
-          <section>
-            <Header.Entity entity="record" />
-            <Accordion>
-              {(
-                Object.entries(recordsByProtocol) as Entries<RecordsByProtocol>
-              ).map(
-                ([key, recordByProtocol]) =>
-                  recordByProtocol.length > 0 && (
-                    <Accordion.Item key={key}>
-                      <Accordion.Header id={key}>
-                        <Icon iconName={protocolMetadata[key].iconName} />
-                        {protocolMetadata[key].name}{" "}
-                      </Accordion.Header>
-                      <Accordion.Body id={key}>
-                        <div className="row row-cols-md-3 g-3">
-                          {recordByProtocol.map((record) => (
-                            <div className="col-md" key={record.id}>
-                              <ProtocolDetail
-                                protocol={record.protocol}
-                                record={record}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  ),
-              )}
-            </Accordion>
-          </section>
+          <Accordion>
+            {(
+              Object.entries(recordsByProtocol) as Entries<RecordsByProtocol>
+            ).map(
+              ([key, recordByProtocol]) =>
+                recordByProtocol.length > 0 && (
+                  <Accordion.Item key={key}>
+                    <Accordion.Header id={key}>
+                      <Icon iconName={protocolMetadata[key].iconName} />
+                      {protocolMetadata[key].name}{" "}
+                    </Accordion.Header>
+                    <Accordion.Body id={key}>
+                      <div className="row row-cols-md-3 g-3">
+                        {recordByProtocol.map((record) => (
+                          <div className="col-md" key={record.id}>
+                            <ProtocolDetail
+                              protocol={record.protocol}
+                              record={record}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                ),
+            )}
+          </Accordion>
         ) : (
           <Section>
             <Message>No records associated with this event</Message>
           </Section>
         )}
-      </>
+      </section>
     </>
   );
 }

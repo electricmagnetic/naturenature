@@ -33,11 +33,9 @@ export const entityToForm = (record: Record): RecordFormInput => {
 export const initialValues: Partial<RecordFormInput> = {
   action: null,
   data: null,
-  //  event_id: null,
   individual_id: null,
   media_id: null,
   object_id: null,
   person_id: null,
-  //  protocol: null,
   type: null,
 };

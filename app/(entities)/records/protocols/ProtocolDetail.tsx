@@ -8,9 +8,10 @@ import ProtocolObservationDetail from "./observation/ProtocolObservationDetail";
 import ProtocolPersonDetail from "./person/ProtocolPersonDetail";
 import ProtocolSampleDetail from "./sample/ProtocolSampleDetail";
 
+import { isProtocol } from "./helpers";
+
 import type { Protocol } from "./metadata";
 import type { CompleteRecord, ProtocolComponents } from "../types";
-import { isProtocol } from "./helpers";
 
 const protocolComponents: ProtocolComponents<{ record: CompleteRecord }> = {
   CITIZEN: ProtocolCitizenDetail,
