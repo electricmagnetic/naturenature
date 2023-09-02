@@ -25,7 +25,7 @@ export default function ProtocolMeasurement({
       </div>
       {record.data && (
         <div>
-          {record.data.value} {record.data.units}
+          {record.data.value} <Lookup>{record.data.units}</Lookup>
         </div>
       )}
     </Card>
