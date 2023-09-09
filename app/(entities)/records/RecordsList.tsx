@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import ActionButton from "@/components/ui/ActionButton";
+import ButtonCollection from "@/components/ui/ButtonCollection";
 import Lookup from "@/components/dictionary/Lookup";
 import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
@@ -47,9 +48,11 @@ export default function RecordsList({ records }: { records: Record[] }) {
                 )}
               </Table.Data>
               <Table.Data>
-                <ActionButton.View entity="record" id={record.id} />
-                <ActionButton.Edit entity="record" id={record.id} />
-                <ActionButton.Delete entity="record" id={record.id} />
+                <ButtonCollection>
+                  <ActionButton.View entity="record" id={record.id} />
+                  <ActionButton.Edit entity="record" id={record.id} />
+                  <ActionButton.Delete entity="record" id={record.id} />
+                </ButtonCollection>
               </Table.Data>
             </Table.Row>
           ))}

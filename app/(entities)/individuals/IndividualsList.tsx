@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import ActionButton from "@/components/ui/ActionButton";
+import ButtonCollection from "@/components/ui/ButtonCollection";
 import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
 import type { Individual } from "./types";
@@ -28,9 +29,11 @@ export default function IndividualsList({
                 </Link>
               </Table.Data>
               <Table.Data>
-                <ActionButton.View entity="individual" id={individual.id} />
-                <ActionButton.Edit entity="individual" id={individual.id} />
-                <ActionButton.Delete entity="individual" id={individual.id} />
+                <ButtonCollection>
+                  <ActionButton.View entity="individual" id={individual.id} />
+                  <ActionButton.Edit entity="individual" id={individual.id} />
+                  <ActionButton.Delete entity="individual" id={individual.id} />
+                </ButtonCollection>
               </Table.Data>
             </Table.Row>
           ))}

@@ -3,9 +3,9 @@ import { User } from "@supabase/supabase-js";
 import Section from "@/components/layout/Section";
 import Header from "@/components/layout/Header";
 import Properties from "@/components/ui/Properties";
-import Toolbar from "@/components/ui/Toolbar";
 import DateTime from "@/components/ui/DateTime";
 import ActionButton from "@/components/ui/ActionButton";
+import ButtonCollection from "@/components/ui/ButtonCollection";
 
 import RedirectLinkButton from "./RedirectLinkButton";
 import ClearLocalStorageButton from "./ClearLocalStorageButton";
@@ -15,12 +15,12 @@ export default function AccountView({ user }: { user: User }) {
   return (
     <main>
       <Header title="Account" iconName="person-circle">
-        <Toolbar>
+        <ButtonCollection>
           <ActionButton href="/" iconName="house">
             Home
           </ActionButton>
           <RedirectLinkButton />
-        </Toolbar>
+        </ButtonCollection>
       </Header>
       <Section isPrimary>
         <Properties>

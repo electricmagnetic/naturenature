@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import ActionButton from "@/components/ui/ActionButton";
+import ButtonCollection from "@/components/ui/ButtonCollection";
 import Lookup from "@/components/dictionary/Lookup";
 import Table from "@/components/ui/Table";
 import Section from "@/components/layout/Section";
@@ -33,9 +34,11 @@ export default function ObjectsList({ objects }: { objects: Object[] }) {
                 </Link>
               </Table.Data>
               <Table.Data>
-                <ActionButton.View entity="object" id={object.id} />
-                <ActionButton.Edit entity="object" id={object.id} />
-                <ActionButton.Delete entity="object" id={object.id} />
+                <ButtonCollection>
+                  <ActionButton.View entity="object" id={object.id} />
+                  <ActionButton.Edit entity="object" id={object.id} />
+                  <ActionButton.Delete entity="object" id={object.id} />
+                </ButtonCollection>
               </Table.Data>
             </Table.Row>
           ))}

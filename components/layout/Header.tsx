@@ -2,8 +2,8 @@ import { PropsWithChildren } from "react";
 
 import { EntityMetadatum, getMetadatum } from "@/app/(entities)/metadata";
 import ActionButton from "@/components/ui/ActionButton";
+import ButtonCollection from "../ui/ButtonCollection";
 import Icon from "@/components/ui/Icon";
-import Toolbar from "@/components/ui/Toolbar";
 
 export enum Action {
   Create = "Create",
@@ -50,24 +50,20 @@ const HeaderEntity = ({
       iconName={entityMetadatum.iconName}
     >
       {actionButtons && (
-        <Toolbar>
+        <ButtonCollection>
           {actionButtons.includes(Action.Create) && (
             <ActionButton.Create entity={entity} />
           )}
-          {id && (
-            <>
-              {actionButtons.includes(Action.View) && (
-                <ActionButton.View entity={entity} id={id} />
-              )}
-              {actionButtons.includes(Action.Edit) && (
-                <ActionButton.Edit entity={entity} id={id} />
-              )}
-              {actionButtons.includes(Action.Delete) && (
-                <ActionButton.Delete entity={entity} id={id} />
-              )}
-            </>
+          {actionButtons.includes(Action.View) && id && (
+            <ActionButton.View entity={entity} id={id} />
           )}
-        </Toolbar>
+          {actionButtons.includes(Action.Edit) && id && (
+            <ActionButton.Edit entity={entity} id={id} />
+          )}
+          {actionButtons.includes(Action.Delete) && id && (
+            <ActionButton.Delete entity={entity} id={id} />
+          )}
+        </ButtonCollection>
       )}
       {children}
     </Header>

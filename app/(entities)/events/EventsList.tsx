@@ -1,13 +1,14 @@
 import Link from "next/link";
 
 import ActionButton from "@/components/ui/ActionButton";
+import SelectButton from "@/components/ui/SelectButton";
+import ButtonCollection from "@/components/ui/ButtonCollection";
 import Table from "@/components/ui/Table";
 import DateTime from "@/components/ui/DateTime";
 import Lookup from "@/components/dictionary/Lookup";
 import PublicPrivate from "@/components/ui/PublicPrivate";
 import Section from "@/components/layout/Section";
 import type { Event } from "./types";
-import SelectButton from "@/components/ui/SelectButton";
 
 export default function EventsList({
   events,
@@ -59,9 +60,11 @@ export default function EventsList({
                 </Table.Data>
               ) : (
                 <Table.Data>
-                  <ActionButton.View entity="event" id={event.id} />
-                  <ActionButton.Edit entity="event" id={event.id} />
-                  <ActionButton.Delete entity="event" id={event.id} />
+                  <ButtonCollection>
+                    <ActionButton.View entity="event" id={event.id} />
+                    <ActionButton.Edit entity="event" id={event.id} />
+                    <ActionButton.Delete entity="event" id={event.id} />
+                  </ButtonCollection>
                 </Table.Data>
               )}
             </Table.Row>

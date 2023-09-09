@@ -6,6 +6,7 @@ import Section from "@/components/layout/Section";
 import Header from "@/components/layout/Header";
 import Accordion from "@/components/ui/Accordion";
 import ActionButton from "@/components/ui/ActionButton";
+import ButtonCollection from "@/components/ui/ButtonCollection";
 import DateTime from "@/components/ui/DateTime";
 import Icon from "@/components/ui/Icon";
 import Message from "@/components/ui/Message";
@@ -100,12 +101,14 @@ export default function EventDetail({
       </div>
       <section>
         <Header.Entity entity="record">
-          <ActionButton
-            iconName="plus-circle"
-            href={`/records/new?event_id=${event.id}`}
-          >
-            Create Linked Record
-          </ActionButton>
+          <ButtonCollection>
+            <ActionButton
+              iconName="plus-circle"
+              href={`/records/new?event_id=${event.id}`}
+            >
+              Create Linked Record
+            </ActionButton>
+          </ButtonCollection>
         </Header.Entity>
         {records && records.length > 0 ? (
           <Accordion>
