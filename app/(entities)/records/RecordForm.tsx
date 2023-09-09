@@ -5,6 +5,7 @@ import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import Lookup from "@/components/dictionary/Lookup";
 import Section from "@/components/layout/Section";
 import Properties from "@/components/ui/Properties";
+import EventSelector from "@/app/(entities)/events/EventSelector";
 
 import ProtocolForm from "./protocols/ProtocolForm";
 import ProtocolSelector from "./protocols/ProtocolSelector";
@@ -51,7 +52,11 @@ export default function RecordForm({
 
   // An event_id must be provided
   if (!paramsAndRecord.event_id) {
-    return <Section title="Select event">TODO</Section>;
+    return (
+      <Section title="Select event">
+        <EventSelector />
+      </Section>
+    );
   }
 
   return (

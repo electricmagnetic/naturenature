@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import Link from "next/link";
 
-import { getMetadatum, getMetadatumByTable } from "@/app/(entities)/metadata";
+import { getMetadatum } from "@/app/(entities)/metadata";
 import Icon from "./Icon";
 
 const ActionButton = ({

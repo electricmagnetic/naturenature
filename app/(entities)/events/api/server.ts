@@ -7,7 +7,10 @@ import { uuidOrNotFound } from "@/components/helpers/uuid";
 
 export const getEvents = async () => {
   const supabase = createServerSupabaseClient();
-  const { data: events, error } = await supabase.from("events").select("*");
+  const { data: events, error } = await supabase
+    .from("events")
+    .select("*")
+    .order("datetime", { ascending: false });
 
   if (error) throw Error(error.message);
   if (!events) return notFound();

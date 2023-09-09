@@ -17,3 +17,16 @@ export const upsertEvent = async (values: EventDto) => {
 
   return { status, data, error };
 };
+
+export const getRecentEvents = async () => {
+  const supabase = createClientComponentClient<Database>();
+
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) throw Error(error.message);
+  if (!data) return [];
+
+  return data;
+};
