@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getRecords } from "./api";
+import { getRecords } from "./api/server";
 import RecordsList from "./RecordsList";
 
 export default async function Records() {

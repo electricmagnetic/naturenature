@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import Link from "next/link";
 
-import metadata from "@/app/(entities)/metadata";
+import { getMetadatum } from "@/app/(entities)/metadata";
 import Icon from "./Icon";
 
 const ActionButton = ({
@@ -24,11 +24,9 @@ type ActionButtonEntity = { entity: string; table?: never };
 type ActionButton = ActionButtonTable | ActionButtonEntity;
 type ActionButtonWithId = { id: string };
 
-const getTable = (entity: string) => metadata[entity].table;
-
 const ActionButtonCreate = ({ entity, table, ...others }: ActionButton) => (
   <ActionButton
-    href={`/${entity ? getTable(entity) : table}/new`}
+    href={`/${entity ? getMetadatum(entity).table : table}/new`}
     {...others}
     iconName="plus-circle"
   >
@@ -43,7 +41,7 @@ const ActionButtonView = ({
   ...others
 }: ActionButton & ActionButtonWithId) => (
   <ActionButton
-    href={`/${entity ? getTable(entity) : table}/${id}`}
+    href={`/${entity ? getMetadatum(entity).table : table}/${id}`}
     {...others}
     iconName="eye"
   >
@@ -58,7 +56,7 @@ const ActionButtonEdit = ({
   ...others
 }: ActionButton & ActionButtonWithId) => (
   <ActionButton
-    href={`/${entity ? getTable(entity) : table}/${id}/edit`}
+    href={`/${entity ? getMetadatum(entity).table : table}/${id}/edit`}
     {...others}
     iconName="pencil-square"
   >
@@ -73,7 +71,7 @@ const ActionButtonDelete = ({
   ...others
 }: ActionButton & ActionButtonWithId) => (
   <ActionButton
-    href={`/${entity ? getTable(entity) : table}/${id}/delete`}
+    href={`/${entity ? getMetadatum(entity).table : table}/${id}/delete`}
     {...others}
     iconName="trash"
   >

@@ -3,19 +3,28 @@ import dynamic from "next/dynamic";
 import Lookup from "@/components/dictionary/Lookup";
 import GeoJSON from "@/components/geospatial/GeoJSON";
 import Section from "@/components/layout/Section";
+import Header from "@/components/layout/Header";
+import Accordion from "@/components/ui/Accordion";
+import ActionButton from "@/components/ui/ActionButton";
+import DateTime from "@/components/ui/DateTime";
+import Icon from "@/components/ui/Icon";
+import Message from "@/components/ui/Message";
 import Properties from "@/components/ui/Properties";
 import PublicPrivate from "@/components/ui/PublicPrivate";
-import DateTime from "@/components/ui/DateTime";
-import Protocol from "@/app/(entities)/records/protocols/Protocol";
-import Message from "@/components/ui/Message";
-
+import ProtocolDetail from "@/app/(entities)/records/protocols/ProtocolDetail";
+import { Protocol, protocolMetadata } from "../records/protocols/metadata";
 import type { Json } from "@/types/_supabase";
+import type { Entries } from "@/types/generics";
 import type { CompleteRecord } from "@/app/(entities)/records/types";
 import type { CompleteEvent } from "./types";
 
 const Map = dynamic(() => import("@/components/geospatial/Map"), {
   ssr: false,
 });
+
+type RecordsByProtocol = {
+  [key in Protocol]: CompleteRecord[];
+};
 
 export default function EventDetail({
   event,
@@ -24,51 +33,114 @@ export default function EventDetail({
   event: CompleteEvent;
   records: CompleteRecord[];
 }) {
+  const recordsByProtocol = Object.fromEntries(
+    Object.keys(protocolMetadata).map((key) => [
+      key as Protocol,
+      records.filter((record) => record.protocol === key),
+    ]),
+  ) as RecordsByProtocol;
+
   return (
     <>
-      <Section title="Basic details" isPrimary>
-        <Properties>
-          <Properties.Item name="Date/Time">
-            <DateTime datetime={event.datetime} />
-          </Properties.Item>
-          <Properties.Item name="Source">
-            <Lookup>{event.source}</Lookup>
-          </Properties.Item>
-          <Properties.Item name="Comments">{event.comments}</Properties.Item>
-          <Properties.Item name="Visibility">
-            <PublicPrivate>{event.is_public}</PublicPrivate>
-          </Properties.Item>
-          <Properties.Item name="Reference">{event.reference}</Properties.Item>
-        </Properties>
-      </Section>
-      <Section title="Records">
+      <div className="row">
+        <div className="col-md-6">
+          <Section title="Basic details">
+            <Properties>
+              <Properties.Item name="Date/Time">
+                <DateTime datetime={event.datetime} />
+              </Properties.Item>
+            </Properties>
+          </Section>
+          <Section title="Metadata">
+            <Properties>
+              <Properties.Item name="Visibility">
+                <PublicPrivate>{event.is_public}</PublicPrivate>
+              </Properties.Item>
+            </Properties>
+            <Properties>
+              <Properties.Item name="Status">
+                <Lookup>{event.status}</Lookup>
+              </Properties.Item>
+              <Properties.Item name="Source">
+                <Lookup>{event.source}</Lookup>
+              </Properties.Item>
+              <Properties.Item name="Reference">
+                {event.reference}
+              </Properties.Item>
+            </Properties>
+            <Properties>
+              <Properties.Item name="Creation Date/Time">
+                <DateTime datetime={event.created_at} />
+              </Properties.Item>
+            </Properties>
+          </Section>
+          <Section title="Comments">
+            <small>{event.comments}</small>
+          </Section>
+        </div>
+        <div className="col-md-6">
+          <Section title="Location">
+            <>
+              {event.place && (
+                <Map height={480}>
+                  <GeoJSON data={event.place.geometry as Json} />
+                </Map>
+              )}
+              {event.event_place_geometry && (
+                <Map height={480}>
+                  <GeoJSON data={event.event_place_geometry as Json} />
+                </Map>
+              )}
+              {!event.place && !event.event_place_geometry && (
+                <Message>No place associated with this event</Message>
+              )}
+            </>
+          </Section>
+        </div>
+      </div>
+      <section>
+        <Header.Entity entity="record">
+          <ActionButton
+            iconName="plus-circle"
+            href={`/records/new?event_id=${event.id}`}
+          >
+            Create Linked Record
+          </ActionButton>
+        </Header.Entity>
         {records && records.length > 0 ? (
-          <div className="row row-cols-md-3 g-3">
-            {records.map((record) => (
-              <Protocol record={record} className="col-md" key={record.id} />
-            ))}
-          </div>
+          <Accordion>
+            {(
+              Object.entries(recordsByProtocol) as Entries<RecordsByProtocol>
+            ).map(
+              ([key, recordByProtocol]) =>
+                recordByProtocol.length > 0 && (
+                  <Accordion.Item key={key}>
+                    <Accordion.Header id={key}>
+                      <Icon iconName={protocolMetadata[key].iconName} />
+                      {protocolMetadata[key].name}{" "}
+                    </Accordion.Header>
+                    <Accordion.Body id={key}>
+                      <div className="row row-cols-md-3 g-3">
+                        {recordByProtocol.map((record) => (
+                          <div className="col-md" key={record.id}>
+                            <ProtocolDetail
+                              protocol={record.protocol}
+                              record={record}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                ),
+            )}
+          </Accordion>
         ) : (
-          <Message>No records associated with this event</Message>
+          <Section>
+            <Message>No records associated with this event</Message>
+          </Section>
         )}
-      </Section>
-      <Section title="Place">
-        <>
-          {event.place && (
-            <Map scrollWheelZoom={false}>
-              <GeoJSON data={event.place.geometry as Json} />
-            </Map>
-          )}
-          {event.event_place_geometry && (
-            <Map scrollWheelZoom={false}>
-              <GeoJSON data={event.event_place_geometry as Json} />
-            </Map>
-          )}
-          {!event.place && !event.event_place_geometry && (
-            <Message>No place associated with this event</Message>
-          )}
-        </>
-      </Section>
+      </section>
     </>
   );
 }

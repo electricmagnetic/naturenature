@@ -2,7 +2,7 @@
 
 import type { Session } from "@supabase/auth-helpers-nextjs";
 
-import metadata from "@/app/(entities)/metadata";
+import { entityMetadata } from "@/app/(entities)/metadata";
 import Icon from "@/components/ui/Icon";
 import NavLink from "./NavLink";
 
@@ -26,13 +26,13 @@ export default function NavAuthenticated({ session }: { session: Session }) {
       </button>
       <div className="collapse navbar-collapse" id="navbar">
         <ul className="navbar-nav me-auto">
-          {Object.keys(metadata).map((entity) => (
+          {Object.entries(entityMetadata).map(([entity, metadatum]) => (
             <NavLink
               key={entity}
-              href={`/${metadata[entity].table}`}
-              iconName={metadata[entity].iconName}
+              href={`/${metadatum.table}`}
+              iconName={metadatum.iconName}
             >
-              {metadata[entity].pluralName}
+              {metadatum.pluralName}
             </NavLink>
           ))}
         </ul>
@@ -49,14 +49,14 @@ export default function NavAuthenticated({ session }: { session: Session }) {
               Create
             </a>
             <ul className="dropdown-menu dropdown-menu-end">
-              {Object.keys(metadata).map((entity) => (
+              {Object.entries(entityMetadata).map(([entity, metadatum]) => (
                 <NavLink
                   key={entity}
                   isDropdownItem
-                  href={`/${metadata[entity].table}/new`}
-                  iconName={metadata[entity].iconName}
+                  href={`/${metadatum.table}/new`}
+                  iconName={metadatum.iconName}
                 >
-                  {metadata[entity].name}
+                  {metadatum.name}
                 </NavLink>
               ))}
             </ul>

@@ -1,14 +1,19 @@
 import { DateTime as LuxonDateTime } from "luxon";
 
-export default function DateTime({ datetime }: { datetime?: string | null }) {
-  return (
-    datetime && (
-      <>
-        {LuxonDateTime.fromISO(datetime).toLocaleString(
-          LuxonDateTime.DATETIME_MED,
-          { locale: process.env.NEXT_PUBLIC_LOCALE },
-        )}
-      </>
-    )
-  );
+export default function DateTime({
+  datetime,
+  relative,
+}: {
+  datetime?: string | null;
+  relative?: boolean;
+}) {
+  if (!datetime) return;
+  return relative
+    ? LuxonDateTime.fromISO(datetime).toRelative()
+    : LuxonDateTime.fromISO(datetime).toLocaleString(
+        LuxonDateTime.DATETIME_MED,
+        {
+          locale: process.env.NEXT_PUBLIC_LOCALE,
+        },
+      );
 }

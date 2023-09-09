@@ -4,17 +4,16 @@ import Link from "next/link";
 
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
-import type { CompleteRecord, ProtocolMeasurementData } from "../types";
+import type { CompleteRecord } from "../../types";
+import type { ProtocolMeasurement } from "./schema";
 
 export default function ProtocolMeasurement({
   record,
 }: {
-  record: CompleteRecord;
+  record: CompleteRecord & ProtocolMeasurement;
 }) {
-  const data = record.data as ProtocolMeasurementData;
-
   return (
-    <Card title="Measurement">
+    <Card>
       <div>
         <Lookup formatted>{record.action}</Lookup>{" "}
         <Lookup>{record.type}</Lookup> of{" "}
@@ -24,9 +23,9 @@ export default function ProtocolMeasurement({
           </Link>
         )}
       </div>
-      {data && (
+      {record.data && (
         <div>
-          {data.value} {data.units}
+          {record.data.value} <Lookup>{record.data.units}</Lookup>
         </div>
       )}
     </Card>

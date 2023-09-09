@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 
-import metadata, { EntityMetadatum } from "@/app/(entities)/metadata";
+import { EntityMetadatum, getMetadatum } from "@/app/(entities)/metadata";
 import ActionButton from "@/components/ui/ActionButton";
 import Icon from "@/components/ui/Icon";
 import Toolbar from "@/components/ui/Toolbar";
@@ -42,8 +42,7 @@ const HeaderEntity = ({
   action?: Action;
   actionButtons?: Action[];
 }>) => {
-  const entityMetadatum = metadata[entity];
-  if (!entityMetadatum) throw Error("Entity metadata not found");
+  const entityMetadatum = getMetadatum(entity);
 
   return (
     <Header

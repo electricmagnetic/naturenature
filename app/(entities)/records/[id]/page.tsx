@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 
-import { getRecord } from "../api";
+import { getRecord } from "../api/server";
 import RecordDetail from "../RecordDetail";
 
 export default async function Record({
@@ -16,7 +16,7 @@ export default async function Record({
         entity="record"
         action={Header.Action.View}
         id={id}
-        actionButtons={[Header.Action.Delete]}
+        actionButtons={[Header.Action.Edit, Header.Action.Delete]}
       />
       <RecordDetail record={record} />
     </main>

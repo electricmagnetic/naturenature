@@ -68,7 +68,7 @@ type FormProps<FormInput, EntityDto, Entity, RelatedObjects> = {
   }>;
   render: () => JSX.Element;
   schema: ZodType<FormInput>;
-  initialValues: FormInput;
+  initialValues: Partial<FormInput>;
   entity?: Entity;
   relatedObjects?: RelatedObjects;
 };

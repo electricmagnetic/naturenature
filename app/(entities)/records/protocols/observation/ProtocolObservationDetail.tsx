@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
-import type { CompleteRecord } from "../types";
+import type { CompleteRecord } from "../../types";
 
 export default function ProtocolObservation({
   record,
@@ -12,7 +12,7 @@ export default function ProtocolObservation({
   record: CompleteRecord;
 }) {
   return (
-    <Card title="Observation">
+    <Card>
       <Lookup>{record.type}</Lookup> of{" "}
       {record.individual && (
         <Link href={`/individuals/${record.individual.id}`}>

@@ -4,13 +4,16 @@ import Link from "next/link";
 
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
-import type { CompleteRecord, ProtocolSampleData } from "../types";
+import type { CompleteRecord } from "../../types";
+import type { ProtocolSample } from "./schema";
 
-export default function ProtocolSample({ record }: { record: CompleteRecord }) {
-  const data = record.data as ProtocolSampleData;
-
+export default function ProtocolSample({
+  record,
+}: {
+  record: CompleteRecord & ProtocolSample;
+}) {
   return (
-    <Card title="Sample">
+    <Card>
       <div>
         <Lookup formatted>{record.action}</Lookup>{" "}
         {record.object && (
@@ -25,9 +28,12 @@ export default function ProtocolSample({ record }: { record: CompleteRecord }) {
           </Link>
         )}
       </div>
-      {data && (
+      {record.data && (
         <div>
-          {data.value} {data.units}
+          <div>
+            {record.data.value} <Lookup>{record.data.units}</Lookup>
+          </div>
+          {record.data.comments && <small>{record.data.comments}</small>}
         </div>
       )}
     </Card>

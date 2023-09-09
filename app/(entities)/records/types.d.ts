@@ -1,5 +1,8 @@
 import type { FC } from "react";
+import type { ZodSchema } from "zod";
+
 import type { UpdateDto, TableRow, InsertDto } from "@/types/database";
+import type { Protocol } from "./protocols/metadata";
 
 // Supabase types
 export type Record = TableRow<"records">;
@@ -17,24 +20,10 @@ export type RecordRelatedObjects = {
 export type CompleteRecord = Record & RecordRelatedObjects;
 
 // Type for protocol components (responsible for rendering the different protocols)
-export type ProtocolComponent = {
-  [key: string]: FC<{ record: CompleteRecord }>;
+export type ProtocolComponents<T = void> = {
+  [key in Protocol]: (T?) => JSX.Element;
 };
 
-// Types for JSON fields in Records
-export type ProtocolMeasurementData = {
-  value: number;
-  units: string;
-};
-
-export type ProtocolSampleData = {
-  value: number;
-  units: string;
-};
-
-export type ProtocolCitizenData = {
-  banded: string;
-  band_combo: string | undefined;
-  life_stage_guess: string | undefined;
-  sex_guess: string | undefined;
+export type ProtocolSchemas = {
+  [key in Protocol]: ZodSchema;
 };

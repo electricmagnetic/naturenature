@@ -2,11 +2,11 @@
 
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
-import type { CompleteRecord } from "../types";
+import type { CompleteRecord } from "../../types";
 
 export default function ProtocolGroup({ record }: { record: CompleteRecord }) {
   return (
-    <Card title="Group">
+    <Card>
       <Lookup>{record.type}</Lookup>
     </Card>
   );
