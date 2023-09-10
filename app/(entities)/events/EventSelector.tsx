@@ -13,7 +13,7 @@ export default function EventSelector() {
       setEvents(data);
       setIsPending(false);
     });
-  }, [getRecentEvents, setEvents]);
+  }, [setEvents, setIsPending]);
 
   useEffect(() => {
     getEvents();
