@@ -123,14 +123,14 @@ export default function EventDetail({
                       {protocolMetadata[key].name}{" "}
                     </Accordion.Header>
                     <Accordion.Body id={key}>
-                      <div className="row row-cols-md-3 g-3">
+                      <div className="row g-3">
                         {recordByProtocol.map((record) => (
-                          <div className="col-md" key={record.id}>
-                            <ProtocolDetail
-                              protocol={record.protocol}
-                              record={record}
-                            />
-                          </div>
+                          <ProtocolDetail
+                            protocol={record.protocol}
+                            record={record}
+                            key={record.id}
+                            asBlock
+                          />
                         ))}
                       </div>
                     </Accordion.Body>

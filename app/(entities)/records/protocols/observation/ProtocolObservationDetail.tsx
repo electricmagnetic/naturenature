@@ -2,23 +2,39 @@
 
 import Link from "next/link";
 
+import Block from "@/components/ui/Block";
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
 import type { CompleteRecord } from "../../types";
 
-export default function ProtocolObservation({
+export const ProtocolObservationPage = ({
   record,
 }: {
   record: CompleteRecord;
-}) {
-  return (
-    <Card>
+}) => (
+  <Card>
+    <Lookup>{record.type}</Lookup> of{" "}
+    {record.individual && (
+      <Link href={`/individuals/${record.individual.id}`}>
+        {record.individual?.name}
+      </Link>
+    )}
+  </Card>
+);
+
+export const ProtocolObservationBlock = ({
+  record,
+}: {
+  record: CompleteRecord;
+}) => (
+  <div className="col-md-4">
+    <Block entity="record" id={record.id}>
       <Lookup>{record.type}</Lookup> of{" "}
       {record.individual && (
         <Link href={`/individuals/${record.individual.id}`}>
           {record.individual?.name}
         </Link>
       )}
-    </Card>
-  );
-}
+    </Block>
+  </div>
+);
