@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import Link from "next/link";
 
 import Card from "@/app/_components/ui/Card";
 import DateTime from "@/app/_components/ui/DateTime";
@@ -39,17 +40,16 @@ const blockComponents: ProtocolDetailComponents = {
 export default function ProtocolBlock({
   protocol,
   record,
-  children,
   displayProps = {
     showEvent: false,
     showIndividual: true,
     showButtons: true,
   },
-}: PropsWithChildren<{
+}: {
   protocol: Protocol | string;
   record: CompleteRecord;
   displayProps?: DisplayProps;
-}>) {
+}) {
   if (!isProtocol(protocol)) throw Error("Invalid protocol");
 
   const ProtocolDetailComponent = blockComponents[protocol];
@@ -64,8 +64,12 @@ export default function ProtocolBlock({
             <DateTime datetime={record.event.datetime} />
           </div>
         )}
-        {showIndividual && (
-          <div className="col-md-2">{record.individual?.name}</div>
+        {showIndividual && record.individual && (
+          <div className="col-md-2">
+            <Link href={`/individuals/${record.individual.id}`}>
+              {record.individual.name}
+            </Link>
+          </div>
         )}
         <div className="col-md">
           <ProtocolDetailComponent record={record} />
