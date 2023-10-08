@@ -1,7 +1,11 @@
 import Header from "@/components/layout/Header";
 
-import { getIndividual } from "../api/server";
+import RecordBlocks from "@/app/(entities)/records/RecordBlocks";
+import { getRecordsBy } from "@/app/(entities)/records/api/server";
 import IndividualDetail from "../IndividualDetail";
+import { getIndividual } from "../api/server";
+import Section from "@/components/layout/Section";
+import Message from "@/components/ui/Message";
 
 export default async function Individual({
   params: { id },
@@ -9,6 +13,7 @@ export default async function Individual({
   params: { id: string };
 }) {
   const individual = await getIndividual(id);
+  const records = await getRecordsBy("individual_id", id);
 
   return (
     <main>
@@ -19,6 +24,23 @@ export default async function Individual({
         actionButtons={[Header.Action.Edit, Header.Action.Delete]}
       />
       <IndividualDetail individual={individual} />
+      <section>
+        <Header.Entity entity="record" />
+        {records && records.length > 0 ? (
+          <RecordBlocks
+            records={records}
+            displayProps={{
+              showEvent: true,
+              showIndividual: false,
+              showButtons: false,
+            }}
+          />
+        ) : (
+          <Section>
+            <Message>No records associated with this individual</Message>
+          </Section>
+        )}
+      </section>
     </main>
   );
 }

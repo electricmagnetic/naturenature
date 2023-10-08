@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import clsx from "clsx";
 import Link from "next/link";
 
 import { getMetadatum } from "@/app/(entities)/metadata";
@@ -7,13 +7,29 @@ import Icon from "./Icon";
 const ActionButton = ({
   iconName,
   href,
-  children,
+  label,
+  small,
   ...others
-}: PropsWithChildren<{ iconName: string; href: string }>) => {
+}: {
+  iconName: string;
+  href: string;
+  label: string;
+  small?: boolean;
+}) => {
   return (
-    <Link className="btn btn-sm btn-outline-secondary" href={href} {...others}>
-      <Icon iconName={iconName} />
-      {children}
+    <Link
+      className={clsx("btn btn-outline-secondary", small ? "btn-xs" : "btn-sm")}
+      href={href}
+      {...others}
+    >
+      {small ? (
+        <Icon iconName={iconName} label={label} />
+      ) : (
+        <>
+          <Icon iconName={iconName} />
+          {label}
+        </>
+      )}
     </Link>
   );
 };
@@ -21,7 +37,10 @@ const ActionButton = ({
 type ActionButtonTable = { entity?: never; table: string };
 type ActionButtonEntity = { entity: string; table?: never };
 
-type ActionButton = ActionButtonTable | ActionButtonEntity;
+type ActionButton = { small?: boolean } & (
+  | ActionButtonTable
+  | ActionButtonEntity
+);
 type ActionButtonWithId = { id: string };
 
 const ActionButtonCreate = ({ entity, table, ...others }: ActionButton) => (
@@ -29,9 +48,8 @@ const ActionButtonCreate = ({ entity, table, ...others }: ActionButton) => (
     href={`/${entity ? getMetadatum(entity).table : table}/new`}
     {...others}
     iconName="plus-circle"
-  >
-    Create
-  </ActionButton>
+    label="Create"
+  />
 );
 
 const ActionButtonView = ({
@@ -44,9 +62,8 @@ const ActionButtonView = ({
     href={`/${entity ? getMetadatum(entity).table : table}/${id}`}
     {...others}
     iconName="eye"
-  >
-    View
-  </ActionButton>
+    label="View"
+  />
 );
 
 const ActionButtonEdit = ({
@@ -59,9 +76,8 @@ const ActionButtonEdit = ({
     href={`/${entity ? getMetadatum(entity).table : table}/${id}/edit`}
     {...others}
     iconName="pencil-square"
-  >
-    Edit
-  </ActionButton>
+    label="Edit"
+  />
 );
 
 const ActionButtonDelete = ({
@@ -74,9 +90,8 @@ const ActionButtonDelete = ({
     href={`/${entity ? getMetadatum(entity).table : table}/${id}/delete`}
     {...others}
     iconName="trash"
-  >
-    Delete
-  </ActionButton>
+    label="Delete"
+  />
 );
 
 ActionButton.Create = ActionButtonCreate;

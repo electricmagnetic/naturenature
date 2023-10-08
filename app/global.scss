@@ -73,7 +73,7 @@ $card-border-radius: 0;
 // Accordion
 $accordion-padding-y: 0.75rem;
 $accordion-padding-x: $accordion-padding-y;
-$accordion-body-padding-y: 1rem;
+$accordion-body-padding-y: 0.5rem;
 $accordion-body-padding-x: $accordion-body-padding-y;
 $accordion-border-radius: 0;
 
@@ -115,4 +115,11 @@ $accordion-button-active-bg: $accordion-button-bg;
       color: var(--bs-body-color);
     }
   }
+}
+
+// Button (xs)
+.btn-xs {
+  --bs-btn-padding-y: 0.2rem;
+  --bs-btn-padding-x: 0.4rem;
+  --bs-btn-font-size: 0.875rem;
 }

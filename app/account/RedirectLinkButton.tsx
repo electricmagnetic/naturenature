@@ -13,8 +13,10 @@ export default function RedirectLinkButton() {
 
   if (!next || next === "/") return null;
   return (
-    <ActionButton href={next} iconName="arrow-counterclockwise">
-      Return to {searchParams.get("next")}
-    </ActionButton>
+    <ActionButton
+      href={next}
+      iconName="arrow-counterclockwise"
+      label={`Return to ${searchParams.get("next")}`}
+    />
   );
 }

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 
-import Block from "@/components/ui/Block";
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
 import type { CompleteRecord } from "../../types";
@@ -27,14 +26,7 @@ export const ProtocolObservationBlock = ({
 }: {
   record: CompleteRecord;
 }) => (
-  <div className="col-md-4">
-    <Block entity="record" id={record.id}>
-      <Lookup>{record.type}</Lookup> of{" "}
-      {record.individual && (
-        <Link href={`/individuals/${record.individual.id}`}>
-          {record.individual?.name}
-        </Link>
-      )}
-    </Block>
+  <div>
+    <Lookup>{record.type}</Lookup>
   </div>
 );

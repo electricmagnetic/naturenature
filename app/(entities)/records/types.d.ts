@@ -27,3 +27,8 @@ export type ProtocolComponents<T = void> = {
 export type ProtocolSchemas = {
   [key in Protocol]: ZodSchema;
 };
+
+// Protocol Detail Components
+export type ProtocolDetailComponents = ProtocolComponents<{
+  record: CompleteRecord;
+}>;

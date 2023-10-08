@@ -6,7 +6,7 @@ import Lookup from "@/components/dictionary/Lookup";
 import { isProtocol } from "./protocols/helpers";
 import type { CompleteRecord } from "./types";
 
-import ProtocolDetail from "./protocols/ProtocolDetail";
+import ProtocolPage from "./protocols/ProtocolPage";
 
 export default function RecordDetail({ record }: { record: CompleteRecord }) {
   const { protocol } = record;
@@ -26,7 +26,7 @@ export default function RecordDetail({ record }: { record: CompleteRecord }) {
         </Properties>
       </Section>
       <Section>
-        <ProtocolDetail protocol={protocol} record={record} />
+        <ProtocolPage protocol={protocol} record={record} />
       </Section>
     </>
   );

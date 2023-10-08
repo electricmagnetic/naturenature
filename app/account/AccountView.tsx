@@ -16,9 +16,7 @@ export default function AccountView({ user }: { user: User }) {
     <main>
       <Header title="Account" iconName="person-circle">
         <ButtonCollection>
-          <ActionButton href="/" iconName="house">
-            Home
-          </ActionButton>
+          <ActionButton href="/" iconName="house" label="Home" />
           <RedirectLinkButton />
         </ButtonCollection>
       </Header>

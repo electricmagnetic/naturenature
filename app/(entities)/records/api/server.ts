@@ -5,6 +5,9 @@ import { uuidOrNotFound } from "@/components/helpers/uuid";
 
 import type { CompleteRecord, RecordRelatedObjects } from "../types";
 
+const RECORD_RELATED_OBJECTS =
+  "event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)";
+
 export const getRecords = async () => {
   const supabase = createServerSupabaseClient();
   const { data: records, error } = await supabase.from("records").select("*");
@@ -22,9 +25,7 @@ export const getRecord = async (id: string) => {
 
   const { data: record, error } = await supabase
     .from("records")
-    .select(
-      "*, event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)",
-    )
+    .select(`*, ${RECORD_RELATED_OBJECTS}`)
     .eq("id", id)
     .returns<CompleteRecord[]>()
     .limit(1)
@@ -36,17 +37,15 @@ export const getRecord = async (id: string) => {
   return record;
 };
 
-export const getRecordsByEvent = async (id: string) => {
+export const getRecordsBy = async (column: string, id: string) => {
   uuidOrNotFound(id);
 
   const supabase = createServerSupabaseClient();
 
   const { data: record, error } = await supabase
     .from("records")
-    .select(
-      "*, event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)",
-    )
-    .eq("event_id", id)
+    .select(`*, ${RECORD_RELATED_OBJECTS}`)
+    .eq(column, id)
     .returns<CompleteRecord[]>();
 
   if (error) throw Error(error.message);
@@ -62,9 +61,7 @@ export const getRecordRelatedObjects = async (id: string) => {
 
   const { data: event, error } = await supabase
     .from("records")
-    .select(
-      "event:events(*), individual:individuals(*), media:media(*), object:objects(*), person:people(*)",
-    )
+    .select(`${RECORD_RELATED_OBJECTS}`)
     .eq("id", id)
     .returns<RecordRelatedObjects[]>()
     .limit(1)

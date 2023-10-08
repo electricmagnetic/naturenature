@@ -19,8 +19,7 @@ export default function SelectButton({
     <ActionButton
       href={`${pathname}?${createQueryString(fieldName, value, searchParams)}`}
       iconName="check2-circle"
-    >
-      Select
-    </ActionButton>
+      label="Select"
+    />
   );
 }

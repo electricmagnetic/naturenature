@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 
-import Block from "@/components/ui/Block";
 import Card from "@/components/ui/Card";
 import Lookup from "@/components/dictionary/Lookup";
 import type { CompleteRecord } from "../../types";
@@ -36,22 +35,14 @@ export const ProtocolMeasurementBlock = ({
 }: {
   record: CompleteRecord & ProtocolMeasurement;
 }) => (
-  <div className="col-md-4">
-    <Block entity="record" id={record.id}>
-      <div>
-        <Lookup formatted>{record.action}</Lookup>{" "}
-        <Lookup>{record.type}</Lookup> of{" "}
-        {record.individual && (
-          <Link href={`/individuals/${record.individual.id}`}>
-            {record.individual?.name}
-          </Link>
-        )}
+  <div className="row">
+    <div className="col">
+      <Lookup formatted>{record.action}</Lookup> <Lookup>{record.type}</Lookup>
+    </div>
+    {record.data && (
+      <div className="col">
+        {record.data.value} <Lookup>{record.data.units}</Lookup>
       </div>
-      {record.data && (
-        <div>
-          {record.data.value} <Lookup>{record.data.units}</Lookup>
-        </div>
-      )}
-    </Block>
+    )}
   </div>
 );
