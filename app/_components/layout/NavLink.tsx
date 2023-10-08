@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import Icon from "@/components/ui/Icon";
+import Icon from "@/app/_components/ui/Icon";
 
 export default function NavLink({
   iconName,

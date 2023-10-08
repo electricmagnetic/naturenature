@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 
-import createQueryString from "@/components/helpers/createQueryString";
+import createQueryString from "@/app/_components/helpers/createQueryString";
 import ActionButton from "./ActionButton";
 
 export default function SelectButton({

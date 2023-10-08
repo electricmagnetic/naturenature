@@ -33,17 +33,17 @@ This is an alpha-stage project, but contributions are nonetheless welcome. Pleas
   - [GitHub Projects](https://github.com/electricmagnetic/naturenature/projects)
 - **Project layout**
   - `app` routes (and components specific to those routes), as well as styles and global components necessary for the app router of Next.js
+    - `_components` reusable components, not specific to any one route
+      - `_components/dictionary` components/functions for interacting with the dictionary, a special table used across the database to map IDs to names
+      - `_components/forms` components/functions relating to forms and fields
+      - `_components/geospatial` components/functions for Leaflet-based maps
+      - `_components/helpers` functions for managing server-side fetching and cache revalidation
+      - `_components/layout` interactive components relating to page layout (header, footer, navbar etc)
+      - `_components/ui` static components (server/client friendly) to standardise UI elements
     - `app/(entities)` folders (pages/components) relating to the different entities (tables), and a metadata file containing information on each entity
     - `app/account` page/components relating to logging in (including redirecting to the link before login), as well as a simple button for clearing localStorage
     - `app/auth` auth callback, plus a route for logging out
     - `app/create` a single page for creating different entities
-  - `components` reusable components, not specific to any one route
-    - `components/dictionary` components/functions for interacting with the dictionary, a special table used across the database to map IDs to names
-    - `components/forms` components/functions relating to forms and fields
-    - `components/geospatial` components/functions for Leaflet-based maps
-    - `components/helpers` functions for managing server-side fetching and cache revalidation
-    - `components/layout` interactive components relating to page layout (header, footer, navbar etc)
-    - `components/ui` static components (server/client friendly) to standardise UI elements
   - `public` static assets
   - `supabase` migrations and configuration necessary for the Supabase backend
   - `types` global TypeScript types

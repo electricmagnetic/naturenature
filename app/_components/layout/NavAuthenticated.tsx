@@ -3,7 +3,7 @@
 import type { Session } from "@supabase/auth-helpers-nextjs";
 
 import { entityMetadata } from "@/app/(entities)/metadata";
-import Icon from "@/components/ui/Icon";
+import Icon from "@/app/_components/ui/Icon";
 import NavLink from "./NavLink";
 
 export default function NavAuthenticated({ session }: { session: Session }) {

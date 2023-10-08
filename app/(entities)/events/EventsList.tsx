@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-import ActionButton from "@/components/ui/ActionButton";
-import SelectButton from "@/components/ui/SelectButton";
-import ButtonCollection from "@/components/ui/ButtonCollection";
-import Table from "@/components/ui/Table";
-import DateTime from "@/components/ui/DateTime";
-import Lookup from "@/components/dictionary/Lookup";
-import PublicPrivate from "@/components/ui/PublicPrivate";
-import Section from "@/components/layout/Section";
+import ActionButton from "@/app/_components/ui/ActionButton";
+import SelectButton from "@/app/_components/ui/SelectButton";
+import ButtonCollection from "@/app/_components/ui/ButtonCollection";
+import Table from "@/app/_components/ui/Table";
+import DateTime from "@/app/_components/ui/DateTime";
+import Lookup from "@/app/_components/dictionary/Lookup";
+import PublicPrivate from "@/app/_components/ui/PublicPrivate";
+import Section from "@/app/_components/layout/Section";
 import type { Event } from "./types";
 
 export default function EventsList({

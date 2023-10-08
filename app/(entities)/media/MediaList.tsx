@@ -1,5 +1,5 @@
-import Table from "@/components/ui/Table";
-import Section from "@/components/layout/Section";
+import Table from "@/app/_components/ui/Table";
+import Section from "@/app/_components/layout/Section";
 import { Media } from "./types";
 
 export default function MediaList({ media }: { media: Media[] }) {

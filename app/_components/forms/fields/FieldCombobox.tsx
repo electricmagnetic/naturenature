@@ -6,7 +6,7 @@ import { useController } from "react-hook-form";
 import { UseComboboxStateChangeTypes, useCombobox } from "downshift";
 import debounce from "lodash.debounce";
 
-import Icon from "@/components/ui/Icon";
+import Icon from "@/app/_components/ui/Icon";
 import Wrapper from "./Wrapper";
 import type { LookupItem } from "@/types/database";
 import type FieldProperties from "./Properties";

@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
-import Form from "@/components/forms/Form";
-import Field from "@/components/forms/Field";
+import Form from "@/app/_components/forms/Form";
+import Field from "@/app/_components/forms/Field";
 import { upsertObject } from "./api/client";
 import {
   ObjectFormSchema,

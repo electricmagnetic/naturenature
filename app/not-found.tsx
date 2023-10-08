@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import Header from "@/components/layout/Header";
-import Section from "@/components/layout/Section";
+import Header from "@/app/_components/layout/Header";
+import Section from "@/app/_components/layout/Section";
 
 export default function NotFound() {
   return (

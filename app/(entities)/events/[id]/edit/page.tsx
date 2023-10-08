@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import Header from "@/app/_components/layout/Header";
 
 import { getEvent, getEventRelatedObjects } from "../../api/server";
 import EventForm from "../../EventForm";

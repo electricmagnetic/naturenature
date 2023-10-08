@@ -1,21 +1,21 @@
 import dynamic from "next/dynamic";
 
-import Lookup from "@/components/dictionary/Lookup";
-import GeoJSON from "@/components/geospatial/GeoJSON";
-import Section from "@/components/layout/Section";
-import Header from "@/components/layout/Header";
-import ActionButton from "@/components/ui/ActionButton";
-import ButtonCollection from "@/components/ui/ButtonCollection";
-import DateTime from "@/components/ui/DateTime";
-import Message from "@/components/ui/Message";
-import Properties from "@/components/ui/Properties";
-import PublicPrivate from "@/components/ui/PublicPrivate";
+import Lookup from "@/app/_components/dictionary/Lookup";
+import GeoJSON from "@/app/_components/geospatial/GeoJSON";
+import Section from "@/app/_components/layout/Section";
+import Header from "@/app/_components/layout/Header";
+import ActionButton from "@/app/_components/ui/ActionButton";
+import ButtonCollection from "@/app/_components/ui/ButtonCollection";
+import DateTime from "@/app/_components/ui/DateTime";
+import Message from "@/app/_components/ui/Message";
+import Properties from "@/app/_components/ui/Properties";
+import PublicPrivate from "@/app/_components/ui/PublicPrivate";
 import type { Json } from "@/types/_supabase";
 import type { CompleteRecord } from "@/app/(entities)/records/types";
 import type { CompleteEvent } from "./types";
 import RecordBlocks from "../records/RecordBlocks";
 
-const Map = dynamic(() => import("@/components/geospatial/Map"), {
+const Map = dynamic(() => import("@/app/_components/geospatial/Map"), {
   ssr: false,
 });
 

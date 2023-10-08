@@ -1,6 +1,6 @@
-import Lookup from "@/components/dictionary/Lookup";
-import Section from "@/components/layout/Section";
-import Properties from "@/components/ui/Properties";
+import Lookup from "@/app/_components/dictionary/Lookup";
+import Section from "@/app/_components/layout/Section";
+import Properties from "@/app/_components/ui/Properties";
 import type { Object } from "./types";
 
 export default function ObjectDetail({ object }: { object: Object }) {

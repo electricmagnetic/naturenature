@@ -2,7 +2,7 @@
 
 import type { SyntheticEvent } from "react";
 
-import revalidate from "@/components/helpers/revalidate";
+import revalidate from "@/app/_components/helpers/revalidate";
 
 /**
  * Button (client side) for clearing local storage (forcing the front-end to redownload any stored data)

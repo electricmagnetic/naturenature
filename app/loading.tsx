@@ -1,4 +1,4 @@
-import Loader from "@/components/ui/Loader";
+import Loader from "@/app/_components/ui/Loader";
 
 export default function Loading() {
   return (

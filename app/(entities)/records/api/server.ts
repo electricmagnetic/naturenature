@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
-import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
-import { uuidOrNotFound } from "@/components/helpers/uuid";
+import createServerSupabaseClient from "@/app/_components/helpers/createServerSupabaseClient";
+import { uuidOrNotFound } from "@/app/_components/helpers/uuid";
 
 import type { CompleteRecord, RecordRelatedObjects } from "../types";
 

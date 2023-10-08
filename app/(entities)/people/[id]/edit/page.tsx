@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import Header from "@/app/_components/layout/Header";
 
 import { getPerson } from "../../api/server";
 import PersonForm from "../../PersonForm";

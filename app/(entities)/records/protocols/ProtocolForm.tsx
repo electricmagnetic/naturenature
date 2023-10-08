@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import Form from "@/components/forms/Form";
+import Form from "@/app/_components/forms/Form";
 
 import ProtocolCitizenForm from "./citizen/ProtocolCitizenForm";
 import ProtocolIdentifierForm from "./identifier/ProtocolIdentifierForm";

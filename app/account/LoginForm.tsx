@@ -4,8 +4,8 @@ import { useState, SyntheticEvent, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import Message from "@/components/ui/Message";
-import Loader from "@/components/ui/Loader";
+import Message from "@/app/_components/ui/Message";
+import Loader from "@/app/_components/ui/Loader";
 import type { Database } from "@/types/_supabase";
 
 enum LoginType {

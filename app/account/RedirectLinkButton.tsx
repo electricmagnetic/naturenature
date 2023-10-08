@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 
-import ActionButton from "@/components/ui/ActionButton";
+import ActionButton from "@/app/_components/ui/ActionButton";
 
 /**
  * Button (client side) for showing an alert with links to home and the previous page visited before logging in

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
-import Header from "@/components/layout/Header";
+import Header from "@/app/_components/layout/Header";
 import { getMetadatumByTable } from "@/app/(entities)/metadata";
-import DeleteObjectForm from "@/components/forms/DeleteObjectForm";
+import DeleteObjectForm from "@/app/_components/forms/DeleteObjectForm";
 
 /**
  * Generic delete view, handles a delete for any table/ID combo

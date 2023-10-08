@@ -8,8 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { PostgrestError } from "@supabase/supabase-js";
 import type { ZodType } from "zod";
 
-import Message from "@/components/ui/Message";
-import Submit from "@/components/forms/Submit";
+import Message from "@/app/_components/ui/Message";
+import Submit from "@/app/_components/forms/Submit";
 import { RelatedObjectsProvider } from "./RelatedObjectsContext";
 
 const IS_PRODUCTION = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";

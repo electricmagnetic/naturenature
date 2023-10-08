@@ -1,7 +1,7 @@
 "use client";
 
-import Form from "@/components/forms/Form";
-import Field from "@/components/forms/Field";
+import Form from "@/app/_components/forms/Form";
+import Field from "@/app/_components/forms/Field";
 import { upsertIndividual } from "./api/client";
 import {
   IndividualFormSchema,

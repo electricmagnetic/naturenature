@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useController } from "react-hook-form";
 
-import useDictionary from "@/components/dictionary/useDictionary";
+import useDictionary from "@/app/_components/dictionary/useDictionary";
 import Wrapper from "./Wrapper";
 
 import type { TableRow } from "@/types/database";

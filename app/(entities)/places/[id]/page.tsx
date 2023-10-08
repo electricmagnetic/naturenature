@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import Header from "@/app/_components/layout/Header";
 
 import { getPlace } from "../api/server";
 import PlaceDetail from "../PlaceDetail";

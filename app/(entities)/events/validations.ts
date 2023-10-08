@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { DateTime as LuxonDateTime } from "luxon";
 
-import { BaseFormSchema } from "@/components/forms/helpers";
+import { BaseFormSchema } from "@/app/_components/forms/helpers";
 import type { Event, EventDto } from "./types";
 
 // Validations

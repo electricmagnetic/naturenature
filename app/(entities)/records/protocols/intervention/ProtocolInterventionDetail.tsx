@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 
-import Card from "@/components/ui/Card";
-import Lookup from "@/components/dictionary/Lookup";
+import Card from "@/app/_components/ui/Card";
+import Lookup from "@/app/_components/dictionary/Lookup";
 import type { CompleteRecord } from "../../types";
 
 export const ProtocolInterventionPage = ({

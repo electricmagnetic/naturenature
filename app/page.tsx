@@ -1,8 +1,8 @@
-import Header from "@/components/layout/Header";
-import Section from "@/components/layout/Section";
-import Icon from "@/components/ui/Icon";
+import Header from "@/app/_components/layout/Header";
+import Section from "@/app/_components/layout/Section";
+import Icon from "@/app/_components/ui/Icon";
 import { entityMetadata, getMetadatum } from "@/app/(entities)/metadata";
-import NavLink from "@/components/layout/NavLink";
+import NavLink from "@/app/_components/layout/NavLink";
 
 const EntityPill = ({
   entity,

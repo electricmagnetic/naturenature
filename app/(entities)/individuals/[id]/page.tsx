@@ -1,11 +1,11 @@
-import Header from "@/components/layout/Header";
+import Header from "@/app/_components/layout/Header";
 
 import RecordBlocks from "@/app/(entities)/records/RecordBlocks";
 import { getRecordsBy } from "@/app/(entities)/records/api/server";
 import IndividualDetail from "../IndividualDetail";
 import { getIndividual } from "../api/server";
-import Section from "@/components/layout/Section";
-import Message from "@/components/ui/Message";
+import Section from "@/app/_components/layout/Section";
+import Message from "@/app/_components/ui/Message";
 
 export default async function Individual({
   params: { id },

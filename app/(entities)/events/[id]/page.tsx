@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import Header from "@/app/_components/layout/Header";
 
 import { getRecordsBy } from "@/app/(entities)/records/api/server";
 import { getCompleteEvent } from "../api/server";

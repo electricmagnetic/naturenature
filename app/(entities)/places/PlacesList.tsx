@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import ActionButton from "@/components/ui/ActionButton";
-import ButtonCollection from "@/components/ui/ButtonCollection";
-import Lookup from "@/components/dictionary/Lookup";
-import Table from "@/components/ui/Table";
-import Section from "@/components/layout/Section";
+import ActionButton from "@/app/_components/ui/ActionButton";
+import ButtonCollection from "@/app/_components/ui/ButtonCollection";
+import Lookup from "@/app/_components/dictionary/Lookup";
+import Table from "@/app/_components/ui/Table";
+import Section from "@/app/_components/layout/Section";
 import type { Place } from "./types";
 
 export default function PlacesList({

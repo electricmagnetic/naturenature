@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import Card from "@/components/ui/Card";
+import Card from "@/app/_components/ui/Card";
 import type { CompleteRecord } from "../../types";
 
 export const ProtocolMediaPage = ({ record }: { record: CompleteRecord }) => (

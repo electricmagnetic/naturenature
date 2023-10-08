@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { getRecentEvents } from "./api/client";
 import EventsList from "./EventsList";
 import type { Event } from "./types";
-import Loader from "@/components/ui/Loader";
+import Loader from "@/app/_components/ui/Loader";
 
 export default function EventSelector() {
   const [events, setEvents] = useState<Event[]>([]);

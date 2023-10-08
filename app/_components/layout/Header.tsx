@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react";
 
 import { EntityMetadatum, getMetadatum } from "@/app/(entities)/metadata";
-import ActionButton from "@/components/ui/ActionButton";
+import ActionButton from "@/app/_components/ui/ActionButton";
 import ButtonCollection from "../ui/ButtonCollection";
-import Icon from "@/components/ui/Icon";
+import Icon from "@/app/_components/ui/Icon";
 
 export enum Action {
   Create = "Create",

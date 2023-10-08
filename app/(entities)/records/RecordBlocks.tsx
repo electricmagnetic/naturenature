@@ -1,5 +1,5 @@
-import Accordion from "@/components/ui/Accordion";
-import Icon from "@/components/ui/Icon";
+import Accordion from "@/app/_components/ui/Accordion";
+import Icon from "@/app/_components/ui/Icon";
 import { Protocol, protocolMetadata } from "./protocols/metadata";
 import ProtocolBlock from "./protocols/ProtocolBlock";
 import type { Entries } from "@/types/generics";

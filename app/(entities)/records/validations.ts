@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { BaseFormSchema } from "@/components/forms/helpers";
+import { BaseFormSchema } from "@/app/_components/forms/helpers";
 import { Protocol } from "./protocols/metadata";
 import type { Record, RecordDto } from "./types";
 

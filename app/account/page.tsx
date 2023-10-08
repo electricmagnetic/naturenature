@@ -1,4 +1,4 @@
-import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
+import createServerSupabaseClient from "@/app/_components/helpers/createServerSupabaseClient";
 
 import LoginForm from "./LoginForm";
 import AccountView from "./AccountView";

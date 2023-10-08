@@ -1,11 +1,11 @@
 import { User } from "@supabase/supabase-js";
 
-import Section from "@/components/layout/Section";
-import Header from "@/components/layout/Header";
-import Properties from "@/components/ui/Properties";
-import DateTime from "@/components/ui/DateTime";
-import ActionButton from "@/components/ui/ActionButton";
-import ButtonCollection from "@/components/ui/ButtonCollection";
+import Section from "@/app/_components/layout/Section";
+import Header from "@/app/_components/layout/Header";
+import Properties from "@/app/_components/ui/Properties";
+import DateTime from "@/app/_components/ui/DateTime";
+import ActionButton from "@/app/_components/ui/ActionButton";
+import ButtonCollection from "@/app/_components/ui/ButtonCollection";
 
 import RedirectLinkButton from "./RedirectLinkButton";
 import ClearLocalStorageButton from "./ClearLocalStorageButton";

@@ -1,6 +1,6 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import revalidate from "@/components/helpers/revalidate";
+import revalidate from "@/app/_components/helpers/revalidate";
 import type { Database } from "@/types/_supabase";
 import type { LookupItem } from "@/types/database";
 import type { PersonDto } from "../types";

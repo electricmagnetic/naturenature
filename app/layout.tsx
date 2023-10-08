@@ -1,8 +1,8 @@
 import { Inter, Archivo } from "next/font/google";
 
-import createServerSupabaseClient from "@/components/helpers/createServerSupabaseClient";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import createServerSupabaseClient from "@/app/_components/helpers/createServerSupabaseClient";
+import Navbar from "@/app/_components/layout/Navbar";
+import Footer from "@/app/_components/layout/Footer";
 
 // Fonts
 const archivo = Archivo({

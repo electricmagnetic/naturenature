@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react";
 
-import Card from "@/components/ui/Card";
-import DateTime from "@/components/ui/DateTime";
-import ActionButton from "@/components/ui/ActionButton";
-import ButtonCollection from "@/components/ui/ButtonCollection";
+import Card from "@/app/_components/ui/Card";
+import DateTime from "@/app/_components/ui/DateTime";
+import ActionButton from "@/app/_components/ui/ActionButton";
+import ButtonCollection from "@/app/_components/ui/ButtonCollection";
 import { isProtocol } from "./helpers";
 import type { Protocol } from "./metadata";
 import type { CompleteRecord, ProtocolDetailComponents } from "../types";

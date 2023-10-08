@@ -1,9 +1,9 @@
 import { usePathname, useSearchParams } from "next/navigation";
 
-import Lookup from "@/components/dictionary/Lookup";
-import NavLink from "@/components/layout/NavLink";
+import Lookup from "@/app/_components/dictionary/Lookup";
+import NavLink from "@/app/_components/layout/NavLink";
 import { protocolMetadata } from "./metadata";
-import createQueryString from "@/components/helpers/createQueryString";
+import createQueryString from "@/app/_components/helpers/createQueryString";
 
 export default function ProtocolSelector() {
   const pathname = usePathname();
